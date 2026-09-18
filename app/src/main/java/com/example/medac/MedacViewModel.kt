@@ -229,7 +229,12 @@ class MedacViewModel : ViewModel() {
             _serverMeds.value = medDtos
             android.util.Log.d("MedacSync", "refreshServer: meds=${medDtos.size}")
             if (medDtos.isNotEmpty()) {
-                _medicines.value = medDtos.map { dto -> medicationDtoToManaged(dto) }
+                // Merge (never wipe): preserve local schedule times, photos and
+                // stable ids so alarms + dose logs survive cloud sync.
+                val existingByName = _medicines.value.associateBy { it.name.lowercase(Locale.getDefault()) }
+                _medicines.value = medDtos.map { dto ->
+                    medicationDtoToManaged(dto, existingByName[dto.enteredName.lowercase(Locale.getDefault())])
+                }
                 persistMedicines()
             }
             // occurrences for Today
@@ -238,6 +243,12 @@ class MedacViewModel : ViewModel() {
             android.util.Log.d("MedacSync", "refreshServer: occurrences from=$from to=$to")
             _occurrences.value = MedacRepository.occurrences(context, pid, from, to)
             android.util.Log.d("MedacSync", "refreshServer: occurrences=${_occurrences.value.size}")
+            // Backfill any still-empty schedules from today's occurrences, then
+            // (re)schedule alarms so reboot/reschedule sees real times.
+            if (backfillTimesFromOccurrences()) {
+                persistMedicines()
+            }
+            try { rescheduleAllActiveReminders() } catch (_: Exception) {}
             // alerts
             android.util.Log.d("MedacSync", "refreshServer: openAlerts")
             val alertsDto = MedacRepository.openAlerts(context, pid)
@@ -729,32 +740,11 @@ class MedacViewModel : ViewModel() {
         }
     }
     fun todaySchedule(): List<DoseScheduleItem>{
-        // if we have server occurrences, map them to UI items (preferred)
-        val occ = _occurrences.value
-        if(occ.isNotEmpty()){
-            return occ.mapNotNull{ o ->
-                val med = _medicines.value.firstOrNull{ it.name==o.medicationId || it.id.toString()==o.medicationId } // fallback by id match via cache
-                val dtoMed = try{ _medicines.value.firstOrNull{ it.name.equals(o.medicationId, true)} } catch(_:Exception){ null}
-                val name = med?.name ?: dtoMed?.name ?: o.medicationId
-                val time = try{ Instant.parse(o.scheduledAtUtc).atZone(ZoneId.systemDefault()).toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))} catch(_:Exception){ return@mapNotNull null}
-                val cardImg = dtoMed?.cardImageUri ?: dtoMed?.photoUris?.firstOrNull() ?: med?.cardImageUri ?: med?.photoUris?.firstOrNull()
-                DoseScheduleItem(
-                    medicineId = o.medicationId.hashCode().toLong(),
-                    medicineName = name,
-                    use = "",
-                    genericNameAndDose = "${o.nominalDoseValue ?: ""} ${o.nominalDoseUnit ?: ""}".trim(),
-                    time = time,
-                    active = o.state !in listOf("cancelled","taken","skipped"),
-                    cardImageUri = cardImg
-                )
-            }.sortedBy{ it.time}
-        }
-        val today= LocalDate.now(); val zone= ZoneId.systemDefault()
-        return _medicines.value.filter { it.statusOrActive == "active" }.flatMap{ med ->
-            val createdDate = try{ Instant.ofEpochMilli(med.id).atZone(zone).toLocalDate()} catch(_:Exception){ null}
-            val createdTime = try{ Instant.ofEpochMilli(med.id).atZone(zone).toLocalTime()} catch(_:Exception){ null}
+        val localItems = _medicines.value.filter { it.statusOrActive == "active" }.flatMap{ med ->
+            // Show every dose scheduled for today regardless of the time the
+            // medicine was added — past doses stay visible for late logging.
             med.times.mapNotNull{ time ->
-                val dt=parseTime(time); if(createdDate!=null && createdDate==today && dt!=null && createdTime!=null){ if(dt.isBefore(createdTime)) return@mapNotNull null}
+                if (parseTime(time) == null) return@mapNotNull null
                 DoseScheduleItem(
                     medicineId = med.id,
                     medicineName = med.name,
@@ -765,7 +755,44 @@ class MedacViewModel : ViewModel() {
                     cardImageUri = med.cardImageUri ?: med.photoUris.firstOrNull()
                 )
             }
-        }.sortedBy{ it.time}
+        }
+        val occ = _occurrences.value
+        if(occ.isEmpty()) return localItems.sortedBy{ it.time}
+        // Server occurrences preferred, but resolved through _serverMeds so the
+        // card shows the real medicine name/dose/image and reuses the local
+        // ManagedMedicine.id (keeps dose-log keys stable).
+        val serverItems = occ.mapNotNull{ o ->
+            val serverDto = _serverMeds.value.firstOrNull{ it.id == o.medicationId }
+            val local = _medicines.value.firstOrNull { med ->
+                serverDto?.enteredName?.equals(med.name, ignoreCase = true) == true ||
+                    med.name.equals(serverDto?.enteredName ?: o.medicationId, ignoreCase = true) ||
+                    med.id.toString() == o.medicationId
+            }
+            val name = local?.name ?: serverDto?.enteredName ?: o.medicationId
+            // Skip raw-UUID rows we cannot resolve to any known medicine.
+            if (local == null && serverDto == null) return@mapNotNull null
+            val time = try{ Instant.parse(o.scheduledAtUtc).atZone(ZoneId.systemDefault()).toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))} catch(_:Exception){ return@mapNotNull null}
+            val cardImg = local?.cardImageUri ?: local?.photoUris?.firstOrNull()
+            val dose = "${o.nominalDoseValue ?: ""} ${o.nominalDoseUnit ?: ""}".trim()
+                .ifBlank { local?.genericNameAndDose.orEmpty() }
+            DoseScheduleItem(
+                medicineId = local?.id ?: o.medicationId.hashCode().toLong(),
+                medicineName = name,
+                use = local?.purpose.orEmpty(),
+                genericNameAndDose = dose,
+                time = time,
+                active = o.state !in listOf("cancelled","taken","skipped") &&
+                    !isReminderPaused(name, time),
+                cardImageUri = cardImg
+            )
+        }
+        // Union: keep local-only medicines that have no server occurrence yet
+        // instead of hiding them when occurrences exist.
+        val serverKeys = serverItems.map { "${it.medicineName.lowercase(Locale.getDefault())}|${it.time}" }.toSet()
+        val missingLocal = localItems.filterNot {
+            "${it.medicineName.lowercase(Locale.getDefault())}|${it.time}" in serverKeys
+        }
+        return (serverItems + missingLocal).sortedBy{ it.time}
     }
     fun reminderEntries(active:Boolean): List<ReminderEntry>{
         return _medicines.value.flatMap{ med ->
@@ -777,7 +804,21 @@ class MedacViewModel : ViewModel() {
         val now= LocalTime.now(); return todaySchedule().filter{ it.active}.mapNotNull{ item -> val t=parseTime(item.time) ?: return@mapNotNull null; val m=java.time.Duration.between(now,t).toMinutes(); when{ m>=0->m.toInt(); else-> (m+24*60).toInt()}}.minOrNull()
     }
     fun todayStr(): String = LocalDate.now().toString()
-    fun getDoseLog(medicineId:Long, time:String, date:String=todayStr()): DoseLogEntry?{ val k=doseLogKey(medicineId,date,time); return _doseLogs.value.firstOrNull{ it.id==k}}
+    /**
+     * Tolerant lookup: matches by stable id first, then by medicine name
+     * (case-insensitive) so logs written before a cloud-sync id change or
+     * from the alarm receiver still count.
+     */
+    fun getDoseLog(medicineId:Long, time:String, date:String=todayStr(), medicineName: String? = null): DoseLogEntry?{
+        val k=doseLogKey(medicineId,date,time)
+        _doseLogs.value.firstOrNull{ it.id==k }?.let { return it }
+        if (medicineName != null) {
+            _doseLogs.value.firstOrNull {
+                it.medicineName.equals(medicineName, ignoreCase = true) && it.time == time && it.date == date
+            }?.let { return it }
+        }
+        return null
+    }
     fun markDoseTaken(medicineId:Long, medicineName:String, time:String, doseAmount:String=""){
         val date=todayStr(); val key=doseLogKey(medicineId,date,time)
         val entry=DoseLogEntry(id=key, medicineId=medicineId, medicineName=medicineName, time=time, date=date, status="TAKEN", doseAmount=doseAmount, updatedAt=System.currentTimeMillis())
@@ -848,7 +889,7 @@ class MedacViewModel : ViewModel() {
         val total = sched.size
         if (total == 0) return 0 to 0
         val taken = sched.count { item ->
-            val log = getDoseLog(item.medicineId, item.time)
+            val log = getDoseLog(item.medicineId, item.time, todayStr(), item.medicineName)
             log?.status == "TAKEN"
         }
         return taken to total
@@ -1899,10 +1940,82 @@ class MedacViewModel : ViewModel() {
         }
     }
 
-    private fun medicationDtoToManaged(dto: com.example.medac.data.MedicationDto): ManagedMedicine{
-        val id = dto.id.hashCode().toLong()
-        val times = emptyList<String>() // schedule times are in occurrences, keep empty until schedule fetch; UI will use occurrences
-        return ManagedMedicine(id=id, name=dto.enteredName, genericNameAndDose="${dto.doseQuantityValue} ${dto.doseQuantityUnit}", purpose=dto.labelInstructionsText ?: "", times=times, photoUris=emptyList(), ocrText="", form=dto.form ?: "", foodTiming="", instruction=dto.labelInstructionsText ?: "", status=dto.status)
+    private fun medicationDtoToManaged(
+        dto: com.example.medac.data.MedicationDto,
+        existing: ManagedMedicine? = null,
+        fallbackTimes: List<String> = emptyList()
+    ): ManagedMedicine{
+        // Keep the existing local id when the same medicine (by name) already
+        // exists so dose-log keys and alarm bookkeeping stay stable across
+        // syncs. Only new server medicines get a hash-derived id.
+        val id = existing?.id ?: dto.id.hashCode().toLong()
+        val times = when {
+            !existing?.times.isNullOrEmpty() -> existing?.times.orEmpty()
+            fallbackTimes.isNotEmpty() -> fallbackTimes.distinct().sorted()
+            else -> emptyList()
+        }
+        return ManagedMedicine(
+            id = id,
+            name = dto.enteredName,
+            genericNameAndDose = "${dto.doseQuantityValue} ${dto.doseQuantityUnit}",
+            purpose = dto.labelInstructionsText ?: existing?.purpose.orEmpty(),
+            times = times,
+            photoUris = existing?.photoUris ?: emptyList(),
+            ocrText = existing?.ocrText.orEmpty(),
+            cardImageUri = existing?.cardImageUri,
+            form = dto.form ?: existing?.form.orEmpty(),
+            foodTiming = existing?.foodTiming.orEmpty(),
+            instruction = dto.labelInstructionsText ?: existing?.instruction.orEmpty(),
+            status = dto.status,
+            highAttention = dto.highAttention ?: existing?.highAttention ?: false,
+            frequency = existing?.frequency ?: "Once daily",
+            duration = existing?.duration ?: "Ongoing",
+            startDate = existing?.startDate.orEmpty(),
+            refillTrackingEnabled = existing?.refillTrackingEnabled ?: false,
+            currentSupply = existing?.currentSupply ?: 0,
+            refillThresholdPercent = existing?.refillThresholdPercent ?: 0,
+            notes = existing?.notes.orEmpty()
+        )
+    }
+
+    /**
+     * Derives HH:mm times from today's server occurrences for medicines whose
+     * local [ManagedMedicine.times] is still empty. Returns true if anything changed.
+     */
+    private fun backfillTimesFromOccurrences(): Boolean {
+        val occ = _occurrences.value
+        if (occ.isEmpty()) return false
+        val zone = ZoneId.systemDefault()
+        val timesByMedId = occ.groupBy { it.medicationId }.mapValues { (_, list) ->
+            list.mapNotNull {
+                try {
+                    Instant.parse(it.scheduledAtUtc).atZone(zone).toLocalTime()
+                        .format(DateTimeFormatter.ofPattern("HH:mm"))
+                } catch (_: Exception) { null }
+            }.distinct().sorted()
+        }
+        // Map server medication id -> local medicine name via _serverMeds.
+        val nameByServerId = _serverMeds.value.associate { it.id to it.enteredName }
+        var changed = false
+        _medicines.value = _medicines.value.map { med ->
+            if (med.times.isNotEmpty()) return@map med
+            // Find server id(s) matching this local medicine by name.
+            val serverIds = _serverMeds.value
+                .filter { it.enteredName.equals(med.name, ignoreCase = true) }
+                .map { it.id }
+                .ifEmpty {
+                    // Fallback: occurrence already keyed by local hash (offline cache).
+                    nameByServerId.entries
+                        .filter { it.value.equals(med.name, ignoreCase = true) }
+                        .map { it.key }
+                }
+            val derived = serverIds.flatMap { timesByMedId[it].orEmpty() }.distinct().sorted()
+            if (derived.isNotEmpty()) {
+                changed = true
+                med.copy(times = derived)
+            } else med
+        }
+        return changed
     }
 
     private fun applyFallbackDraft(photoUri: Uri?, ocrText: String){

@@ -153,6 +153,26 @@ fun doseLogKey(medicineId: Long, date: String, time: String): String = "${medici
 
 fun todayDateString(): String = java.time.LocalDate.now().toString()
 
+/**
+ * Tolerant taken-check: matches by stable id OR by medicine name
+ * (case-insensitive) so logs written from the alarm receiver / notification
+ * before a cloud-sync id change still count. Date is enforced when supplied;
+ * Today screens pass today's date, calendar passes the selected date.
+ */
+fun isDoseTaken(
+    item: DoseScheduleItem,
+    logs: List<DoseLogEntry>,
+    date: String? = null
+): Boolean {
+    return logs.any { log ->
+        val sameMed = log.medicineId == item.medicineId ||
+            log.medicineName.equals(item.medicineName, ignoreCase = true)
+        val sameTime = log.time == item.time
+        val sameDate = date == null || log.date.isBlank() || log.date == date
+        sameMed && sameTime && log.status == "TAKEN" && sameDate
+    }
+}
+
 fun doseStatusForLog(time: String, log: DoseLogEntry?): DoseStatus {
     if (log != null) {
         return when (log.status) {

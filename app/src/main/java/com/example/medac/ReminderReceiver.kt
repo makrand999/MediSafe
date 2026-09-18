@@ -29,7 +29,7 @@ class ReminderReceiver : BroadcastReceiver() {
         when (intent.action) {
             ACTION_TAKE_DOSE -> {
                 logDoseDirectly(context, medicineName, time, "TAKEN")
-                ActiveAlarmStore.clearActiveAlarm(context)
+                ActiveAlarmStore.removeActiveAlarm(context, medicineName, time)
                 AlarmService.stop(context)
                 notificationManager.cancel(notifId)
                 notificationManager.cancel(preNotifId)
@@ -37,7 +37,7 @@ class ReminderReceiver : BroadcastReceiver() {
                 return
             }
             ACTION_DELAY_DOSE -> {
-                ActiveAlarmStore.clearActiveAlarm(context)
+                ActiveAlarmStore.removeActiveAlarm(context, medicineName, time)
                 AlarmService.stop(context)
                 scheduleSnoozeReminder(context, medicineName, time, DEFAULT_SNOOZE_DELAY_MINUTES)
                 notificationManager.cancel(notifId)
@@ -81,8 +81,8 @@ class ReminderReceiver : BroadcastReceiver() {
             // 1. Cancel lingering 2-min pre-alarm notification
             notificationManager.cancel(preNotifId)
 
-            // 2. Persist active alarm so app shows full-screen UI when opened
-            ActiveAlarmStore.setActiveAlarm(context, medicineName, time)
+            // 2. Persist active alarm (multi-alarm aware) so app shows full-screen UI when opened
+            ActiveAlarmStore.addActiveAlarm(context, medicineName, time)
 
             // 3. Broadcast to running MainActivity for immediate in-app UI and audio alarm
             val dueBroadcast = Intent(ActiveAlarmStore.ACTION_MEDICINE_DUE).apply {
@@ -163,17 +163,15 @@ class ReminderReceiver : BroadcastReceiver() {
 
             notificationManager.notify(notifId, alarmNotification)
 
-            // 6. Best-effort Foreground Service / Activity start (catches modern Android restrictions safely)
+            // 6. Best-effort foreground service for lockscreen ringing.
+            // The full-screen UI is delivered via setFullScreenIntent() above,
+            // which is the Android 10+ compliant path. A direct
+            // startActivity() from background is blocked on API 29+ and is
+            // deliberately not attempted here.
             try {
                 AlarmService.start(context, medicineName, time)
             } catch (e: Exception) {
                 android.util.Log.d("ReminderReceiver", "AlarmService.start not permitted in background: ${e.message}")
-            }
-
-            try {
-                context.startActivity(alarmActivityIntent)
-            } catch (e: Exception) {
-                android.util.Log.d("ReminderReceiver", "Background startActivity not permitted: ${e.message}")
             }
 
             // 7. Reschedule next day's reminder if this wasn't a temporary snooze

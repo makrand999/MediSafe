@@ -137,8 +137,10 @@ import com.example.medac.DoseLogEntry
 import com.example.medac.DoseScheduleItem
 import com.example.medac.ManagedMedicine
 import com.example.medac.MedicineDraft
+import com.example.medac.isDoseTaken
 import com.example.medac.showDatePicker
 import com.example.medac.showTimePicker
+import com.example.medac.todayDateString
 import com.example.medac.ui.theme.AsteriskGold
 import com.example.medac.ui.theme.BorderSubtle
 import com.example.medac.ui.theme.CardSurface
@@ -782,7 +784,7 @@ fun MedRemindDashboardScreen(
 ) {
     val totalDoses = schedule.size
     val takenDoses = schedule.count { item ->
-        doseLogs.any { it.medicineId == item.medicineId && it.time == item.time && it.status == "TAKEN" }
+        isDoseTaken(item, doseLogs, todayDateString())
     }
 
     LazyColumn(
@@ -973,9 +975,7 @@ fun MedRemindDashboardScreen(
             }
         } else {
             items(schedule) { item ->
-                val isTaken = doseLogs.any {
-                    it.medicineId == item.medicineId && it.time == item.time && it.status == "TAKEN"
-                }
+                val isTaken = isDoseTaken(item, doseLogs, todayDateString())
                 MedRemindScheduleCard(
                     item = item,
                     isTaken = isTaken,
@@ -1563,7 +1563,7 @@ fun MedRemindNotificationsScreen(
 ) {
     val totalDoses = schedule.size
     val takenDoses = schedule.count { item ->
-        doseLogs.any { it.medicineId == item.medicineId && it.time == item.time && it.status == "TAKEN" }
+        isDoseTaken(item, doseLogs, todayDateString())
     }
 
     Column(
@@ -1628,9 +1628,7 @@ fun MedRemindNotificationsScreen(
                 }
             } else {
                 items(schedule) { item ->
-                    val isTaken = doseLogs.any {
-                        it.medicineId == item.medicineId && it.time == item.time && it.status == "TAKEN"
-                    }
+                    val isTaken = isDoseTaken(item, doseLogs, todayDateString())
                     MedRemindScheduleCard(
                         item = item,
                         isTaken = isTaken,
@@ -1840,9 +1838,7 @@ fun MedRemindCalendarScreen(
                 }
             } else {
                 items(daySchedule) { item ->
-                    val isTaken = doseLogs.any {
-                        it.medicineId == item.medicineId && it.time == item.time && it.status == "TAKEN" && it.date == selectedDate.toString()
-                    }
+                    val isTaken = isDoseTaken(item, doseLogs, selectedDate.toString())
                     MedRemindScheduleCard(
                         item = item,
                         isTaken = isTaken,

@@ -533,12 +533,12 @@ fun MedacRoot(initialIntent: Intent? = null) {
         BackHandler {
             InAppAlarmPlayer.stop()
             AlarmService.stop(context)
-            ActiveAlarmStore.clearActiveAlarm(context)
+            ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
             val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
             notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
             notifManager.cancel(AlarmService.NOTIFICATION_ID)
-            dueAlarm = null
+            dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
             isPinUnlocked = true
             currentTab = MedacTab.TODAY
         }
@@ -553,12 +553,12 @@ fun MedacRoot(initialIntent: Intent? = null) {
                 val medId = med?.id ?: currentDue.medicineName.hashCode().toLong()
                 viewModel.markDoseTaken(medId, currentDue.medicineName, currentDue.time)
                 logDoseDirectly(context, currentDue.medicineName, currentDue.time, "TAKEN")
-                ActiveAlarmStore.clearActiveAlarm(context)
+                ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
                 val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
                 notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
                 notifManager.cancel(AlarmService.NOTIFICATION_ID)
-                dueAlarm = null
+                dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
                 isPinUnlocked = true
                 currentTab = MedacTab.TODAY
                 android.widget.Toast.makeText(context, "${currentDue.medicineName} marked as taken", android.widget.Toast.LENGTH_SHORT).show()
@@ -566,12 +566,12 @@ fun MedacRoot(initialIntent: Intent? = null) {
             onGoToHome = {
                 InAppAlarmPlayer.stop()
                 AlarmService.stop(context)
-                ActiveAlarmStore.clearActiveAlarm(context)
+                ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
                 val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
                 notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
                 notifManager.cancel(AlarmService.NOTIFICATION_ID)
-                dueAlarm = null
+                dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
                 isPinUnlocked = true
                 currentTab = MedacTab.TODAY
             }

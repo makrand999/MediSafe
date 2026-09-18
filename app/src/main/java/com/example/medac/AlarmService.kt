@@ -154,14 +154,29 @@ class AlarmService : Service() {
             .build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            ServiceCompat.startForeground(
-                this,
-                NOTIFICATION_ID,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
-            )
+            try {
+                ServiceCompat.startForeground(
+                    this,
+                    NOTIFICATION_ID,
+                    notification,
+                    ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+                )
+            } catch (e: SecurityException) {
+                // Android 14+: FGS start denied in background (no exemption).
+                // The high-priority full-screen notification posted by
+                // ReminderReceiver remains the delivery path — stop quietly.
+                android.util.Log.w("AlarmService", "startForeground denied: ${e.message}")
+                stopSelf()
+                return
+            }
         } else {
-            startForeground(NOTIFICATION_ID, notification)
+            try {
+                startForeground(NOTIFICATION_ID, notification)
+            } catch (e: SecurityException) {
+                android.util.Log.w("AlarmService", "startForeground denied: ${e.message}")
+                stopSelf()
+                return
+            }
         }
 
         startRingingAndVibration()

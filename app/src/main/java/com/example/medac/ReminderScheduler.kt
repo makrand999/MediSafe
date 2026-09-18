@@ -11,6 +11,33 @@ const val PRE_REMINDER_MINUTES = 2
 const val DEFAULT_SNOOZE_DELAY_MINUTES = 3
 
 /**
+ * Helper for Android 12+ exact-alarm permission. [SCHEDULE_EXACT_ALARM] is
+ * declared in the manifest; on API 31+ the user must grant it in Settings.
+ * Callers fall back to inexact alarms when denied (see below).
+ */
+object ExactAlarmHelper {
+    fun canScheduleExactAlarms(context: Context): Boolean {
+        val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            am.canScheduleExactAlarms()
+        } else true
+    }
+
+    fun openExactAlarmSettings(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            try {
+                val intent = Intent(
+                    android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
+                    android.net.Uri.parse("package:${context.packageName}")
+                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+            } catch (_: Exception) { /* Settings unavailable — caller keeps inexact fallback */
+            }
+        }
+    }
+}
+
+/**
  * Schedules both the 2-minute pre-alarm notification and the exact full-screen incoming-call alarm.
  */
 fun scheduleMedicineReminder(context: Context, medicineName: String, time: String) {
