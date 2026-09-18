@@ -1,0 +1,763 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 26,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Chat",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        291,
+        371,
+        423
+      ],
+      "center": [
+        213,
+        357
+      ],
+      "width": 316,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_chat"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Draft",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        382,
+        291,
+        698,
+        423
+      ],
+      "center": [
+        540,
+        357
+      ],
+      "width": 316,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_draft"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Summary",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        709,
+        291,
+        1025,
+        423
+      ],
+      "center": [
+        867,
+        357
+      ],
+      "width": 316,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_summary"
+    },
+    {
+      "index": 3,
+      "role": "INPUT",
+      "label": "e.g. Take 1 tablet twice daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        77,
+        923,
+        1003,
+        1077
+      ],
+      "center": [
+        540,
+        1000
+      ],
+      "width": 926,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_eg_take_1_tablet_twice_daily"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Parse",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        77,
+        1100,
+        1003,
+        1232
+      ],
+      "center": [
+        540,
+        1166
+      ],
+      "width": 926,
+      "height": 132,
+      "clickable": true,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": false,
+      "slug": "button_parse"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Delete conversation",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        1297,
+        378,
+        1429
+      ],
+      "center": [
+        211,
+        1363
+      ],
+      "width": 334,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_delete_conversation"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "Adherence last 7d?",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        1972,
+        358,
+        2094
+      ],
+      "center": [
+        201,
+        2033
+      ],
+      "width": 314,
+      "height": 122,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_adherence_last_7d"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "What times should I take?",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        380,
+        1972,
+        781,
+        2104
+      ],
+      "center": [
+        580,
+        2038
+      ],
+      "width": 401,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_what_times_should_i_take"
+    },
+    {
+      "index": 8,
+      "role": "INPUT",
+      "label": "Ask assistant\u2026",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        44,
+        2094,
+        775,
+        2248
+      ],
+      "center": [
+        409,
+        2171
+      ],
+      "width": 731,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_ask_assistant"
+    },
+    {
+      "index": 9,
+      "role": "BUTTON",
+      "label": "Send",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        803,
+        2105,
+        1036,
+        2237
+      ],
+      "center": [
+        919,
+        2171
+      ],
+      "width": 233,
+      "height": 132,
+      "clickable": true,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": false,
+      "slug": "button_send"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Chat",
+      "text": "Chat",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        334,
+        371,
+        379
+      ],
+      "center": [
+        213,
+        356
+      ],
+      "width": 316,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_chat"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Draft",
+      "text": "Draft",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        382,
+        334,
+        698,
+        379
+      ],
+      "center": [
+        540,
+        356
+      ],
+      "width": 316,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_draft"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Summary",
+      "text": "Summary",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        709,
+        334,
+        1025,
+        379
+      ],
+      "center": [
+        867,
+        356
+      ],
+      "width": 316,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_summary"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Not medical advice \u00b7 AI limited \u00b7 conversations expire 72h \u00b7 6 turns / 12 tool calls",
+      "text": "Not medical advice \u00b7 AI limited \u00b7 conversations expire 72h \u00b7 6 turns / 12 tool calls",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        77,
+        500,
+        1003,
+        585
+      ],
+      "center": [
+        540,
+        542
+      ],
+      "width": 926,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_not_medical_advice_ai_limited_conve"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "Ask about your medicines. Assistant cites facts_used and offers confirmable proposals.",
+      "text": "Ask about your medicines. Assistant cites facts_used and offers confirmable proposals.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        684,
+        997,
+        767
+      ],
+      "center": [
+        540,
+        725
+      ],
+      "width": 914,
+      "height": 83,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_ask_about_your_medicines_assistant"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "Parse instruction",
+      "text": "Parse instruction",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        77,
+        866,
+        335,
+        901
+      ],
+      "center": [
+        206,
+        883
+      ],
+      "width": 258,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_parse_instruction"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "e.g. Take 1 tablet twice daily",
+      "text": "e.g. Take 1 tablet twice daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        121,
+        967,
+        673,
+        1033
+      ],
+      "center": [
+        397,
+        1000
+      ],
+      "width": 552,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_eg_take_1_tablet_twice_daily"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Parse",
+      "text": "Parse",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        492,
+        1143,
+        589,
+        1188
+      ],
+      "center": [
+        540,
+        1165
+      ],
+      "width": 97,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_parse"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Delete conversation",
+      "text": "Delete conversation",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        77,
+        1346,
+        345,
+        1381
+      ],
+      "center": [
+        211,
+        1363
+      ],
+      "width": 268,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_delete_conversation"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Adherence last 7d?",
+      "text": "Adherence last 7d?",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        72,
+        2020,
+        330,
+        2055
+      ],
+      "center": [
+        201,
+        2037
+      ],
+      "width": 258,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_adherence_last_7d"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "What times should I take?",
+      "text": "What times should I take?",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        408,
+        2020,
+        753,
+        2055
+      ],
+      "center": [
+        580,
+        2037
+      ],
+      "width": 345,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_what_times_should_i_take"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Ask assistant\u2026",
+      "text": "Ask assistant\u2026",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        88,
+        2138,
+        382,
+        2204
+      ],
+      "center": [
+        235,
+        2171
+      ],
+      "width": 294,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_ask_assistant"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "Send",
+      "text": "Send",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        869,
+        2144,
+        970,
+        2199
+      ],
+      "center": [
+        919,
+        2171
+      ],
+      "width": 101,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_send"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Assistant",
+      "text": "Assistant",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        409,
+        229
+      ],
+      "center": [
+        281,
+        190
+      ],
+      "width": 255,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_assistant"
+    }
+  ]
+}

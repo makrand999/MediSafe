@@ -1,0 +1,51 @@
+# --- Android / Gradle ---
+*.iml
+.gradle/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# --- Android Studio / IDE ---
+.idea/
+.kotlin/
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+
+# --- Local agent / tool state ---
+.commandcode/
+
+# --- Generated test reports ---
+test_reports/
+
+# --- Python tools ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# --- Medac server (Node/Fastify) ---
+server/node_modules/
+server/dist/
+server/coverage/
+server/.env
+server/.server-credentials.env
+*.log
+npm-debug.log*
+coverage/
+.nyc_output/
+
+# --- Secrets / local config (never commit real values) ---
+.env
+.env.local
+*.key
+*.pem
+google-services.json

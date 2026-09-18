@@ -1,0 +1,23 @@
+[Unit]
+Description=Medac Worker (background jobs)
+After=network.target postgresql.service medac-api.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=medac
+Group=medac
+WorkingDirectory=/opt/medac/server
+ExecStart=/usr/bin/node /opt/medac/server/dist/worker.js
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/medac/env/worker.env
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/medac/exports /var/log/medac
+
+[Install]
+WantedBy=multi-user.target

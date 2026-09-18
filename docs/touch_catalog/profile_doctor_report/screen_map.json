@@ -1,0 +1,676 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 23,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "2026-08-04",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        530,
+        313,
+        662
+      ],
+      "center": [
+        198,
+        596
+      ],
+      "width": 230,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_2026_08_04"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "2026-09-04",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        391,
+        530,
+        621,
+        662
+      ],
+      "center": [
+        506,
+        596
+      ],
+      "width": 230,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_2026_09_04"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Load",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        799,
+        529,
+        997,
+        661
+      ],
+      "center": [
+        898,
+        595
+      ],
+      "width": 198,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_load"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Generate alerts",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1291,
+        997,
+        1423
+      ],
+      "center": [
+        540,
+        1357
+      ],
+      "width": 914,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_generate_alerts"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 5,
+      "role": "TEXT",
+      "label": "Doctor report",
+      "text": "Doctor report",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        44,
+        323,
+        404,
+        394
+      ],
+      "center": [
+        224,
+        358
+      ],
+      "width": 360,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_doctor_report"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Range",
+      "text": "Range",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        466,
+        176,
+        501
+      ],
+      "center": [
+        129,
+        483
+      ],
+      "width": 93,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_range"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "2026-08-04",
+      "text": "2026-08-04",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        111,
+        576,
+        285,
+        615
+      ],
+      "center": [
+        198,
+        595
+      ],
+      "width": 174,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_2026_08_04"
+    },
+    {
+      "index": 8,
+      "role": "TEXT",
+      "label": "\u2014",
+      "text": "\u2014",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        335,
+        562,
+        369,
+        628
+      ],
+      "center": [
+        352,
+        595
+      ],
+      "width": 34,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_elem_8"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "2026-09-04",
+      "text": "2026-09-04",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        419,
+        576,
+        593,
+        615
+      ],
+      "center": [
+        506,
+        595
+      ],
+      "width": 174,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_2026_09_04"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "Load",
+      "text": "Load",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        865,
+        578,
+        931,
+        613
+      ],
+      "center": [
+        898,
+        595
+      ],
+      "width": 66,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_load"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Timezone: Asia/Kolkata",
+      "text": "Timezone: Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        689,
+        404,
+        724
+      ],
+      "center": [
+        243,
+        706
+      ],
+      "width": 321,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_timezone_asiakolkata"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "0%",
+      "text": "0%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        128,
+        921,
+        192,
+        979
+      ],
+      "center": [
+        160,
+        950
+      ],
+      "width": 64,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "0% adherence",
+      "text": "0% adherence",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        835,
+        511,
+        880
+      ],
+      "center": [
+        393,
+        857
+      ],
+      "width": 235,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0_adherence"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "0 / 143 taken \u00b7 0 skipped \u00b7 0 missed",
+      "text": "0 / 143 taken \u00b7 0 skipped \u00b7 0 missed",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        886,
+        749,
+        921
+      ],
+      "center": [
+        512,
+        903
+      ],
+      "width": 473,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0_143_taken_0_skipped_0_missed"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "pending 143 \u00b7 excluded 0 ()",
+      "text": "pending 143 \u00b7 excluded 0 ()",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        927,
+        601,
+        960
+      ],
+      "center": [
+        438,
+        943
+      ],
+      "width": 325,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_pending_143_excluded_0"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "eligible_scheduled_count = total scheduled occurrences in range excluding PRN, cancelled, paused; adherence = taken / eligible",
+      "text": "eligible_scheduled_count = total scheduled occurrences in range excluding PRN, cancelled, paused; adherence = taken / eligible",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        966,
+        997,
+        1065
+      ],
+      "center": [
+        636,
+        1015
+      ],
+      "width": 721,
+      "height": 99,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_eligible_scheduled_count_total_sche"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "Generate alerts",
+      "text": "Generate alerts",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1176,
+        313,
+        1211
+      ],
+      "center": [
+        198,
+        1193
+      ],
+      "width": 230,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generate_alerts"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Manual trigger \u2014 manager+ required",
+      "text": "Manual trigger \u2014 manager+ required",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1233,
+        573,
+        1268
+      ],
+      "center": [
+        328,
+        1250
+      ],
+      "width": 490,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_manual_trigger_manager_required"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Generate alerts",
+      "text": "Generate alerts",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        411,
+        1334,
+        670,
+        1379
+      ],
+      "center": [
+        540,
+        1356
+      ],
+      "width": 259,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generate_alerts_2"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "CSV export moved to Profile \u2192 Exports",
+      "text": "CSV export moved to Profile \u2192 Exports",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        1494,
+        580,
+        1538
+      ],
+      "center": [
+        317,
+        1516
+      ],
+      "width": 525,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_csv_export_moved_to_profile_exports"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Report",
+      "text": "Report",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        336,
+        229
+      ],
+      "center": [
+        245,
+        190
+      ],
+      "width": 182,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_report"
+    }
+  ]
+}

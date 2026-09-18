@@ -1,0 +1,966 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 33,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        33,
+        33,
+        165,
+        165
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 1,
+      "role": "SCROLLVIEW",
+      "label": "Medication Supplies PARACIP-500 1 tablet Low Current Supply: 0 units Refill at: 20% Record Refill GLITCH-M1 t-MD Dolo-650",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        198,
+        1025,
+        2392
+      ],
+      "center": [
+        540,
+        1295
+      ],
+      "width": 970,
+      "height": 2194,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_medication_supplies_paracip_500_1_t"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Record Refill",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        105,
+        660,
+        975,
+        792
+      ],
+      "center": [
+        540,
+        726
+      ],
+      "width": 870,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_record_refill"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Record Refill",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        105,
+        1204,
+        975,
+        1336
+      ],
+      "center": [
+        540,
+        1270
+      ],
+      "width": 870,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_record_refill_2"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Record Refill",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        105,
+        1748,
+        975,
+        1880
+      ],
+      "center": [
+        540,
+        1814
+      ],
+      "width": 870,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_record_refill_3"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Record Refill",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        105,
+        2292,
+        975,
+        2392
+      ],
+      "center": [
+        540,
+        2342
+      ],
+      "width": 870,
+      "height": 100,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_record_refill_4"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        66,
+        66,
+        132,
+        132
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "Refill Tracker",
+      "text": "Refill Tracker",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        165,
+        64,
+        524,
+        135
+      ],
+      "center": [
+        344,
+        99
+      ],
+      "width": 359,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_tracker"
+    },
+    {
+      "index": 8,
+      "role": "TEXT",
+      "label": "Medication Supplies",
+      "text": "Medication Supplies",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        220,
+        606,
+        291
+      ],
+      "center": [
+        330,
+        255
+      ],
+      "width": 551,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medication_supplies"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "PARACIP-500",
+      "text": "PARACIP-500",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        385,
+        411,
+        443
+      ],
+      "center": [
+        258,
+        414
+      ],
+      "width": 306,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_paracip_500"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        443,
+        252,
+        495
+      ],
+      "center": [
+        178,
+        469
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Low",
+      "text": "Low",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        866,
+        418,
+        936,
+        463
+      ],
+      "center": [
+        901,
+        440
+      ],
+      "width": 70,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Current Supply: 0 units",
+      "text": "Current Supply: 0 units",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        534,
+        556,
+        586
+      ],
+      "center": [
+        330,
+        560
+      ],
+      "width": 451,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_supply_0_units"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Refill at: 20%",
+      "text": "Refill at: 20%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        771,
+        534,
+        975,
+        578
+      ],
+      "center": [
+        873,
+        556
+      ],
+      "width": 204,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_at_20"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Record Refill",
+      "text": "Record Refill",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        703,
+        649,
+        748
+      ],
+      "center": [
+        540,
+        725
+      ],
+      "width": 218,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_record_refill"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "GLITCH-M1",
+      "text": "GLITCH-M1",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        929,
+        365,
+        987
+      ],
+      "center": [
+        235,
+        958
+      ],
+      "width": 260,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_glitch_m1"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        987,
+        252,
+        1039
+      ],
+      "center": [
+        178,
+        1013
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_2"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "Low",
+      "text": "Low",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        866,
+        962,
+        936,
+        1007
+      ],
+      "center": [
+        901,
+        984
+      ],
+      "width": 70,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low_2"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Current Supply: 0 units",
+      "text": "Current Supply: 0 units",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1078,
+        556,
+        1130
+      ],
+      "center": [
+        330,
+        1104
+      ],
+      "width": 451,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_supply_0_units_2"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Refill at: 20%",
+      "text": "Refill at: 20%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        771,
+        1078,
+        975,
+        1122
+      ],
+      "center": [
+        873,
+        1100
+      ],
+      "width": 204,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_at_20_2"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Record Refill",
+      "text": "Record Refill",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        1247,
+        649,
+        1292
+      ],
+      "center": [
+        540,
+        1269
+      ],
+      "width": 218,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_record_refill_2"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "t-MD",
+      "text": "t-MD",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1473,
+        216,
+        1531
+      ],
+      "center": [
+        160,
+        1502
+      ],
+      "width": 111,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_t_md"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1531,
+        252,
+        1583
+      ],
+      "center": [
+        178,
+        1557
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_3"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "Low",
+      "text": "Low",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        866,
+        1506,
+        936,
+        1551
+      ],
+      "center": [
+        901,
+        1528
+      ],
+      "width": 70,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low_3"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Current Supply: 0 units",
+      "text": "Current Supply: 0 units",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1622,
+        556,
+        1674
+      ],
+      "center": [
+        330,
+        1648
+      ],
+      "width": 451,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_supply_0_units_3"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Refill at: 20%",
+      "text": "Refill at: 20%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        771,
+        1622,
+        975,
+        1666
+      ],
+      "center": [
+        873,
+        1644
+      ],
+      "width": 204,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_at_20_3"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Record Refill",
+      "text": "Record Refill",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        1791,
+        649,
+        1836
+      ],
+      "center": [
+        540,
+        1813
+      ],
+      "width": 218,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_record_refill_3"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "Dolo-650",
+      "text": "Dolo-650",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        2017,
+        309,
+        2075
+      ],
+      "center": [
+        207,
+        2046
+      ],
+      "width": 204,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_dolo_650"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        2075,
+        252,
+        2127
+      ],
+      "center": [
+        178,
+        2101
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_4"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "Low",
+      "text": "Low",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        866,
+        2050,
+        936,
+        2095
+      ],
+      "center": [
+        901,
+        2072
+      ],
+      "width": 70,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low_4"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Current Supply: 0 units",
+      "text": "Current Supply: 0 units",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        2166,
+        556,
+        2218
+      ],
+      "center": [
+        330,
+        2192
+      ],
+      "width": 451,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_supply_0_units_4"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "Refill at: 20%",
+      "text": "Refill at: 20%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        771,
+        2166,
+        975,
+        2210
+      ],
+      "center": [
+        873,
+        2188
+      ],
+      "width": 204,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_at_20_4"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "Record Refill",
+      "text": "Record Refill",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        2335,
+        649,
+        2380
+      ],
+      "center": [
+        540,
+        2357
+      ],
+      "width": 218,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_record_refill_4"
+    }
+  ]
+}

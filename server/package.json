@@ -1,0 +1,50 @@
+{
+  "name": "medac-server",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "worker": "node dist/worker.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "tsc --noEmit",
+    "lint": "eslint .",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed-development.ts",
+    "db:migrate:down": "tsx scripts/migrate.ts --down",
+    "openapi:generate": "tsx scripts/generate-openapi.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "argon2": "^0.44.0",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.45.2",
+    "fastify": "^5.3.2",
+    "fastify-plugin": "^6.0.0",
+    "firebase-admin": "^14.3.0",
+    "jose": "^6.0.0",
+    "pg": "^8.13.0",
+    "pino": "^9.6.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "@types/uuid": "^10.0.0",
+    "drizzle-kit": "^0.30.4",
+    "eslint": "^9.17.0",
+    "testcontainers": "^11.2.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

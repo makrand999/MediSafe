@@ -1,0 +1,937 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 32,
+  "elements": [
+    {
+      "index": 0,
+      "role": "SCROLLVIEW",
+      "label": "Account Email makarandshinde8i Patient details Display name Timezone (IANA e.g. America/New_York) Privacy mode private generic detailed Save patient Archive Request deletion Change password Logs out other devices (bumps token_version) Current password New password (\u226512 chars)",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        0,
+        279,
+        1080,
+        2276
+      ],
+      "center": [
+        540,
+        1277
+      ],
+      "width": 1080,
+      "height": 1997,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_account_email_makarandshinde8i_pati"
+    },
+    {
+      "index": 1,
+      "role": "INPUT",
+      "label": "Display name",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        744,
+        997,
+        920
+      ],
+      "center": [
+        540,
+        832
+      ],
+      "width": 914,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_display_name"
+    },
+    {
+      "index": 2,
+      "role": "INPUT",
+      "label": "Timezone (IANA e.g. America/New_York)",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        948,
+        997,
+        1124
+      ],
+      "center": [
+        540,
+        1036
+      ],
+      "width": 914,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_timezone_iana_eg_americanew_york"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "private",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1184,
+        220,
+        1313
+      ],
+      "center": [
+        151,
+        1248
+      ],
+      "width": 137,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_private"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "generic",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        242,
+        1184,
+        387,
+        1313
+      ],
+      "center": [
+        314,
+        1248
+      ],
+      "width": 145,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_generic"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "detailed",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        409,
+        1184,
+        561,
+        1313
+      ],
+      "center": [
+        485,
+        1248
+      ],
+      "width": 152,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_detailed"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "Save patient",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1313,
+        997,
+        1445
+      ],
+      "center": [
+        540,
+        1379
+      ],
+      "width": 914,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_save_patient"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "Archive",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1473,
+        529,
+        1605
+      ],
+      "center": [
+        306,
+        1539
+      ],
+      "width": 446,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_archive"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "Request deletion",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        551,
+        1473,
+        997,
+        1605
+      ],
+      "center": [
+        774,
+        1539
+      ],
+      "width": 446,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_request_deletion"
+    },
+    {
+      "index": 9,
+      "role": "INPUT",
+      "label": "Current password",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        1851,
+        997,
+        2027
+      ],
+      "center": [
+        540,
+        1939
+      ],
+      "width": 914,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_current_password"
+    },
+    {
+      "index": 10,
+      "role": "INPUT",
+      "label": "New password (\u226512 chars)",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        2055,
+        997,
+        2231
+      ],
+      "center": [
+        540,
+        2143
+      ],
+      "width": 914,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_new_password_12_chars"
+    },
+    {
+      "index": 11,
+      "role": "BUTTON",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        2260,
+        997,
+        2342
+      ],
+      "center": [
+        540,
+        2301
+      ],
+      "width": 914,
+      "height": 82,
+      "clickable": true,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": false,
+      "slug": "button_button"
+    },
+    {
+      "index": 12,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Account",
+      "text": "Account",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        44,
+        323,
+        267,
+        394
+      ],
+      "center": [
+        155,
+        358
+      ],
+      "width": 223,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_account"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Email",
+      "text": "Email",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        466,
+        166,
+        501
+      ],
+      "center": [
+        124,
+        483
+      ],
+      "width": 83,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_email"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "makarandshinde8i",
+      "text": "makarandshinde8i",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        518,
+        373,
+        560
+      ],
+      "center": [
+        228,
+        539
+      ],
+      "width": 290,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_makarandshinde8i"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "Patient details",
+      "text": "Patient details",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        671,
+        327,
+        716
+      ],
+      "center": [
+        205,
+        693
+      ],
+      "width": 244,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_patient_details"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "Display name",
+      "text": "Display name",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        810,
+        392,
+        876
+      ],
+      "center": [
+        259,
+        843
+      ],
+      "width": 265,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_display_name"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Timezone (IANA e.g. America/New_York)",
+      "text": "Timezone (IANA e.g. America/New_York)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        1014,
+        933,
+        1080
+      ],
+      "center": [
+        530,
+        1047
+      ],
+      "width": 806,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_timezone_iana_eg_americanew_york"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Privacy mode",
+      "text": "Privacy mode",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1152,
+        266,
+        1187
+      ],
+      "center": [
+        174,
+        1169
+      ],
+      "width": 183,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_privacy_mode"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "private",
+      "text": "private",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1232,
+        198,
+        1267
+      ],
+      "center": [
+        151,
+        1249
+      ],
+      "width": 93,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_private"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "generic",
+      "text": "generic",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        264,
+        1232,
+        365,
+        1267
+      ],
+      "center": [
+        314,
+        1249
+      ],
+      "width": 101,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generic"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "detailed",
+      "text": "detailed",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        1232,
+        539,
+        1267
+      ],
+      "center": [
+        485,
+        1249
+      ],
+      "width": 108,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_detailed"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "Save patient",
+      "text": "Save patient",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        436,
+        1356,
+        645,
+        1401
+      ],
+      "center": [
+        540,
+        1378
+      ],
+      "width": 209,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_save_patient"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Archive",
+      "text": "Archive",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        255,
+        1521,
+        358,
+        1556
+      ],
+      "center": [
+        306,
+        1538
+      ],
+      "width": 103,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_archive"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Request deletion",
+      "text": "Request deletion",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        661,
+        1521,
+        887,
+        1556
+      ],
+      "center": [
+        774,
+        1538
+      ],
+      "width": 226,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_request_deletion"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Change password",
+      "text": "Change password",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1715,
+        386,
+        1760
+      ],
+      "center": [
+        234,
+        1737
+      ],
+      "width": 303,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_change_password"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "Logs out other devices (bumps token_version)",
+      "text": "Logs out other devices (bumps token_version)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1788,
+        700,
+        1823
+      ],
+      "center": [
+        391,
+        1805
+      ],
+      "width": 617,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_logs_out_other_devices_bumps_token"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Current password",
+      "text": "Current password",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        1917,
+        475,
+        1983
+      ],
+      "center": [
+        301,
+        1950
+      ],
+      "width": 348,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_password"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "New password (\u226512 chars)",
+      "text": "New password (\u226512 chars)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        2121,
+        652,
+        2187
+      ],
+      "center": [
+        389,
+        2154
+      ],
+      "width": 525,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_new_password_12_chars"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "Account",
+      "text": "Account",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        377,
+        229
+      ],
+      "center": [
+        265,
+        190
+      ],
+      "width": 223,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_account_2"
+    }
+  ]
+}

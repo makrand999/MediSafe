@@ -1,0 +1,328 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 11,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        33,
+        33,
+        165,
+        165
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Taken",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        360,
+        198,
+        720,
+        330
+      ],
+      "center": [
+        540,
+        264
+      ],
+      "width": 360,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_taken"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Missed",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        720,
+        198,
+        1080,
+        330
+      ],
+      "center": [
+        900,
+        264
+      ],
+      "width": 360,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_missed"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Clear All Data",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        690,
+        1025,
+        822
+      ],
+      "center": [
+        540,
+        756
+      ],
+      "width": 970,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_clear_all_data"
+    },
+    {
+      "index": 4,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        66,
+        66,
+        132,
+        132
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 5,
+      "role": "TEXT",
+      "label": "History Log",
+      "text": "History Log",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        165,
+        64,
+        475,
+        135
+      ],
+      "center": [
+        320,
+        99
+      ],
+      "width": 310,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_history_log"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "All",
+      "text": "All",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        153,
+        238,
+        207,
+        290
+      ],
+      "center": [
+        180,
+        264
+      ],
+      "width": 54,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_all"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "Taken",
+      "text": "Taken",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        482,
+        238,
+        599,
+        290
+      ],
+      "center": [
+        540,
+        264
+      ],
+      "width": 117,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_taken"
+    },
+    {
+      "index": 8,
+      "role": "TEXT",
+      "label": "Missed",
+      "text": "Missed",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        829,
+        238,
+        972,
+        290
+      ],
+      "center": [
+        900,
+        264
+      ],
+      "width": 143,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_missed"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "No history logs recorded yet",
+      "text": "No history logs recorded yet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        132,
+        473,
+        948,
+        525
+      ],
+      "center": [
+        540,
+        499
+      ],
+      "width": 816,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_history_logs_recorded_yet"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "Clear All Data",
+      "text": "Clear All Data",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        439,
+        729,
+        708,
+        784
+      ],
+      "center": [
+        573,
+        756
+      ],
+      "width": 269,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_clear_all_data"
+    }
+  ]
+}

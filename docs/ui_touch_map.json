@@ -1,0 +1,3229 @@
+{
+  "device": "10BF5X01P4002B1",
+  "resolution": [
+    1080,
+    2392
+  ],
+  "screens": {
+    "today_dashboard": {
+      "name": "Today Dashboard",
+      "slug": "today_dashboard",
+      "clean_image": "docs/touch_catalog/today_dashboard_clean.png",
+      "annotated_image": "docs/touch_catalog/today_dashboard_annotated.png",
+      "json_path": "docs/touch_catalog/today_dashboard_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "SCROLLVIEW",
+          "label": "Medisafe Your medication assistant Daily Progress 0 of 0 doses 0% Add Medication Calendar View History Log Refill Tracker Today's Schedule See All No medications scheduled for today Add your first medication",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            103,
+            1025,
+            2056
+          ],
+          "center": [
+            540,
+            1079
+          ],
+          "width": 970,
+          "height": 1953,
+          "clickable": false,
+          "focusable": false,
+          "editable": false,
+          "scrollable": true,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "scrollview_medisafe_your_medication_assistant"
+        },
+        {
+          "index": 1,
+          "role": "BUTTON",
+          "label": "Notifications",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            763,
+            146,
+            895,
+            278
+          ],
+          "center": [
+            829,
+            212
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_notifications"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Profile",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            901,
+            146,
+            1033,
+            278
+          ],
+          "center": [
+            967,
+            212
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_profile"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "Add Medication",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            694,
+            523,
+            991
+          ],
+          "center": [
+            289,
+            842
+          ],
+          "width": 468,
+          "height": 297,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_add_medication"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "Calendar View",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            556,
+            694,
+            1025,
+            991
+          ],
+          "center": [
+            790,
+            842
+          ],
+          "width": 469,
+          "height": 297,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_calendar_view"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "History Log",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1024,
+            523,
+            1321
+          ],
+          "center": [
+            289,
+            1172
+          ],
+          "width": 468,
+          "height": 297,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_history_log"
+        },
+        {
+          "index": 6,
+          "role": "BUTTON",
+          "label": "Refill Tracker",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            556,
+            1024,
+            1025,
+            1321
+          ],
+          "center": [
+            790,
+            1172
+          ],
+          "width": 469,
+          "height": 297,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_refill_tracker"
+        },
+        {
+          "index": 7,
+          "role": "BUTTON",
+          "label": "See All",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            822,
+            1387,
+            1025,
+            1519
+          ],
+          "center": [
+            923,
+            1453
+          ],
+          "width": 203,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_see_all"
+        },
+        {
+          "index": 8,
+          "role": "BUTTON",
+          "label": "Add your first medication",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            224,
+            1858,
+            856,
+            1990
+          ],
+          "center": [
+            540,
+            1924
+          ],
+          "width": 632,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_add_your_first_medication"
+        },
+        {
+          "index": 9,
+          "role": "BUTTON",
+          "label": "Medicines",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            275,
+            2056,
+            528,
+            2276
+          ],
+          "center": [
+            401,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_medicines"
+        },
+        {
+          "index": 10,
+          "role": "BUTTON",
+          "label": "Reminders",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            550,
+            2056,
+            804,
+            2276
+          ],
+          "center": [
+            677,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_reminders"
+        },
+        {
+          "index": 11,
+          "role": "BUTTON",
+          "label": "Profile",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            826,
+            2056,
+            1080,
+            2276
+          ],
+          "center": [
+            953,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_profile_2"
+        }
+      ],
+      "all_elements_count": 35,
+      "table": "#   | Role       | Label / Text                      | Center (x,y) | Bounds                | Slug                                         \n----+------------+-----------------------------------+--------------+-----------------------+----------------------------------------------\n#0  | SCROLLVIEW | Medisafe Your medication assis... | (540,1079)   | [55,103][1025,2056]   | scrollview_medisafe_your_medication_assistant\n#1  | BUTTON     | Notifications                     | (829,212)    | [763,146][895,278]    | button_notifications                         \n#2  | BUTTON     | Profile                           | (967,212)    | [901,146][1033,278]   | button_profile                               \n#3  | BUTTON     | Add Medication                    | (289,842)    | [55,694][523,991]     | button_add_medication                        \n#4  | BUTTON     | Calendar View                     | (790,842)    | [556,694][1025,991]   | button_calendar_view                         \n#5  | BUTTON     | History Log                       | (289,1172)   | [55,1024][523,1321]   | button_history_log                           \n#6  | BUTTON     | Refill Tracker                    | (790,1172)   | [556,1024][1025,1321] | button_refill_tracker                        \n#7  | BUTTON     | See All                           | (923,1453)   | [822,1387][1025,1519] | button_see_all                               \n#8  | BUTTON     | Add your first medication         | (540,1924)   | [224,1858][856,1990]  | button_add_your_first_medication             \n#9  | BUTTON     | Medicines                         | (401,2166)   | [275,2056][528,2276]  | button_medicines                             \n#10 | BUTTON     | Reminders                         | (677,2166)   | [550,2056][804,2276]  | button_reminders                             \n#11 | BUTTON     | Profile                           | (953,2166)   | [826,2056][1080,2276] | button_profile_2                             "
+    },
+    "add_medication_screen": {
+      "name": "Add Medication Screen",
+      "slug": "add_medication_screen",
+      "clean_image": "docs/touch_catalog/add_medication_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/add_medication_screen_annotated.png",
+      "json_path": "docs/touch_catalog/add_medication_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "Back",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            33,
+            33,
+            165,
+            165
+          ],
+          "center": [
+            99,
+            99
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_back"
+        },
+        {
+          "index": 1,
+          "role": "SCROLLVIEW",
+          "label": "Scan Prescription or Label Auto-fill details & capture medicine photo Medication Name e.g., Drug1, Aspirin Dosage e.g., 100mg, 1 tablet How often? Once daily Twice daily Three times daily Four times daily As needed For how long? 7 14 30 90 \u221e Ongoing Starts 03/09/2026",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.widget.ScrollView",
+          "bounds": [
+            0,
+            198,
+            1080,
+            2001
+          ],
+          "center": [
+            540,
+            1099
+          ],
+          "width": 1080,
+          "height": 1803,
+          "clickable": false,
+          "focusable": false,
+          "editable": false,
+          "scrollable": true,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "scrollview_scan_prescription_or_label_auto_fil"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Scan Prescription or Label Auto-fill details & capture medicine photo",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            253,
+            1025,
+            427
+          ],
+          "center": [
+            540,
+            340
+          ],
+          "width": 970,
+          "height": 174,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_scan_prescription_or_label_auto_fil"
+        },
+        {
+          "index": 3,
+          "role": "INPUT",
+          "label": "e.g., Drug1, Aspirin",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.widget.EditText",
+          "bounds": [
+            55,
+            557,
+            1025,
+            711
+          ],
+          "center": [
+            540,
+            634
+          ],
+          "width": 970,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": true,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "input_eg_drug1_aspirin"
+        },
+        {
+          "index": 4,
+          "role": "INPUT",
+          "label": "e.g., 100mg, 1 tablet",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.widget.EditText",
+          "bounds": [
+            55,
+            841,
+            1025,
+            995
+          ],
+          "center": [
+            540,
+            918
+          ],
+          "width": 970,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": true,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "input_eg_100mg_1_tablet"
+        },
+        {
+          "index": 5,
+          "role": "CHECKBOX",
+          "label": "Once daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1136,
+            351,
+            1268
+          ],
+          "center": [
+            203,
+            1202
+          ],
+          "width": 296,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": true,
+          "enabled": true,
+          "slug": "checkbox_once_daily"
+        },
+        {
+          "index": 6,
+          "role": "CHECKBOX",
+          "label": "Twice daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            373,
+            1136,
+            679,
+            1268
+          ],
+          "center": [
+            526,
+            1202
+          ],
+          "width": 306,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": false,
+          "enabled": true,
+          "slug": "checkbox_twice_daily"
+        },
+        {
+          "index": 7,
+          "role": "CHECKBOX",
+          "label": "Three times daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1290,
+            478,
+            1422
+          ],
+          "center": [
+            266,
+            1356
+          ],
+          "width": 423,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": false,
+          "enabled": true,
+          "slug": "checkbox_three_times_daily"
+        },
+        {
+          "index": 8,
+          "role": "CHECKBOX",
+          "label": "Four times daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            500,
+            1290,
+            900,
+            1422
+          ],
+          "center": [
+            700,
+            1356
+          ],
+          "width": 400,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": false,
+          "enabled": true,
+          "slug": "checkbox_four_times_daily"
+        },
+        {
+          "index": 9,
+          "role": "CHECKBOX",
+          "label": "As needed",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1444,
+            349,
+            1576
+          ],
+          "center": [
+            202,
+            1510
+          ],
+          "width": 294,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": false,
+          "enabled": true,
+          "slug": "checkbox_as_needed"
+        },
+        {
+          "index": 10,
+          "role": "BUTTON",
+          "label": "7",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1715,
+            232,
+            1847
+          ],
+          "center": [
+            143,
+            1781
+          ],
+          "width": 177,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_7"
+        },
+        {
+          "index": 11,
+          "role": "BUTTON",
+          "label": "14",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            254,
+            1715,
+            431,
+            1847
+          ],
+          "center": [
+            342,
+            1781
+          ],
+          "width": 177,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_14"
+        },
+        {
+          "index": 12,
+          "role": "BUTTON",
+          "label": "30",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            453,
+            1715,
+            629,
+            1847
+          ],
+          "center": [
+            541,
+            1781
+          ],
+          "width": 176,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_30"
+        },
+        {
+          "index": 13,
+          "role": "BUTTON",
+          "label": "90",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            651,
+            1715,
+            827,
+            1847
+          ],
+          "center": [
+            739,
+            1781
+          ],
+          "width": 176,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_90"
+        },
+        {
+          "index": 14,
+          "role": "BUTTON",
+          "label": "\u221e Ongoing",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            849,
+            1715,
+            1025,
+            1847
+          ],
+          "center": [
+            937,
+            1781
+          ],
+          "width": 176,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_ongoing"
+        },
+        {
+          "index": 15,
+          "role": "BUTTON",
+          "label": "Starts 03/09/2026",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1905,
+            1025,
+            2001
+          ],
+          "center": [
+            540,
+            1953
+          ],
+          "width": 970,
+          "height": 96,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_starts_03092026"
+        },
+        {
+          "index": 16,
+          "role": "BUTTON",
+          "label": "Add Medication",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            2045,
+            1025,
+            2188
+          ],
+          "center": [
+            540,
+            2116
+          ],
+          "width": 970,
+          "height": 143,
+          "clickable": true,
+          "focusable": false,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": false,
+          "slug": "button_add_medication"
+        },
+        {
+          "index": 17,
+          "role": "BUTTON",
+          "label": "Cancel",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            2216,
+            1025,
+            2348
+          ],
+          "center": [
+            540,
+            2282
+          ],
+          "width": 970,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_cancel"
+        }
+      ],
+      "all_elements_count": 42,
+      "table": "#   | Role       | Label / Text                      | Center (x,y) | Bounds                | Slug                                          \n----+------------+-----------------------------------+--------------+-----------------------+-----------------------------------------------\n#0  | BUTTON     | Back                              | (99,99)      | [33,33][165,165]      | button_back                                   \n#1  | SCROLLVIEW | Scan Prescription or Label Aut... | (540,1099)   | [0,198][1080,2001]    | scrollview_scan_prescription_or_label_auto_fil\n#2  | BUTTON     | Scan Prescription or Label Aut... | (540,340)    | [55,253][1025,427]    | button_scan_prescription_or_label_auto_fil    \n#3  | INPUT      | e.g., Drug1, Aspirin              | (540,634)    | [55,557][1025,711]    | input_eg_drug1_aspirin                        \n#4  | INPUT      | e.g., 100mg, 1 tablet             | (540,918)    | [55,841][1025,995]    | input_eg_100mg_1_tablet                       \n#5  | CHECKBOX   | Once daily                        | (203,1202)   | [55,1136][351,1268]   | checkbox_once_daily                           \n#6  | CHECKBOX   | Twice daily                       | (526,1202)   | [373,1136][679,1268]  | checkbox_twice_daily                          \n#7  | CHECKBOX   | Three times daily                 | (266,1356)   | [55,1290][478,1422]   | checkbox_three_times_daily                    \n#8  | CHECKBOX   | Four times daily                  | (700,1356)   | [500,1290][900,1422]  | checkbox_four_times_daily                     \n#9  | CHECKBOX   | As needed                         | (202,1510)   | [55,1444][349,1576]   | checkbox_as_needed                            \n#10 | BUTTON     | 7                                 | (143,1781)   | [55,1715][232,1847]   | button_7                                      \n#11 | BUTTON     | 14                                | (342,1781)   | [254,1715][431,1847]  | button_14                                     \n#12 | BUTTON     | 30                                | (541,1781)   | [453,1715][629,1847]  | button_30                                     \n#13 | BUTTON     | 90                                | (739,1781)   | [651,1715][827,1847]  | button_90                                     \n#14 | BUTTON     | \u221e Ongoing                         | (937,1781)   | [849,1715][1025,1847] | button_ongoing                                \n#15 | BUTTON     | Starts 03/09/2026                 | (540,1953)   | [55,1905][1025,2001]  | button_starts_03092026                        \n#16 | BUTTON     | Add Medication                    | (540,2116)   | [55,2045][1025,2188]  | button_add_medication                         \n#17 | BUTTON     | Cancel                            | (540,2282)   | [55,2216][1025,2348]  | button_cancel                                 "
+    },
+    "calendar_screen": {
+      "name": "Calendar Screen",
+      "slug": "calendar_screen",
+      "clean_image": "docs/touch_catalog/calendar_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/calendar_screen_annotated.png",
+      "json_path": "docs/touch_catalog/calendar_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "Back",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            33,
+            33,
+            165,
+            165
+          ],
+          "center": [
+            99,
+            99
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_back"
+        },
+        {
+          "index": 1,
+          "role": "BUTTON",
+          "label": "Previous Month",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            264,
+            231,
+            396
+          ],
+          "center": [
+            165,
+            330
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_previous_month"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Next Month",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            849,
+            264,
+            981,
+            396
+          ],
+          "center": [
+            915,
+            330
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_next_month"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "1",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            349,
+            483,
+            475,
+            598
+          ],
+          "center": [
+            412,
+            540
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_1"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "2",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            475,
+            483,
+            601,
+            598
+          ],
+          "center": [
+            538,
+            540
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_2"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "3",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            601,
+            483,
+            727,
+            598
+          ],
+          "center": [
+            664,
+            540
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_3"
+        },
+        {
+          "index": 6,
+          "role": "BUTTON",
+          "label": "4",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            727,
+            483,
+            853,
+            598
+          ],
+          "center": [
+            790,
+            540
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_4"
+        },
+        {
+          "index": 7,
+          "role": "BUTTON",
+          "label": "5",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            853,
+            483,
+            985,
+            598
+          ],
+          "center": [
+            919,
+            540
+          ],
+          "width": 132,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_5"
+        },
+        {
+          "index": 8,
+          "role": "BUTTON",
+          "label": "6",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            97,
+            598,
+            223,
+            713
+          ],
+          "center": [
+            160,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_6"
+        },
+        {
+          "index": 9,
+          "role": "BUTTON",
+          "label": "7",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            223,
+            598,
+            349,
+            713
+          ],
+          "center": [
+            286,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_7"
+        },
+        {
+          "index": 10,
+          "role": "BUTTON",
+          "label": "8",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            349,
+            598,
+            475,
+            713
+          ],
+          "center": [
+            412,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_8"
+        },
+        {
+          "index": 11,
+          "role": "BUTTON",
+          "label": "9",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            475,
+            598,
+            601,
+            713
+          ],
+          "center": [
+            538,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_9"
+        },
+        {
+          "index": 12,
+          "role": "BUTTON",
+          "label": "10",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            601,
+            598,
+            727,
+            713
+          ],
+          "center": [
+            664,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_10"
+        },
+        {
+          "index": 13,
+          "role": "BUTTON",
+          "label": "11",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            727,
+            598,
+            853,
+            713
+          ],
+          "center": [
+            790,
+            655
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_11"
+        },
+        {
+          "index": 14,
+          "role": "BUTTON",
+          "label": "12",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            853,
+            598,
+            985,
+            713
+          ],
+          "center": [
+            919,
+            655
+          ],
+          "width": 132,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_12"
+        },
+        {
+          "index": 15,
+          "role": "BUTTON",
+          "label": "13",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            97,
+            713,
+            223,
+            828
+          ],
+          "center": [
+            160,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_13"
+        },
+        {
+          "index": 16,
+          "role": "BUTTON",
+          "label": "14",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            223,
+            713,
+            349,
+            828
+          ],
+          "center": [
+            286,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_14"
+        },
+        {
+          "index": 17,
+          "role": "BUTTON",
+          "label": "15",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            349,
+            713,
+            475,
+            828
+          ],
+          "center": [
+            412,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_15"
+        },
+        {
+          "index": 18,
+          "role": "BUTTON",
+          "label": "16",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            475,
+            713,
+            601,
+            828
+          ],
+          "center": [
+            538,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_16"
+        },
+        {
+          "index": 19,
+          "role": "BUTTON",
+          "label": "17",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            601,
+            713,
+            727,
+            828
+          ],
+          "center": [
+            664,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_17"
+        },
+        {
+          "index": 20,
+          "role": "BUTTON",
+          "label": "18",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            727,
+            713,
+            853,
+            828
+          ],
+          "center": [
+            790,
+            770
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_18"
+        },
+        {
+          "index": 21,
+          "role": "BUTTON",
+          "label": "19",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            853,
+            713,
+            985,
+            828
+          ],
+          "center": [
+            919,
+            770
+          ],
+          "width": 132,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_19"
+        },
+        {
+          "index": 22,
+          "role": "BUTTON",
+          "label": "20",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            97,
+            828,
+            223,
+            943
+          ],
+          "center": [
+            160,
+            885
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_20"
+        },
+        {
+          "index": 23,
+          "role": "BUTTON",
+          "label": "21",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            223,
+            828,
+            349,
+            943
+          ],
+          "center": [
+            286,
+            885
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_21"
+        },
+        {
+          "index": 24,
+          "role": "BUTTON",
+          "label": "22",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            349,
+            828,
+            475,
+            943
+          ],
+          "center": [
+            412,
+            885
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_22"
+        },
+        {
+          "index": 25,
+          "role": "BUTTON",
+          "label": "23",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            475,
+            828,
+            601,
+            943
+          ],
+          "center": [
+            538,
+            885
+          ],
+          "width": 126,
+          "height": 115,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_23"
+        },
+        {
+          "index": 26,
+          "role": "BUTTON",
+          "label": "24",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            601,
+            828,
+            727,
+            960
+          ],
+          "center": [
+            664,
+            894
+          ],
+          "width": 126,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_24"
+        },
+        {
+          "index": 27,
+          "role": "BUTTON",
+          "label": "25",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            727,
+            828,
+            853,
+            960
+          ],
+          "center": [
+            790,
+            894
+          ],
+          "width": 126,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_25"
+        },
+        {
+          "index": 28,
+          "role": "BUTTON",
+          "label": "26",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            853,
+            828,
+            985,
+            960
+          ],
+          "center": [
+            919,
+            894
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_26"
+        },
+        {
+          "index": 29,
+          "role": "BUTTON",
+          "label": "27",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            97,
+            943,
+            223,
+            1075
+          ],
+          "center": [
+            160,
+            1009
+          ],
+          "width": 126,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_27"
+        },
+        {
+          "index": 30,
+          "role": "BUTTON",
+          "label": "28",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            223,
+            943,
+            349,
+            1075
+          ],
+          "center": [
+            286,
+            1009
+          ],
+          "width": 126,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_28"
+        },
+        {
+          "index": 31,
+          "role": "BUTTON",
+          "label": "29",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            349,
+            943,
+            475,
+            1075
+          ],
+          "center": [
+            412,
+            1009
+          ],
+          "width": 126,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_29"
+        },
+        {
+          "index": 32,
+          "role": "BUTTON",
+          "label": "30",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            475,
+            943,
+            607,
+            1075
+          ],
+          "center": [
+            541,
+            1009
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_30"
+        }
+      ],
+      "all_elements_count": 77,
+      "table": "#   | Role   | Label / Text   | Center (x,y) | Bounds              | Slug                 \n----+--------+----------------+--------------+---------------------+----------------------\n#0  | BUTTON | Back           | (99,99)      | [33,33][165,165]    | button_back          \n#1  | BUTTON | Previous Month | (165,330)    | [99,264][231,396]   | button_previous_month\n#2  | BUTTON | Next Month     | (915,330)    | [849,264][981,396]  | button_next_month    \n#3  | BUTTON | 1              | (412,540)    | [349,483][475,598]  | button_1             \n#4  | BUTTON | 2              | (538,540)    | [475,483][601,598]  | button_2             \n#5  | BUTTON | 3              | (664,540)    | [601,483][727,598]  | button_3             \n#6  | BUTTON | 4              | (790,540)    | [727,483][853,598]  | button_4             \n#7  | BUTTON | 5              | (919,540)    | [853,483][985,598]  | button_5             \n#8  | BUTTON | 6              | (160,655)    | [97,598][223,713]   | button_6             \n#9  | BUTTON | 7              | (286,655)    | [223,598][349,713]  | button_7             \n#10 | BUTTON | 8              | (412,655)    | [349,598][475,713]  | button_8             \n#11 | BUTTON | 9              | (538,655)    | [475,598][601,713]  | button_9             \n#12 | BUTTON | 10             | (664,655)    | [601,598][727,713]  | button_10            \n#13 | BUTTON | 11             | (790,655)    | [727,598][853,713]  | button_11            \n#14 | BUTTON | 12             | (919,655)    | [853,598][985,713]  | button_12            \n#15 | BUTTON | 13             | (160,770)    | [97,713][223,828]   | button_13            \n#16 | BUTTON | 14             | (286,770)    | [223,713][349,828]  | button_14            \n#17 | BUTTON | 15             | (412,770)    | [349,713][475,828]  | button_15            \n#18 | BUTTON | 16             | (538,770)    | [475,713][601,828]  | button_16            \n#19 | BUTTON | 17             | (664,770)    | [601,713][727,828]  | button_17            \n#20 | BUTTON | 18             | (790,770)    | [727,713][853,828]  | button_18            \n#21 | BUTTON | 19             | (919,770)    | [853,713][985,828]  | button_19            \n#22 | BUTTON | 20             | (160,885)    | [97,828][223,943]   | button_20            \n#23 | BUTTON | 21             | (286,885)    | [223,828][349,943]  | button_21            \n#24 | BUTTON | 22             | (412,885)    | [349,828][475,943]  | button_22            \n#25 | BUTTON | 23             | (538,885)    | [475,828][601,943]  | button_23            \n#26 | BUTTON | 24             | (664,894)    | [601,828][727,960]  | button_24            \n#27 | BUTTON | 25             | (790,894)    | [727,828][853,960]  | button_25            \n#28 | BUTTON | 26             | (919,894)    | [853,828][985,960]  | button_26            \n#29 | BUTTON | 27             | (160,1009)   | [97,943][223,1075]  | button_27            \n#30 | BUTTON | 28             | (286,1009)   | [223,943][349,1075] | button_28            \n#31 | BUTTON | 29             | (412,1009)   | [349,943][475,1075] | button_29            \n#32 | BUTTON | 30             | (541,1009)   | [475,943][607,1075] | button_30            "
+    },
+    "history_log_screen": {
+      "name": "History Log Screen",
+      "slug": "history_log_screen",
+      "clean_image": "docs/touch_catalog/history_log_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/history_log_screen_annotated.png",
+      "json_path": "docs/touch_catalog/history_log_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "Back",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            33,
+            33,
+            165,
+            165
+          ],
+          "center": [
+            99,
+            99
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_back"
+        },
+        {
+          "index": 1,
+          "role": "BUTTON",
+          "label": "Taken",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            360,
+            198,
+            720,
+            330
+          ],
+          "center": [
+            540,
+            264
+          ],
+          "width": 360,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_taken"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Missed",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            720,
+            198,
+            1080,
+            330
+          ],
+          "center": [
+            900,
+            264
+          ],
+          "width": 360,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_missed"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "Clear All Data",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            690,
+            1025,
+            822
+          ],
+          "center": [
+            540,
+            756
+          ],
+          "width": 970,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_clear_all_data"
+        }
+      ],
+      "all_elements_count": 11,
+      "table": "#  | Role   | Label / Text   | Center (x,y) | Bounds              | Slug                 \n---+--------+----------------+--------------+---------------------+----------------------\n#0 | BUTTON | Back           | (99,99)      | [33,33][165,165]    | button_back          \n#1 | BUTTON | Taken          | (540,264)    | [360,198][720,330]  | button_taken         \n#2 | BUTTON | Missed         | (900,264)    | [720,198][1080,330] | button_missed        \n#3 | BUTTON | Clear All Data | (540,756)    | [55,690][1025,822]  | button_clear_all_data"
+    },
+    "refill_tracker_screen": {
+      "name": "Refill Tracker Screen",
+      "slug": "refill_tracker_screen",
+      "clean_image": "docs/touch_catalog/refill_tracker_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/refill_tracker_screen_annotated.png",
+      "json_path": "docs/touch_catalog/refill_tracker_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "Back",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            33,
+            33,
+            165,
+            165
+          ],
+          "center": [
+            99,
+            99
+          ],
+          "width": 132,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_back"
+        },
+        {
+          "index": 1,
+          "role": "SCROLLVIEW",
+          "label": "Medication Supplies PARACIP-500 1 tablet Low Current Supply: 0 units Refill at: 20% Record Refill GLITCH-M1 t-MD Dolo-650",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            198,
+            1025,
+            2392
+          ],
+          "center": [
+            540,
+            1295
+          ],
+          "width": 970,
+          "height": 2194,
+          "clickable": false,
+          "focusable": false,
+          "editable": false,
+          "scrollable": true,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "scrollview_medication_supplies_paracip_500_1_t"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Record Refill",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            105,
+            660,
+            975,
+            792
+          ],
+          "center": [
+            540,
+            726
+          ],
+          "width": 870,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_record_refill"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "Record Refill",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            105,
+            1204,
+            975,
+            1336
+          ],
+          "center": [
+            540,
+            1270
+          ],
+          "width": 870,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_record_refill_2"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "Record Refill",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            105,
+            1748,
+            975,
+            1880
+          ],
+          "center": [
+            540,
+            1814
+          ],
+          "width": 870,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_record_refill_3"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "Record Refill",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            105,
+            2292,
+            975,
+            2392
+          ],
+          "center": [
+            540,
+            2342
+          ],
+          "width": 870,
+          "height": 100,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_record_refill_4"
+        }
+      ],
+      "all_elements_count": 33,
+      "table": "#  | Role       | Label / Text                      | Center (x,y) | Bounds               | Slug                                          \n---+------------+-----------------------------------+--------------+----------------------+-----------------------------------------------\n#0 | BUTTON     | Back                              | (99,99)      | [33,33][165,165]     | button_back                                   \n#1 | SCROLLVIEW | Medication Supplies PARACIP-50... | (540,1295)   | [55,198][1025,2392]  | scrollview_medication_supplies_paracip_500_1_t\n#2 | BUTTON     | Record Refill                     | (540,726)    | [105,660][975,792]   | button_record_refill                          \n#3 | BUTTON     | Record Refill                     | (540,1270)   | [105,1204][975,1336] | button_record_refill_2                        \n#4 | BUTTON     | Record Refill                     | (540,1814)   | [105,1748][975,1880] | button_record_refill_3                        \n#5 | BUTTON     | Record Refill                     | (540,2342)   | [105,2292][975,2392] | button_record_refill_4                        "
+    },
+    "medicines_screen": {
+      "name": "Medicines Screen",
+      "slug": "medicines_screen",
+      "clean_image": "docs/touch_catalog/medicines_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/medicines_screen_annotated.png",
+      "json_path": "docs/touch_catalog/medicines_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "Add",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            806,
+            256,
+            1025,
+            388
+          ],
+          "center": [
+            915,
+            322
+          ],
+          "width": 219,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_add"
+        },
+        {
+          "index": 1,
+          "role": "INPUT",
+          "label": "Search medicines, doses...",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.widget.EditText",
+          "bounds": [
+            55,
+            427,
+            1025,
+            581
+          ],
+          "center": [
+            540,
+            504
+          ],
+          "width": 970,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": true,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "input_search_medicines_doses"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "All (5)",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            729,
+            598,
+            1025,
+            730
+          ],
+          "center": [
+            877,
+            664
+          ],
+          "width": 296,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_all_5"
+        },
+        {
+          "index": 3,
+          "role": "SCROLLVIEW",
+          "label": "PARACIP-500 Active 1 tablet Once daily GLITCH-M1 t-MD Dolo-650 Weltone Gold+ 1 mL \u00b7 liquid",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            747,
+            1025,
+            2056
+          ],
+          "center": [
+            540,
+            1401
+          ],
+          "width": 970,
+          "height": 1309,
+          "clickable": false,
+          "focusable": false,
+          "editable": false,
+          "scrollable": true,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "scrollview_paracip_500_active_1_tablet_once_da"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "PARACIP-500 Active 1 tablet Once daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            747,
+            1025,
+            1005
+          ],
+          "center": [
+            540,
+            876
+          ],
+          "width": 970,
+          "height": 258,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_paracip_500_active_1_tablet_once_da"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "Upload photo",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            807,
+            237,
+            945
+          ],
+          "center": [
+            168,
+            876
+          ],
+          "width": 138,
+          "height": 138,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_upload_photo"
+        },
+        {
+          "index": 6,
+          "role": "BUTTON",
+          "label": "GLITCH-M1 Active 1 tablet Once daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1038,
+            1025,
+            1296
+          ],
+          "center": [
+            540,
+            1167
+          ],
+          "width": 970,
+          "height": 258,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_glitch_m1_active_1_tablet_once_dail"
+        },
+        {
+          "index": 7,
+          "role": "BUTTON",
+          "label": "Upload photo",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            1098,
+            237,
+            1236
+          ],
+          "center": [
+            168,
+            1167
+          ],
+          "width": 138,
+          "height": 138,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_upload_photo_2"
+        },
+        {
+          "index": 8,
+          "role": "BUTTON",
+          "label": "t-MD Active 1 tablet Once daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1329,
+            1025,
+            1587
+          ],
+          "center": [
+            540,
+            1458
+          ],
+          "width": 970,
+          "height": 258,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_t_md_active_1_tablet_once_daily"
+        },
+        {
+          "index": 9,
+          "role": "BUTTON",
+          "label": "Upload photo",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            1389,
+            237,
+            1527
+          ],
+          "center": [
+            168,
+            1458
+          ],
+          "width": 138,
+          "height": 138,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_upload_photo_3"
+        },
+        {
+          "index": 10,
+          "role": "BUTTON",
+          "label": "Dolo-650 Active 1 tablet Once daily",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1620,
+            1025,
+            1878
+          ],
+          "center": [
+            540,
+            1749
+          ],
+          "width": 970,
+          "height": 258,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_dolo_650_active_1_tablet_once_daily"
+        },
+        {
+          "index": 11,
+          "role": "BUTTON",
+          "label": "Upload photo",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            1680,
+            237,
+            1818
+          ],
+          "center": [
+            168,
+            1749
+          ],
+          "width": 138,
+          "height": 138,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_upload_photo_4"
+        },
+        {
+          "index": 12,
+          "role": "BUTTON",
+          "label": "Weltone Gold+ Active 1 mL \u00b7 liquid",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            55,
+            1911,
+            1025,
+            2056
+          ],
+          "center": [
+            540,
+            1983
+          ],
+          "width": 970,
+          "height": 145,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_weltone_gold_active_1_ml_liquid"
+        },
+        {
+          "index": 13,
+          "role": "BUTTON",
+          "label": "",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            99,
+            1971,
+            237,
+            2056
+          ],
+          "center": [
+            168,
+            2013
+          ],
+          "width": 138,
+          "height": 85,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_button"
+        },
+        {
+          "index": 14,
+          "role": "BUTTON",
+          "label": "Today",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            0,
+            2056,
+            253,
+            2276
+          ],
+          "center": [
+            126,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_today"
+        },
+        {
+          "index": 15,
+          "role": "BUTTON",
+          "label": "Reminders",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            550,
+            2056,
+            804,
+            2276
+          ],
+          "center": [
+            677,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_reminders"
+        },
+        {
+          "index": 16,
+          "role": "BUTTON",
+          "label": "Profile",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            826,
+            2056,
+            1080,
+            2276
+          ],
+          "center": [
+            953,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_profile"
+        }
+      ],
+      "all_elements_count": 56,
+      "table": "#   | Role       | Label / Text                      | Center (x,y) | Bounds                | Slug                                          \n----+------------+-----------------------------------+--------------+-----------------------+-----------------------------------------------\n#0  | BUTTON     | Add                               | (915,322)    | [806,256][1025,388]   | button_add                                    \n#1  | INPUT      | Search medicines, doses...        | (540,504)    | [55,427][1025,581]    | input_search_medicines_doses                  \n#2  | BUTTON     | All (5)                           | (877,664)    | [729,598][1025,730]   | button_all_5                                  \n#3  | SCROLLVIEW | PARACIP-500 Active 1 tablet On... | (540,1401)   | [55,747][1025,2056]   | scrollview_paracip_500_active_1_tablet_once_da\n#4  | BUTTON     | PARACIP-500 Active 1 tablet On... | (540,876)    | [55,747][1025,1005]   | button_paracip_500_active_1_tablet_once_da    \n#5  | BUTTON     | Upload photo                      | (168,876)    | [99,807][237,945]     | button_upload_photo                           \n#6  | BUTTON     | GLITCH-M1 Active 1 tablet Once... | (540,1167)   | [55,1038][1025,1296]  | button_glitch_m1_active_1_tablet_once_dail    \n#7  | BUTTON     | Upload photo                      | (168,1167)   | [99,1098][237,1236]   | button_upload_photo_2                         \n#8  | BUTTON     | t-MD Active 1 tablet Once dail... | (540,1458)   | [55,1329][1025,1587]  | button_t_md_active_1_tablet_once_daily        \n#9  | BUTTON     | Upload photo                      | (168,1458)   | [99,1389][237,1527]   | button_upload_photo_3                         \n#10 | BUTTON     | Dolo-650 Active 1 tablet Once ... | (540,1749)   | [55,1620][1025,1878]  | button_dolo_650_active_1_tablet_once_daily    \n#11 | BUTTON     | Upload photo                      | (168,1749)   | [99,1680][237,1818]   | button_upload_photo_4                         \n#12 | BUTTON     | Weltone Gold+ Active 1 mL \u00b7 li... | (540,1983)   | [55,1911][1025,2056]  | button_weltone_gold_active_1_ml_liquid        \n#13 | BUTTON     | -                                 | (168,2013)   | [99,1971][237,2056]   | button_button                                 \n#14 | BUTTON     | Today                             | (126,2166)   | [0,2056][253,2276]    | button_today                                  \n#15 | BUTTON     | Reminders                         | (677,2166)   | [550,2056][804,2276]  | button_reminders                              \n#16 | BUTTON     | Profile                           | (953,2166)   | [826,2056][1080,2276] | button_profile                                "
+    },
+    "reminders_screen": {
+      "name": "Reminders Screen",
+      "slug": "reminders_screen",
+      "clean_image": "docs/touch_catalog/reminders_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/reminders_screen_annotated.png",
+      "json_path": "docs/touch_catalog/reminders_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "BUTTON",
+          "label": "22:00",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            83,
+            293,
+            224,
+            425
+          ],
+          "center": [
+            153,
+            359
+          ],
+          "width": 141,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_2200"
+        },
+        {
+          "index": 1,
+          "role": "BUTTON",
+          "label": "07:00",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            297,
+            293,
+            438,
+            425
+          ],
+          "center": [
+            367,
+            359
+          ],
+          "width": 141,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_0700"
+        },
+        {
+          "index": 2,
+          "role": "CHECKBOX",
+          "label": "",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            854,
+            452,
+            997,
+            584
+          ],
+          "center": [
+            925,
+            518
+          ],
+          "width": 143,
+          "height": 132,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": true,
+          "checked": false,
+          "enabled": true,
+          "slug": "checkbox_checkbox"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "Today",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            0,
+            2056,
+            253,
+            2276
+          ],
+          "center": [
+            126,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_today"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "Medicines",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            275,
+            2056,
+            528,
+            2276
+          ],
+          "center": [
+            401,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_medicines"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "Profile",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            826,
+            2056,
+            1080,
+            2276
+          ],
+          "center": [
+            953,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_profile"
+        }
+      ],
+      "all_elements_count": 21,
+      "table": "#  | Role     | Label / Text | Center (x,y) | Bounds                | Slug             \n---+----------+--------------+--------------+-----------------------+------------------\n#0 | BUTTON   | 22:00        | (153,359)    | [83,293][224,425]     | button_2200      \n#1 | BUTTON   | 07:00        | (367,359)    | [297,293][438,425]    | button_0700      \n#2 | CHECKBOX | -            | (925,518)    | [854,452][997,584]    | checkbox_checkbox\n#3 | BUTTON   | Today        | (126,2166)   | [0,2056][253,2276]    | button_today     \n#4 | BUTTON   | Medicines    | (401,2166)   | [275,2056][528,2276]  | button_medicines \n#5 | BUTTON   | Profile      | (953,2166)   | [826,2056][1080,2276] | button_profile   "
+    },
+    "profile_screen": {
+      "name": "Profile Screen",
+      "slug": "profile_screen",
+      "clean_image": "docs/touch_catalog/profile_screen_clean.png",
+      "annotated_image": "docs/touch_catalog/profile_screen_annotated.png",
+      "json_path": "docs/touch_catalog/profile_screen_map.json",
+      "elements": [
+        {
+          "index": 0,
+          "role": "SCROLLVIEW",
+          "label": "Profile M makarandshinde8i Active 5 Medicines 0 Active reminders Care People & sharing Patients, members, invites \u203a Alert preferences Delays, quiet hours Doctor report Adherence & CSV export Assistant AI conversations Symptoms Timeline & corrections Exports CSV \u00b7 download \u00b7 1h link Account Account & security Password, sessions Security MFA, active sessions",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            0,
+            103,
+            1080,
+            2056
+          ],
+          "center": [
+            540,
+            1079
+          ],
+          "width": 1080,
+          "height": 1953,
+          "clickable": false,
+          "focusable": false,
+          "editable": false,
+          "scrollable": true,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "scrollview_profile_m_makarandshinde8i_active_5"
+        },
+        {
+          "index": 1,
+          "role": "BUTTON",
+          "label": "People & sharing Patients, members, invites \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            747,
+            1036,
+            901
+          ],
+          "center": [
+            540,
+            824
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_people_sharing_patients_members_inv"
+        },
+        {
+          "index": 2,
+          "role": "BUTTON",
+          "label": "Alert preferences Delays, quiet hours \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            902,
+            1036,
+            1056
+          ],
+          "center": [
+            540,
+            979
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_alert_preferences_delays_quiet_hour"
+        },
+        {
+          "index": 3,
+          "role": "BUTTON",
+          "label": "Doctor report Adherence & CSV export \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1057,
+            1036,
+            1211
+          ],
+          "center": [
+            540,
+            1134
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_doctor_report_adherence_csv_export"
+        },
+        {
+          "index": 4,
+          "role": "BUTTON",
+          "label": "Assistant AI conversations \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1212,
+            1036,
+            1366
+          ],
+          "center": [
+            540,
+            1289
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_assistant_ai_conversations"
+        },
+        {
+          "index": 5,
+          "role": "BUTTON",
+          "label": "Symptoms Timeline & corrections \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1367,
+            1036,
+            1521
+          ],
+          "center": [
+            540,
+            1444
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_symptoms_timeline_corrections"
+        },
+        {
+          "index": 6,
+          "role": "BUTTON",
+          "label": "Exports CSV \u00b7 download \u00b7 1h link \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1522,
+            1036,
+            1676
+          ],
+          "center": [
+            540,
+            1599
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_exports_csv_download_1h_link"
+        },
+        {
+          "index": 7,
+          "role": "BUTTON",
+          "label": "Account & security Password, sessions \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1800,
+            1036,
+            1954
+          ],
+          "center": [
+            540,
+            1877
+          ],
+          "width": 992,
+          "height": 154,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_account_security_password_sessions"
+        },
+        {
+          "index": 8,
+          "role": "BUTTON",
+          "label": "Security MFA, active sessions \u203a",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            44,
+            1955,
+            1036,
+            2056
+          ],
+          "center": [
+            540,
+            2005
+          ],
+          "width": 992,
+          "height": 101,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_security_mfa_active_sessions"
+        },
+        {
+          "index": 9,
+          "role": "BUTTON",
+          "label": "Today",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            0,
+            2056,
+            253,
+            2276
+          ],
+          "center": [
+            126,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_today"
+        },
+        {
+          "index": 10,
+          "role": "BUTTON",
+          "label": "Medicines",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            275,
+            2056,
+            528,
+            2276
+          ],
+          "center": [
+            401,
+            2166
+          ],
+          "width": 253,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_medicines"
+        },
+        {
+          "index": 11,
+          "role": "BUTTON",
+          "label": "Reminders",
+          "text": "",
+          "content_desc": "",
+          "resource_id": "",
+          "class_name": "android.view.View",
+          "bounds": [
+            550,
+            2056,
+            804,
+            2276
+          ],
+          "center": [
+            677,
+            2166
+          ],
+          "width": 254,
+          "height": 220,
+          "clickable": true,
+          "focusable": true,
+          "editable": false,
+          "scrollable": false,
+          "checkable": false,
+          "checked": false,
+          "enabled": true,
+          "slug": "button_reminders"
+        }
+      ],
+      "all_elements_count": 51,
+      "table": "#   | Role       | Label / Text                      | Center (x,y) | Bounds               | Slug                                          \n----+------------+-----------------------------------+--------------+----------------------+-----------------------------------------------\n#0  | SCROLLVIEW | Profile M makarandshinde8i Act... | (540,1079)   | [0,103][1080,2056]   | scrollview_profile_m_makarandshinde8i_active_5\n#1  | BUTTON     | People & sharing Patients, mem... | (540,824)    | [44,747][1036,901]   | button_people_sharing_patients_members_inv    \n#2  | BUTTON     | Alert preferences Delays, quie... | (540,979)    | [44,902][1036,1056]  | button_alert_preferences_delays_quiet_hour    \n#3  | BUTTON     | Doctor report Adherence & CSV ... | (540,1134)   | [44,1057][1036,1211] | button_doctor_report_adherence_csv_export     \n#4  | BUTTON     | Assistant AI conversations \u203a      | (540,1289)   | [44,1212][1036,1366] | button_assistant_ai_conversations             \n#5  | BUTTON     | Symptoms Timeline & correction... | (540,1444)   | [44,1367][1036,1521] | button_symptoms_timeline_corrections          \n#6  | BUTTON     | Exports CSV \u00b7 download \u00b7 1h li... | (540,1599)   | [44,1522][1036,1676] | button_exports_csv_download_1h_link           \n#7  | BUTTON     | Account & security Password, s... | (540,1877)   | [44,1800][1036,1954] | button_account_security_password_sessions     \n#8  | BUTTON     | Security MFA, active sessions ... | (540,2005)   | [44,1955][1036,2056] | button_security_mfa_active_sessions           \n#9  | BUTTON     | Today                             | (126,2166)   | [0,2056][253,2276]   | button_today                                  \n#10 | BUTTON     | Medicines                         | (401,2166)   | [275,2056][528,2276] | button_medicines                              \n#11 | BUTTON     | Reminders                         | (677,2166)   | [550,2056][804,2276] | button_reminders                              "
+    }
+  }
+}

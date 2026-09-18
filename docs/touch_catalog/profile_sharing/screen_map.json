@@ -1,0 +1,1111 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 38,
+  "elements": [
+    {
+      "index": 0,
+      "role": "SCROLLVIEW",
+      "label": "People & sharing Members (1) Refresh 41b2c9e0 \u00b7 owner active created \u2014 owner Change role Revoke Invite by email Email viewer contributor manager Send invite Only owners can invite owners Pending invites (0) No pending invites Accept invite by token Paste token from email/outbox (opaque, \u226510 chars) Invite token",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        0,
+        279,
+        1080,
+        2276
+      ],
+      "center": [
+        540,
+        1277
+      ],
+      "width": 1080,
+      "height": 1997,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_people_sharing_members_1_refresh_41"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Refresh",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        837,
+        466,
+        997,
+        598
+      ],
+      "center": [
+        917,
+        532
+      ],
+      "width": 160,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_refresh"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Change role",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        848,
+        289,
+        980
+      ],
+      "center": [
+        186,
+        914
+      ],
+      "width": 206,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_change_role"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Revoke",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        306,
+        848,
+        466,
+        980
+      ],
+      "center": [
+        386,
+        914
+      ],
+      "width": 160,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_revoke"
+    },
+    {
+      "index": 4,
+      "role": "INPUT",
+      "label": "Email",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        1147,
+        997,
+        1323
+      ],
+      "center": [
+        540,
+        1235
+      ],
+      "width": 914,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_email"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "viewer",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1320,
+        215,
+        1449
+      ],
+      "center": [
+        149,
+        1384
+      ],
+      "width": 132,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_viewer"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "contributor",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        237,
+        1320,
+        432,
+        1449
+      ],
+      "center": [
+        334,
+        1384
+      ],
+      "width": 195,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_contributor"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "manager",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        454,
+        1320,
+        617,
+        1449
+      ],
+      "center": [
+        535,
+        1384
+      ],
+      "width": 163,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_manager"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "owner",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        637,
+        1320,
+        769,
+        1449
+      ],
+      "center": [
+        703,
+        1384
+      ],
+      "width": 132,
+      "height": 129,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_owner"
+    },
+    {
+      "index": 9,
+      "role": "BUTTON",
+      "label": "Send invite",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1449,
+        997,
+        1581
+      ],
+      "center": [
+        540,
+        1515
+      ],
+      "width": 914,
+      "height": 132,
+      "clickable": true,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": false,
+      "slug": "button_send_invite"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "Refresh",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        837,
+        1752,
+        997,
+        1884
+      ],
+      "center": [
+        917,
+        1818
+      ],
+      "width": 160,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_refresh_2"
+    },
+    {
+      "index": 11,
+      "role": "INPUT",
+      "label": "Invite token",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        83,
+        2195,
+        997,
+        2342
+      ],
+      "center": [
+        540,
+        2268
+      ],
+      "width": 914,
+      "height": 147,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_invite_token"
+    },
+    {
+      "index": 12,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "People & sharing",
+      "text": "People & sharing",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        44,
+        323,
+        502,
+        394
+      ],
+      "center": [
+        273,
+        358
+      ],
+      "width": 458,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_people_sharing"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Members (1)",
+      "text": "Members (1)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        510,
+        300,
+        555
+      ],
+      "center": [
+        191,
+        532
+      ],
+      "width": 217,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_members_1"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "Refresh",
+      "text": "Refresh",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        865,
+        515,
+        970,
+        550
+      ],
+      "center": [
+        917,
+        532
+      ],
+      "width": 105,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refresh"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "41b2c9e0 \u00b7 owner",
+      "text": "41b2c9e0 \u00b7 owner",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        698,
+        364,
+        740
+      ],
+      "center": [
+        223,
+        719
+      ],
+      "width": 281,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_41b2c9e0_owner"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "active",
+      "text": "active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        746,
+        164,
+        781
+      ],
+      "center": [
+        123,
+        763
+      ],
+      "width": 81,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "created \u2014",
+      "text": "created \u2014",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        787,
+        202,
+        820
+      ],
+      "center": [
+        142,
+        803
+      ],
+      "width": 119,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_created"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "owner",
+      "text": "owner",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        906,
+        743,
+        980,
+        776
+      ],
+      "center": [
+        943,
+        759
+      ],
+      "width": 74,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_owner"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Change role",
+      "text": "Change role",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        897,
+        267,
+        932
+      ],
+      "center": [
+        186,
+        914
+      ],
+      "width": 162,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_change_role"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Revoke",
+      "text": "Revoke",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        337,
+        897,
+        436,
+        932
+      ],
+      "center": [
+        386,
+        914
+      ],
+      "width": 99,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_revoke"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Invite by email",
+      "text": "Invite by email",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1074,
+        328,
+        1119
+      ],
+      "center": [
+        205,
+        1096
+      ],
+      "width": 245,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_invite_by_email"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "Email",
+      "text": "Email",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        1213,
+        237,
+        1279
+      ],
+      "center": [
+        182,
+        1246
+      ],
+      "width": 110,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_email"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "viewer",
+      "text": "viewer",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1368,
+        193,
+        1403
+      ],
+      "center": [
+        149,
+        1385
+      ],
+      "width": 88,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_viewer"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "contributor",
+      "text": "contributor",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        259,
+        1368,
+        410,
+        1403
+      ],
+      "center": [
+        334,
+        1385
+      ],
+      "width": 151,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_contributor"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "manager",
+      "text": "manager",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        476,
+        1368,
+        595,
+        1403
+      ],
+      "center": [
+        535,
+        1385
+      ],
+      "width": 119,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_manager"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "owner",
+      "text": "owner",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        661,
+        1368,
+        744,
+        1403
+      ],
+      "center": [
+        702,
+        1385
+      ],
+      "width": 83,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_owner_2"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Send invite",
+      "text": "Send invite",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        447,
+        1492,
+        634,
+        1537
+      ],
+      "center": [
+        540,
+        1514
+      ],
+      "width": 187,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_send_invite"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "Only owners can invite owners",
+      "text": "Only owners can invite owners",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1608,
+        450,
+        1641
+      ],
+      "center": [
+        266,
+        1624
+      ],
+      "width": 367,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_only_owners_can_invite_owners"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Pending invites (0)",
+      "text": "Pending invites (0)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1796,
+        401,
+        1841
+      ],
+      "center": [
+        242,
+        1818
+      ],
+      "width": 318,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_pending_invites_0"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "Refresh",
+      "text": "Refresh",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        865,
+        1801,
+        970,
+        1836
+      ],
+      "center": [
+        917,
+        1818
+      ],
+      "width": 105,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refresh_2"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "No pending invites",
+      "text": "No pending invites",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1906,
+        374,
+        1948
+      ],
+      "center": [
+        228,
+        1927
+      ],
+      "width": 291,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_pending_invites"
+    },
+    {
+      "index": 33,
+      "role": "TEXT",
+      "label": "Accept invite by token",
+      "text": "Accept invite by token",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        2059,
+        457,
+        2104
+      ],
+      "center": [
+        270,
+        2081
+      ],
+      "width": 374,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_accept_invite_by_token"
+    },
+    {
+      "index": 34,
+      "role": "TEXT",
+      "label": "Paste token from email/outbox (opaque, \u226510 chars)",
+      "text": "Paste token from email/outbox (opaque, \u226510 chars)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        2132,
+        772,
+        2167
+      ],
+      "center": [
+        427,
+        2149
+      ],
+      "width": 689,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_paste_token_from_emailoutbox_opaque"
+    },
+    {
+      "index": 35,
+      "role": "TEXT",
+      "label": "Invite token",
+      "text": "Invite token",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        127,
+        2261,
+        351,
+        2276
+      ],
+      "center": [
+        239,
+        2268
+      ],
+      "width": 224,
+      "height": 15,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_invite_token"
+    },
+    {
+      "index": 36,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 37,
+      "role": "TEXT",
+      "label": "Sharing",
+      "text": "Sharing",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        362,
+        229
+      ],
+      "center": [
+        258,
+        190
+      ],
+      "width": 208,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_sharing"
+    }
+  ]
+}

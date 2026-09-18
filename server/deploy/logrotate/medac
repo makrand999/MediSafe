@@ -1,0 +1,13 @@
+/var/log/medac/*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 medac medac
+    postrotate
+        systemctl kill -s USR1 medac-api.service 2>/dev/null || true
+        systemctl kill -s USR1 medac-worker.service 2>/dev/null || true
+    endscript
+}

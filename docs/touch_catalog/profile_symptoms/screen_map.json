@@ -1,0 +1,212 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 7,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "+ Add symptom",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        423,
+        1036,
+        555
+      ],
+      "center": [
+        540,
+        489
+      ],
+      "width": 992,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_add_symptom"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 2,
+      "role": "TEXT",
+      "label": "Symptoms",
+      "text": "Symptoms",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        44,
+        323,
+        334,
+        394
+      ],
+      "center": [
+        189,
+        358
+      ],
+      "width": 290,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_symptoms"
+    },
+    {
+      "index": 3,
+      "role": "TEXT",
+      "label": "+ Add symptom",
+      "text": "+ Add symptom",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        407,
+        466,
+        674,
+        511
+      ],
+      "center": [
+        540,
+        488
+      ],
+      "width": 267,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_symptom"
+    },
+    {
+      "index": 4,
+      "role": "TEXT",
+      "label": "No symptoms yet. Tap + Add to log how you feel.",
+      "text": "No symptoms yet. Tap + Add to log how you feel.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        615,
+        997,
+        654
+      ],
+      "center": [
+        540,
+        634
+      ],
+      "width": 914,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_symptoms_yet_tap_add_to_log_how"
+    },
+    {
+      "index": 5,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Symptoms",
+      "text": "Symptoms",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        444,
+        229
+      ],
+      "center": [
+        299,
+        190
+      ],
+      "width": 290,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_symptoms_2"
+    }
+  ]
+}

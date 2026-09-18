@@ -1,0 +1,937 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 32,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "low stock Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        422,
+        1036,
+        611
+      ],
+      "center": [
+        540,
+        516
+      ],
+      "width": 992,
+      "height": 189,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_low_stock_enabled_0min_delay_quiet"
+    },
+    {
+      "index": 1,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        451,
+        997,
+        583
+      ],
+      "center": [
+        925,
+        517
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_checkbox"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "expiration Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        612,
+        1036,
+        801
+      ],
+      "center": [
+        540,
+        706
+      ],
+      "width": 992,
+      "height": 189,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_expiration_enabled_0min_delay_quiet"
+    },
+    {
+      "index": 3,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        641,
+        997,
+        773
+      ],
+      "center": [
+        925,
+        707
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_checkbox_2"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "missed user attention med Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        802,
+        1036,
+        991
+      ],
+      "center": [
+        540,
+        896
+      ],
+      "width": 992,
+      "height": 189,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_missed_user_attention_med_enabled_0"
+    },
+    {
+      "index": 5,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        831,
+        997,
+        963
+      ],
+      "center": [
+        925,
+        897
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_checkbox_3"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "stale device Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        992,
+        1036,
+        1181
+      ],
+      "center": [
+        540,
+        1086
+      ],
+      "width": 992,
+      "height": 189,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_stale_device_enabled_0min_delay_qui"
+    },
+    {
+      "index": 7,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        1021,
+        997,
+        1153
+      ],
+      "center": [
+        925,
+        1087
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_checkbox_4"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "generic Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        1182,
+        1036,
+        1371
+      ],
+      "center": [
+        540,
+        1276
+      ],
+      "width": 992,
+      "height": 189,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_generic_enabled_0min_delay_quiet_22"
+    },
+    {
+      "index": 9,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        1211,
+        997,
+        1343
+      ],
+      "center": [
+        925,
+        1277
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_checkbox_5"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "Refresh",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        1400,
+        529,
+        1532
+      ],
+      "center": [
+        286,
+        1466
+      ],
+      "width": 485,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_refresh"
+    },
+    {
+      "index": 11,
+      "role": "BUTTON",
+      "label": "Save",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        551,
+        1400,
+        1036,
+        1532
+      ],
+      "center": [
+        793,
+        1466
+      ],
+      "width": 485,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_save"
+    },
+    {
+      "index": 12,
+      "role": "BUTTON",
+      "label": "Generate now",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        1656,
+        997,
+        1788
+      ],
+      "center": [
+        540,
+        1722
+      ],
+      "width": 914,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_generate_now"
+    },
+    {
+      "index": 13,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        11,
+        125,
+        143,
+        257
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Alert preferences",
+      "text": "Alert preferences",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        44,
+        323,
+        512,
+        394
+      ],
+      "center": [
+        278,
+        358
+      ],
+      "width": 468,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_alert_preferences"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "low stock",
+      "text": "low stock",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        450,
+        233,
+        492
+      ],
+      "center": [
+        158,
+        471
+      ],
+      "width": 150,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low_stock"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        498,
+        821,
+        583
+      ],
+      "center": [
+        452,
+        540
+      ],
+      "width": 738,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_enabled_0min_delay_quiet_22000700_a"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "expiration",
+      "text": "expiration",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        640,
+        240,
+        682
+      ],
+      "center": [
+        161,
+        661
+      ],
+      "width": 157,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_expiration"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        688,
+        821,
+        773
+      ],
+      "center": [
+        452,
+        730
+      ],
+      "width": 738,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_enabled_0min_delay_quiet_22000700_a_2"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "missed user attention med",
+      "text": "missed user attention med",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        830,
+        502,
+        872
+      ],
+      "center": [
+        292,
+        851
+      ],
+      "width": 419,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_missed_user_attention_med"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        878,
+        821,
+        963
+      ],
+      "center": [
+        452,
+        920
+      ],
+      "width": 738,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_enabled_0min_delay_quiet_22000700_a_3"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "stale device",
+      "text": "stale device",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1020,
+        271,
+        1062
+      ],
+      "center": [
+        177,
+        1041
+      ],
+      "width": 188,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_stale_device"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1068,
+        821,
+        1153
+      ],
+      "center": [
+        452,
+        1110
+      ],
+      "width": 738,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_enabled_0min_delay_quiet_22000700_a_4"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "generic",
+      "text": "generic",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1210,
+        199,
+        1252
+      ],
+      "center": [
+        141,
+        1231
+      ],
+      "width": 116,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generic"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "text": "Enabled \u00b7 0min delay \u00b7 quiet 22:00\u201307:00 \u00b7 Asia/Kolkata",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1258,
+        821,
+        1343
+      ],
+      "center": [
+        452,
+        1300
+      ],
+      "width": 738,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_enabled_0min_delay_quiet_22000700_a_5"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Refresh",
+      "text": "Refresh",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        221,
+        1443,
+        352,
+        1488
+      ],
+      "center": [
+        286,
+        1465
+      ],
+      "width": 131,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refresh"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Save",
+      "text": "Save",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        753,
+        1443,
+        835,
+        1488
+      ],
+      "center": [
+        794,
+        1465
+      ],
+      "width": 82,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_save"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "Generate alerts",
+      "text": "Generate alerts",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1598,
+        313,
+        1633
+      ],
+      "center": [
+        198,
+        1615
+      ],
+      "width": 230,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generate_alerts"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Generate now",
+      "text": "Generate now",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        424,
+        1699,
+        657,
+        1744
+      ],
+      "center": [
+        540,
+        1721
+      ],
+      "width": 233,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_generate_now"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "Quiet hours per preference \u2014 Tap row to edit delay & quiet hours via time pickers. PUT 1..20 prefs.",
+      "text": "Quiet hours per preference \u2014 Tap row to edit delay & quiet hours via time pickers. PUT 1..20 prefs.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        1854,
+        1025,
+        1939
+      ],
+      "center": [
+        540,
+        1896
+      ],
+      "width": 970,
+      "height": 85,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_quiet_hours_per_preference_tap_row"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        44,
+        158,
+        110,
+        224
+      ],
+      "center": [
+        77,
+        191
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "AlertPrefs",
+      "text": "AlertPrefs",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        154,
+        152,
+        430,
+        229
+      ],
+      "center": [
+        292,
+        190
+      ],
+      "width": 276,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_alertprefs"
+    }
+  ]
+}

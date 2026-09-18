@@ -1,0 +1,1633 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 56,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Add",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        806,
+        256,
+        1025,
+        388
+      ],
+      "center": [
+        915,
+        322
+      ],
+      "width": 219,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_add"
+    },
+    {
+      "index": 1,
+      "role": "INPUT",
+      "label": "Search medicines, doses...",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        55,
+        427,
+        1025,
+        581
+      ],
+      "center": [
+        540,
+        504
+      ],
+      "width": 970,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_search_medicines_doses"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "All (5)",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        729,
+        598,
+        1025,
+        730
+      ],
+      "center": [
+        877,
+        664
+      ],
+      "width": 296,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_all_5"
+    },
+    {
+      "index": 3,
+      "role": "SCROLLVIEW",
+      "label": "PARACIP-500 Active 1 tablet Once daily GLITCH-M1 t-MD Dolo-650 Weltone Gold+ 1 mL \u00b7 liquid",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        747,
+        1025,
+        2056
+      ],
+      "center": [
+        540,
+        1401
+      ],
+      "width": 970,
+      "height": 1309,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_paracip_500_active_1_tablet_once_da"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "PARACIP-500 Active 1 tablet Once daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        747,
+        1025,
+        1005
+      ],
+      "center": [
+        540,
+        876
+      ],
+      "width": 970,
+      "height": 258,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_paracip_500_active_1_tablet_once_da"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        99,
+        807,
+        237,
+        945
+      ],
+      "center": [
+        168,
+        876
+      ],
+      "width": 138,
+      "height": 138,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_upload_photo"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "GLITCH-M1 Active 1 tablet Once daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1038,
+        1025,
+        1296
+      ],
+      "center": [
+        540,
+        1167
+      ],
+      "width": 970,
+      "height": 258,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_glitch_m1_active_1_tablet_once_dail"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        99,
+        1098,
+        237,
+        1236
+      ],
+      "center": [
+        168,
+        1167
+      ],
+      "width": 138,
+      "height": 138,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_upload_photo_2"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "t-MD Active 1 tablet Once daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1329,
+        1025,
+        1587
+      ],
+      "center": [
+        540,
+        1458
+      ],
+      "width": 970,
+      "height": 258,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_t_md_active_1_tablet_once_daily"
+    },
+    {
+      "index": 9,
+      "role": "BUTTON",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        99,
+        1389,
+        237,
+        1527
+      ],
+      "center": [
+        168,
+        1458
+      ],
+      "width": 138,
+      "height": 138,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_upload_photo_3"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "Dolo-650 Active 1 tablet Once daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1620,
+        1025,
+        1878
+      ],
+      "center": [
+        540,
+        1749
+      ],
+      "width": 970,
+      "height": 258,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_dolo_650_active_1_tablet_once_daily"
+    },
+    {
+      "index": 11,
+      "role": "BUTTON",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        99,
+        1680,
+        237,
+        1818
+      ],
+      "center": [
+        168,
+        1749
+      ],
+      "width": 138,
+      "height": 138,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_upload_photo_4"
+    },
+    {
+      "index": 12,
+      "role": "BUTTON",
+      "label": "Weltone Gold+ Active 1 mL \u00b7 liquid",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1911,
+        1025,
+        2056
+      ],
+      "center": [
+        540,
+        1983
+      ],
+      "width": 970,
+      "height": 145,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_weltone_gold_active_1_ml_liquid"
+    },
+    {
+      "index": 13,
+      "role": "BUTTON",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        99,
+        1971,
+        237,
+        2056
+      ],
+      "center": [
+        168,
+        2013
+      ],
+      "width": 138,
+      "height": 85,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_button"
+    },
+    {
+      "index": 14,
+      "role": "BUTTON",
+      "label": "Today",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        0,
+        2056,
+        253,
+        2276
+      ],
+      "center": [
+        126,
+        2166
+      ],
+      "width": 253,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_today"
+    },
+    {
+      "index": 15,
+      "role": "BUTTON",
+      "label": "Reminders",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        550,
+        2056,
+        804,
+        2276
+      ],
+      "center": [
+        677,
+        2166
+      ],
+      "width": 254,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_reminders"
+    },
+    {
+      "index": 16,
+      "role": "BUTTON",
+      "label": "Profile",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        826,
+        2056,
+        1080,
+        2276
+      ],
+      "center": [
+        953,
+        2166
+      ],
+      "width": 254,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_profile"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "My Medicines",
+      "text": "My Medicines",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        262,
+        468,
+        339
+      ],
+      "center": [
+        261,
+        300
+      ],
+      "width": 413,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_my_medicines"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Manage your prescriptions and schedules",
+      "text": "Manage your prescriptions and schedules",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        339,
+        712,
+        383
+      ],
+      "center": [
+        383,
+        361
+      ],
+      "width": 657,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_manage_your_prescriptions_and_sched"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Add",
+      "text": "Add",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        906,
+        295,
+        986,
+        350
+      ],
+      "center": [
+        946,
+        322
+      ],
+      "width": 80,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Search medicines, doses...",
+      "text": "Search medicines, doses...",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        198,
+        471,
+        721,
+        537
+      ],
+      "center": [
+        459,
+        504
+      ],
+      "width": 523,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_search_medicines_doses"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Medications (5)",
+      "text": "Medications (5)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        635,
+        401,
+        693
+      ],
+      "center": [
+        228,
+        664
+      ],
+      "width": 346,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medications_5"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Filter",
+      "text": "",
+      "content_desc": "Filter",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        762,
+        642,
+        806,
+        686
+      ],
+      "center": [
+        784,
+        664
+      ],
+      "width": 44,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_filter"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "All (5)",
+      "text": "All (5)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        823,
+        642,
+        925,
+        687
+      ],
+      "center": [
+        874,
+        664
+      ],
+      "width": 102,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_all_5"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "Upload photo",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        196,
+        904,
+        229,
+        937
+      ],
+      "center": [
+        212,
+        920
+      ],
+      "width": 33,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_upload_photo"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "PARACIP-500",
+      "text": "PARACIP-500",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        791,
+        582,
+        849
+      ],
+      "center": [
+        429,
+        820
+      ],
+      "width": 306,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_paracip_500"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        626,
+        798,
+        719,
+        842
+      ],
+      "center": [
+        672,
+        820
+      ],
+      "width": 93,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        857,
+        423,
+        909
+      ],
+      "center": [
+        349,
+        883
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        917,
+        431,
+        961
+      ],
+      "center": [
+        353,
+        939
+      ],
+      "width": 155,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "View Profile",
+      "text": "",
+      "content_desc": "View Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        849,
+        981,
+        904
+      ],
+      "center": [
+        953,
+        876
+      ],
+      "width": 55,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_view_profile"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "Upload photo",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        196,
+        1195,
+        229,
+        1228
+      ],
+      "center": [
+        212,
+        1211
+      ],
+      "width": 33,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_upload_photo_2"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "GLITCH-M1",
+      "text": "GLITCH-M1",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1082,
+        536,
+        1140
+      ],
+      "center": [
+        406,
+        1111
+      ],
+      "width": 260,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_glitch_m1"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        580,
+        1089,
+        673,
+        1133
+      ],
+      "center": [
+        626,
+        1111
+      ],
+      "width": 93,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active_2"
+    },
+    {
+      "index": 33,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1148,
+        423,
+        1200
+      ],
+      "center": [
+        349,
+        1174
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_2"
+    },
+    {
+      "index": 34,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1208,
+        431,
+        1252
+      ],
+      "center": [
+        353,
+        1230
+      ],
+      "width": 155,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily_2"
+    },
+    {
+      "index": 35,
+      "role": "TEXT",
+      "label": "View Profile",
+      "text": "",
+      "content_desc": "View Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        1140,
+        981,
+        1195
+      ],
+      "center": [
+        953,
+        1167
+      ],
+      "width": 55,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_view_profile_2"
+    },
+    {
+      "index": 36,
+      "role": "TEXT",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "Upload photo",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        196,
+        1486,
+        229,
+        1519
+      ],
+      "center": [
+        212,
+        1502
+      ],
+      "width": 33,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_upload_photo_3"
+    },
+    {
+      "index": 37,
+      "role": "TEXT",
+      "label": "t-MD",
+      "text": "t-MD",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1373,
+        387,
+        1431
+      ],
+      "center": [
+        331,
+        1402
+      ],
+      "width": 111,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_t_md"
+    },
+    {
+      "index": 38,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        431,
+        1380,
+        524,
+        1424
+      ],
+      "center": [
+        477,
+        1402
+      ],
+      "width": 93,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active_3"
+    },
+    {
+      "index": 39,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1439,
+        423,
+        1491
+      ],
+      "center": [
+        349,
+        1465
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_3"
+    },
+    {
+      "index": 40,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1499,
+        431,
+        1543
+      ],
+      "center": [
+        353,
+        1521
+      ],
+      "width": 155,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily_3"
+    },
+    {
+      "index": 41,
+      "role": "TEXT",
+      "label": "View Profile",
+      "text": "",
+      "content_desc": "View Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        1431,
+        981,
+        1486
+      ],
+      "center": [
+        953,
+        1458
+      ],
+      "width": 55,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_view_profile_3"
+    },
+    {
+      "index": 42,
+      "role": "TEXT",
+      "label": "Upload photo",
+      "text": "",
+      "content_desc": "Upload photo",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        196,
+        1777,
+        229,
+        1810
+      ],
+      "center": [
+        212,
+        1793
+      ],
+      "width": 33,
+      "height": 33,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_upload_photo_4"
+    },
+    {
+      "index": 43,
+      "role": "TEXT",
+      "label": "Dolo-650",
+      "text": "Dolo-650",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1664,
+        480,
+        1722
+      ],
+      "center": [
+        378,
+        1693
+      ],
+      "width": 204,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_dolo_650"
+    },
+    {
+      "index": 44,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        524,
+        1671,
+        617,
+        1715
+      ],
+      "center": [
+        570,
+        1693
+      ],
+      "width": 93,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active_4"
+    },
+    {
+      "index": 45,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1730,
+        423,
+        1782
+      ],
+      "center": [
+        349,
+        1756
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet_4"
+    },
+    {
+      "index": 46,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1790,
+        431,
+        1834
+      ],
+      "center": [
+        353,
+        1812
+      ],
+      "width": 155,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily_4"
+    },
+    {
+      "index": 47,
+      "role": "TEXT",
+      "label": "View Profile",
+      "text": "",
+      "content_desc": "View Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        1722,
+        981,
+        1777
+      ],
+      "center": [
+        953,
+        1749
+      ],
+      "width": 55,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_view_profile_4"
+    },
+    {
+      "index": 48,
+      "role": "TEXT",
+      "label": "Weltone Gold+",
+      "text": "Weltone Gold+",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        1955,
+        596,
+        2013
+      ],
+      "center": [
+        436,
+        1984
+      ],
+      "width": 320,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_weltone_gold"
+    },
+    {
+      "index": 49,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        640,
+        1962,
+        733,
+        2006
+      ],
+      "center": [
+        686,
+        1984
+      ],
+      "width": 93,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active_5"
+    },
+    {
+      "index": 50,
+      "role": "TEXT",
+      "label": "1 mL \u00b7 liquid",
+      "text": "1 mL \u00b7 liquid",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        276,
+        2021,
+        516,
+        2056
+      ],
+      "center": [
+        396,
+        2038
+      ],
+      "width": 240,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_ml_liquid"
+    },
+    {
+      "index": 51,
+      "role": "TEXT",
+      "label": "View Profile",
+      "text": "",
+      "content_desc": "View Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        2013,
+        981,
+        2056
+      ],
+      "center": [
+        953,
+        2034
+      ],
+      "width": 55,
+      "height": 43,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_view_profile_5"
+    },
+    {
+      "index": 52,
+      "role": "TEXT",
+      "label": "Today",
+      "text": "Today",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        75,
+        2185,
+        178,
+        2235
+      ],
+      "center": [
+        126,
+        2210
+      ],
+      "width": 103,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_today"
+    },
+    {
+      "index": 53,
+      "role": "TEXT",
+      "label": "Medicines",
+      "text": "Medicines",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        314,
+        2185,
+        489,
+        2235
+      ],
+      "center": [
+        401,
+        2210
+      ],
+      "width": 175,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medicines"
+    },
+    {
+      "index": 54,
+      "role": "TEXT",
+      "label": "Reminders",
+      "text": "Reminders",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        586,
+        2185,
+        768,
+        2235
+      ],
+      "center": [
+        677,
+        2210
+      ],
+      "width": 182,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_reminders"
+    },
+    {
+      "index": 55,
+      "role": "TEXT",
+      "label": "Profile",
+      "text": "Profile",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        897,
+        2185,
+        1008,
+        2235
+      ],
+      "center": [
+        952,
+        2210
+      ],
+      "width": 111,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_profile"
+    }
+  ]
+}

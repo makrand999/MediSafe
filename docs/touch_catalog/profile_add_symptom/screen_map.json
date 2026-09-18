@@ -1,0 +1,386 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 13,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "2026-09-03",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        166,
+        862,
+        434,
+        994
+      ],
+      "center": [
+        300,
+        928
+      ],
+      "width": 268,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_2026_09_03"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "09:11",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        456,
+        862,
+        620,
+        994
+      ],
+      "center": [
+        538,
+        928
+      ],
+      "width": 164,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_0911"
+    },
+    {
+      "index": 2,
+      "role": "INPUT",
+      "label": "Note",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        166,
+        1000,
+        914,
+        1232
+      ],
+      "center": [
+        540,
+        1116
+      ],
+      "width": 748,
+      "height": 232,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_note"
+    },
+    {
+      "index": 3,
+      "role": "INPUT",
+      "label": "Linked dose event id (optional)",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        166,
+        1260,
+        914,
+        1436
+      ],
+      "center": [
+        540,
+        1348
+      ],
+      "width": 748,
+      "height": 176,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_linked_dose_event_id_optional"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Cancel",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        461,
+        1502,
+        663,
+        1634
+      ],
+      "center": [
+        562,
+        1568
+      ],
+      "width": 202,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_cancel"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Save",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        685,
+        1503,
+        914,
+        1635
+      ],
+      "center": [
+        799,
+        1569
+      ],
+      "width": 229,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_save"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Add symptom",
+      "text": "Add symptom",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        166,
+        745,
+        577,
+        839
+      ],
+      "center": [
+        371,
+        792
+      ],
+      "width": 411,
+      "height": 94,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_symptom"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "2026-09-03",
+      "text": "2026-09-03",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        199,
+        905,
+        401,
+        950
+      ],
+      "center": [
+        300,
+        927
+      ],
+      "width": 202,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_2026_09_03"
+    },
+    {
+      "index": 8,
+      "role": "TEXT",
+      "label": "09:11",
+      "text": "09:11",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        489,
+        905,
+        587,
+        950
+      ],
+      "center": [
+        538,
+        927
+      ],
+      "width": 98,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0911"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "Note",
+      "text": "Note",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        210,
+        1066,
+        303,
+        1132
+      ],
+      "center": [
+        256,
+        1099
+      ],
+      "width": 93,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_note"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "Linked dose event id (optional)",
+      "text": "Linked dose event id (optional)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        210,
+        1326,
+        809,
+        1392
+      ],
+      "center": [
+        509,
+        1359
+      ],
+      "width": 599,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_linked_dose_event_id_optional"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Cancel",
+      "text": "Cancel",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        494,
+        1541,
+        630,
+        1596
+      ],
+      "center": [
+        562,
+        1568
+      ],
+      "width": 136,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_cancel"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Save",
+      "text": "Save",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        751,
+        1541,
+        848,
+        1596
+      ],
+      "center": [
+        799,
+        1568
+      ],
+      "width": 97,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_save"
+    }
+  ]
+}

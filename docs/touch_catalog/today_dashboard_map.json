@@ -1,0 +1,1024 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 35,
+  "elements": [
+    {
+      "index": 0,
+      "role": "SCROLLVIEW",
+      "label": "Medisafe Your medication assistant Daily Progress 0 of 0 doses 0% Add Medication Calendar View History Log Refill Tracker Today's Schedule See All No medications scheduled for today Add your first medication",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        103,
+        1025,
+        2056
+      ],
+      "center": [
+        540,
+        1079
+      ],
+      "width": 970,
+      "height": 1953,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_medisafe_your_medication_assistant"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Notifications",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        763,
+        146,
+        895,
+        278
+      ],
+      "center": [
+        829,
+        212
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_notifications"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Profile",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        901,
+        146,
+        1033,
+        278
+      ],
+      "center": [
+        967,
+        212
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_profile"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Add Medication",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        694,
+        523,
+        991
+      ],
+      "center": [
+        289,
+        842
+      ],
+      "width": 468,
+      "height": 297,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_add_medication"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Calendar View",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        556,
+        694,
+        1025,
+        991
+      ],
+      "center": [
+        790,
+        842
+      ],
+      "width": 469,
+      "height": 297,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_calendar_view"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "History Log",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1024,
+        523,
+        1321
+      ],
+      "center": [
+        289,
+        1172
+      ],
+      "width": 468,
+      "height": 297,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_history_log"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "Refill Tracker",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        556,
+        1024,
+        1025,
+        1321
+      ],
+      "center": [
+        790,
+        1172
+      ],
+      "width": 469,
+      "height": 297,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_refill_tracker"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "See All",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        822,
+        1387,
+        1025,
+        1519
+      ],
+      "center": [
+        923,
+        1453
+      ],
+      "width": 203,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_see_all"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "Add your first medication",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        224,
+        1858,
+        856,
+        1990
+      ],
+      "center": [
+        540,
+        1924
+      ],
+      "width": 632,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_add_your_first_medication"
+    },
+    {
+      "index": 9,
+      "role": "BUTTON",
+      "label": "Medicines",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        275,
+        2056,
+        528,
+        2276
+      ],
+      "center": [
+        401,
+        2166
+      ],
+      "width": 253,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_medicines"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "Reminders",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        550,
+        2056,
+        804,
+        2276
+      ],
+      "center": [
+        677,
+        2166
+      ],
+      "width": 254,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_reminders"
+    },
+    {
+      "index": 11,
+      "role": "BUTTON",
+      "label": "Profile",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        826,
+        2056,
+        1080,
+        2276
+      ],
+      "center": [
+        953,
+        2166
+      ],
+      "width": 254,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_profile_2"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Medisafe",
+      "text": "Medisafe",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        147,
+        332,
+        224
+      ],
+      "center": [
+        193,
+        185
+      ],
+      "width": 277,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medisafe"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Your medication assistant",
+      "text": "Your medication assistant",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        224,
+        565,
+        276
+      ],
+      "center": [
+        310,
+        250
+      ],
+      "width": 510,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_your_medication_assistant"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "Notifications",
+      "text": "",
+      "content_desc": "Notifications",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        799,
+        182,
+        860,
+        243
+      ],
+      "center": [
+        829,
+        212
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_notifications"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "Profile",
+      "text": "",
+      "content_desc": "Profile",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        937,
+        182,
+        998,
+        243
+      ],
+      "center": [
+        967,
+        212
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_profile"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "Daily Progress",
+      "text": "Daily Progress",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        110,
+        425,
+        430,
+        483
+      ],
+      "center": [
+        270,
+        454
+      ],
+      "width": 320,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_daily_progress"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "0 of 0 doses",
+      "text": "0 of 0 doses",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        110,
+        494,
+        352,
+        546
+      ],
+      "center": [
+        231,
+        520
+      ],
+      "width": 242,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0_of_0_doses"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "0%",
+      "text": "0%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        839,
+        456,
+        903,
+        514
+      ],
+      "center": [
+        871,
+        485
+      ],
+      "width": 64,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Add Medication",
+      "text": "",
+      "content_desc": "Add Medication",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        124,
+        763,
+        185,
+        824
+      ],
+      "center": [
+        154,
+        793
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_medication"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Add Medication",
+      "text": "Add Medication",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        895,
+        411,
+        947
+      ],
+      "center": [
+        255,
+        921
+      ],
+      "width": 312,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_medication_2"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Calendar View",
+      "text": "",
+      "content_desc": "Calendar View",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        625,
+        763,
+        686,
+        824
+      ],
+      "center": [
+        655,
+        793
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_calendar_view"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Calendar View",
+      "text": "Calendar View",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        600,
+        895,
+        885,
+        947
+      ],
+      "center": [
+        742,
+        921
+      ],
+      "width": 285,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_calendar_view_2"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "History Log",
+      "text": "",
+      "content_desc": "History Log",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        124,
+        1093,
+        185,
+        1154
+      ],
+      "center": [
+        154,
+        1123
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_history_log"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "History Log",
+      "text": "History Log",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        1225,
+        327,
+        1277
+      ],
+      "center": [
+        213,
+        1251
+      ],
+      "width": 228,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_history_log_2"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Refill Tracker",
+      "text": "",
+      "content_desc": "Refill Tracker",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        625,
+        1093,
+        686,
+        1154
+      ],
+      "center": [
+        655,
+        1123
+      ],
+      "width": 61,
+      "height": 61,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_tracker"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Refill Tracker",
+      "text": "Refill Tracker",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        600,
+        1225,
+        862,
+        1277
+      ],
+      "center": [
+        731,
+        1251
+      ],
+      "width": 262,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_refill_tracker_2"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "Today's Schedule",
+      "text": "Today's Schedule",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        1418,
+        521,
+        1489
+      ],
+      "center": [
+        288,
+        1453
+      ],
+      "width": 466,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_todays_schedule"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "See All",
+      "text": "See All",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        855,
+        1427,
+        992,
+        1479
+      ],
+      "center": [
+        923,
+        1453
+      ],
+      "width": 137,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_see_all"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "No medications scheduled for today",
+      "text": "No medications scheduled for today",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        187,
+        1778,
+        894,
+        1830
+      ],
+      "center": [
+        540,
+        1804
+      ],
+      "width": 707,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_medications_scheduled_for_today"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Add your first medication",
+      "text": "Add your first medication",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        290,
+        1897,
+        790,
+        1952
+      ],
+      "center": [
+        540,
+        1924
+      ],
+      "width": 500,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_your_first_medication"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "Today",
+      "text": "Today",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        75,
+        2185,
+        178,
+        2235
+      ],
+      "center": [
+        126,
+        2210
+      ],
+      "width": 103,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_today"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "Medicines",
+      "text": "Medicines",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        314,
+        2185,
+        489,
+        2235
+      ],
+      "center": [
+        401,
+        2210
+      ],
+      "width": 175,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medicines"
+    },
+    {
+      "index": 33,
+      "role": "TEXT",
+      "label": "Reminders",
+      "text": "Reminders",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        586,
+        2185,
+        768,
+        2235
+      ],
+      "center": [
+        677,
+        2210
+      ],
+      "width": 182,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_reminders"
+    },
+    {
+      "index": 34,
+      "role": "TEXT",
+      "label": "Profile",
+      "text": "Profile",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        897,
+        2185,
+        1008,
+        2235
+      ],
+      "center": [
+        952,
+        2210
+      ],
+      "width": 111,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_profile_2"
+    }
+  ]
+}

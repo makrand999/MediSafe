@@ -1,0 +1,1227 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 42,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        33,
+        33,
+        165,
+        165
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 1,
+      "role": "SCROLLVIEW",
+      "label": "Scan Prescription or Label Auto-fill details & capture medicine photo Medication Name e.g., Drug1, Aspirin Dosage e.g., 100mg, 1 tablet How often? Once daily Twice daily Three times daily Four times daily As needed For how long? 7 14 30 90 \u221e Ongoing Starts 03/09/2026",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.ScrollView",
+      "bounds": [
+        0,
+        198,
+        1080,
+        2001
+      ],
+      "center": [
+        540,
+        1099
+      ],
+      "width": 1080,
+      "height": 1803,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_scan_prescription_or_label_auto_fil"
+    },
+    {
+      "index": 2,
+      "role": "BUTTON",
+      "label": "Scan Prescription or Label Auto-fill details & capture medicine photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        253,
+        1025,
+        427
+      ],
+      "center": [
+        540,
+        340
+      ],
+      "width": 970,
+      "height": 174,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_scan_prescription_or_label_auto_fil"
+    },
+    {
+      "index": 3,
+      "role": "INPUT",
+      "label": "e.g., Drug1, Aspirin",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        55,
+        557,
+        1025,
+        711
+      ],
+      "center": [
+        540,
+        634
+      ],
+      "width": 970,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_eg_drug1_aspirin"
+    },
+    {
+      "index": 4,
+      "role": "INPUT",
+      "label": "e.g., 100mg, 1 tablet",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.EditText",
+      "bounds": [
+        55,
+        841,
+        1025,
+        995
+      ],
+      "center": [
+        540,
+        918
+      ],
+      "width": 970,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": true,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "input_eg_100mg_1_tablet"
+    },
+    {
+      "index": 5,
+      "role": "CHECKBOX",
+      "label": "Once daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1136,
+        351,
+        1268
+      ],
+      "center": [
+        203,
+        1202
+      ],
+      "width": 296,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": true,
+      "enabled": true,
+      "slug": "checkbox_once_daily"
+    },
+    {
+      "index": 6,
+      "role": "CHECKBOX",
+      "label": "Twice daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        373,
+        1136,
+        679,
+        1268
+      ],
+      "center": [
+        526,
+        1202
+      ],
+      "width": 306,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": false,
+      "enabled": true,
+      "slug": "checkbox_twice_daily"
+    },
+    {
+      "index": 7,
+      "role": "CHECKBOX",
+      "label": "Three times daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1290,
+        478,
+        1422
+      ],
+      "center": [
+        266,
+        1356
+      ],
+      "width": 423,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": false,
+      "enabled": true,
+      "slug": "checkbox_three_times_daily"
+    },
+    {
+      "index": 8,
+      "role": "CHECKBOX",
+      "label": "Four times daily",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        500,
+        1290,
+        900,
+        1422
+      ],
+      "center": [
+        700,
+        1356
+      ],
+      "width": 400,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": false,
+      "enabled": true,
+      "slug": "checkbox_four_times_daily"
+    },
+    {
+      "index": 9,
+      "role": "CHECKBOX",
+      "label": "As needed",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1444,
+        349,
+        1576
+      ],
+      "center": [
+        202,
+        1510
+      ],
+      "width": 294,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": false,
+      "enabled": true,
+      "slug": "checkbox_as_needed"
+    },
+    {
+      "index": 10,
+      "role": "BUTTON",
+      "label": "7",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1715,
+        232,
+        1847
+      ],
+      "center": [
+        143,
+        1781
+      ],
+      "width": 177,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_7"
+    },
+    {
+      "index": 11,
+      "role": "BUTTON",
+      "label": "14",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        254,
+        1715,
+        431,
+        1847
+      ],
+      "center": [
+        342,
+        1781
+      ],
+      "width": 177,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_14"
+    },
+    {
+      "index": 12,
+      "role": "BUTTON",
+      "label": "30",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        453,
+        1715,
+        629,
+        1847
+      ],
+      "center": [
+        541,
+        1781
+      ],
+      "width": 176,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_30"
+    },
+    {
+      "index": 13,
+      "role": "BUTTON",
+      "label": "90",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        651,
+        1715,
+        827,
+        1847
+      ],
+      "center": [
+        739,
+        1781
+      ],
+      "width": 176,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_90"
+    },
+    {
+      "index": 14,
+      "role": "BUTTON",
+      "label": "\u221e Ongoing",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        849,
+        1715,
+        1025,
+        1847
+      ],
+      "center": [
+        937,
+        1781
+      ],
+      "width": 176,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_ongoing"
+    },
+    {
+      "index": 15,
+      "role": "BUTTON",
+      "label": "Starts 03/09/2026",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        1905,
+        1025,
+        2001
+      ],
+      "center": [
+        540,
+        1953
+      ],
+      "width": 970,
+      "height": 96,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_starts_03092026"
+    },
+    {
+      "index": 16,
+      "role": "BUTTON",
+      "label": "Add Medication",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        2045,
+        1025,
+        2188
+      ],
+      "center": [
+        540,
+        2116
+      ],
+      "width": 970,
+      "height": 143,
+      "clickable": true,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": false,
+      "slug": "button_add_medication"
+    },
+    {
+      "index": 17,
+      "role": "BUTTON",
+      "label": "Cancel",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        2216,
+        1025,
+        2348
+      ],
+      "center": [
+        540,
+        2282
+      ],
+      "width": 970,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_cancel"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        66,
+        66,
+        132,
+        132
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "New Medication",
+      "text": "New Medication",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        165,
+        64,
+        600,
+        135
+      ],
+      "center": [
+        382,
+        99
+      ],
+      "width": 435,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_new_medication"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Scan Prescription or Label",
+      "text": "Scan Prescription or Label",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        193,
+        292,
+        719,
+        344
+      ],
+      "center": [
+        456,
+        318
+      ],
+      "width": 526,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_scan_prescription_or_label"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Auto-fill details & capture medicine photo",
+      "text": "Auto-fill details & capture medicine photo",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        193,
+        344,
+        845,
+        388
+      ],
+      "center": [
+        519,
+        366
+      ],
+      "width": 652,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_auto_fill_details_capture_medicine"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Medication Name",
+      "text": "Medication Name",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        488,
+        405,
+        540
+      ],
+      "center": [
+        230,
+        514
+      ],
+      "width": 350,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medication_name"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "e.g., Drug1, Aspirin",
+      "text": "e.g., Drug1, Aspirin",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        601,
+        467,
+        667
+      ],
+      "center": [
+        283,
+        634
+      ],
+      "width": 368,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_eg_drug1_aspirin"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Dosage",
+      "text": "Dosage",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        772,
+        205,
+        824
+      ],
+      "center": [
+        130,
+        798
+      ],
+      "width": 150,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_dosage"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "e.g., 100mg, 1 tablet",
+      "text": "e.g., 100mg, 1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        885,
+        497,
+        951
+      ],
+      "center": [
+        298,
+        918
+      ],
+      "width": 398,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_eg_100mg_1_tablet"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "How often?",
+      "text": "How often?",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        1056,
+        281,
+        1108
+      ],
+      "center": [
+        168,
+        1082
+      ],
+      "width": 226,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_how_often"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        1176,
+        307,
+        1228
+      ],
+      "center": [
+        203,
+        1202
+      ],
+      "width": 208,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Twice daily",
+      "text": "Twice daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        417,
+        1176,
+        635,
+        1228
+      ],
+      "center": [
+        526,
+        1202
+      ],
+      "width": 218,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_twice_daily"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "Three times daily",
+      "text": "Three times daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        1330,
+        434,
+        1382
+      ],
+      "center": [
+        266,
+        1356
+      ],
+      "width": 335,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_three_times_daily"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "Four times daily",
+      "text": "Four times daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        544,
+        1330,
+        856,
+        1382
+      ],
+      "center": [
+        700,
+        1356
+      ],
+      "width": 312,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_four_times_daily"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "As needed",
+      "text": "As needed",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        1484,
+        305,
+        1536
+      ],
+      "center": [
+        202,
+        1510
+      ],
+      "width": 206,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_as_needed"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "For how long?",
+      "text": "For how long?",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        1637,
+        332,
+        1689
+      ],
+      "center": [
+        193,
+        1663
+      ],
+      "width": 277,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_for_how_long"
+    },
+    {
+      "index": 33,
+      "role": "TEXT",
+      "label": "7",
+      "text": "7",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        133,
+        1758,
+        155,
+        1803
+      ],
+      "center": [
+        144,
+        1780
+      ],
+      "width": 22,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_7"
+    },
+    {
+      "index": 34,
+      "role": "TEXT",
+      "label": "14",
+      "text": "14",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        321,
+        1758,
+        365,
+        1803
+      ],
+      "center": [
+        343,
+        1780
+      ],
+      "width": 44,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_14"
+    },
+    {
+      "index": 35,
+      "role": "TEXT",
+      "label": "30",
+      "text": "30",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        519,
+        1758,
+        563,
+        1803
+      ],
+      "center": [
+        541,
+        1780
+      ],
+      "width": 44,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_30"
+    },
+    {
+      "index": 36,
+      "role": "TEXT",
+      "label": "90",
+      "text": "90",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        717,
+        1758,
+        761,
+        1803
+      ],
+      "center": [
+        739,
+        1780
+      ],
+      "width": 44,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_90"
+    },
+    {
+      "index": 37,
+      "role": "TEXT",
+      "label": "\u221e Ongoing",
+      "text": "\u221e Ongoing",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        849,
+        1733,
+        1025,
+        1828
+      ],
+      "center": [
+        937,
+        1780
+      ],
+      "width": 176,
+      "height": 95,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_ongoing"
+    },
+    {
+      "index": 38,
+      "role": "TEXT",
+      "label": "Starts 03/09/2026",
+      "text": "Starts 03/09/2026",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        99,
+        1946,
+        466,
+        1998
+      ],
+      "center": [
+        282,
+        1972
+      ],
+      "width": 367,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_starts_03092026"
+    },
+    {
+      "index": 39,
+      "role": "TEXT",
+      "label": "Select Start Date",
+      "text": "",
+      "content_desc": "Select Start Date",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        926,
+        1944,
+        981,
+        1999
+      ],
+      "center": [
+        953,
+        1971
+      ],
+      "width": 55,
+      "height": 55,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_select_start_date"
+    },
+    {
+      "index": 40,
+      "role": "TEXT",
+      "label": "Add Medication",
+      "text": "Add Medication",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        383,
+        2091,
+        698,
+        2143
+      ],
+      "center": [
+        540,
+        2117
+      ],
+      "width": 315,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_add_medication"
+    },
+    {
+      "index": 41,
+      "role": "TEXT",
+      "label": "Cancel",
+      "text": "Cancel",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        472,
+        2256,
+        608,
+        2308
+      ],
+      "center": [
+        540,
+        2282
+      ],
+      "width": 136,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_cancel"
+    }
+  ]
+}

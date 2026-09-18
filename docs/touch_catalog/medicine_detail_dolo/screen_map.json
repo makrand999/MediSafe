@@ -1,0 +1,1024 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 35,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        33,
+        136,
+        165,
+        268
+      ],
+      "center": [
+        99,
+        202
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "Edit Medicine",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        915,
+        136,
+        1047,
+        268
+      ],
+      "center": [
+        981,
+        202
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_edit_medicine"
+    },
+    {
+      "index": 2,
+      "role": "SCROLLVIEW",
+      "label": "Dolo-650 1 tablet Active Purpose: Take one tablet with water every 6 to 8 hours as directed by the physician, not exceeding 4000 mg in 24 hours. Take Now Edit Pause Archive Schedule & Dosage Times Frequency Once daily Duration Ongoing Scheduled Dose Times No fixed times (As needed) Adherence Rate 0 of 0 doses taken 100% Supply & Refill Low Stock Current Supply: 0 units Threshold: 0%",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        55,
+        301,
+        1025,
+        2276
+      ],
+      "center": [
+        540,
+        1288
+      ],
+      "width": 970,
+      "height": 1975,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": true,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "scrollview_dolo_650_1_tablet_active_purpose_ta"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Change photo",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        110,
+        373,
+        264,
+        527
+      ],
+      "center": [
+        187,
+        450
+      ],
+      "width": 154,
+      "height": 154,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_change_photo"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Take Now",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        110,
+        780,
+        526,
+        912
+      ],
+      "center": [
+        318,
+        846
+      ],
+      "width": 416,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_take_now"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Edit",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        554,
+        780,
+        970,
+        912
+      ],
+      "center": [
+        762,
+        846
+      ],
+      "width": 416,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_edit"
+    },
+    {
+      "index": 6,
+      "role": "BUTTON",
+      "label": "Pause",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        110,
+        928,
+        526,
+        1060
+      ],
+      "center": [
+        318,
+        994
+      ],
+      "width": 416,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_pause"
+    },
+    {
+      "index": 7,
+      "role": "BUTTON",
+      "label": "Archive",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        554,
+        928,
+        970,
+        1060
+      ],
+      "center": [
+        762,
+        994
+      ],
+      "width": 416,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_archive"
+    },
+    {
+      "index": 8,
+      "role": "BUTTON",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        105,
+        2336,
+        975,
+        2342
+      ],
+      "center": [
+        540,
+        2339
+      ],
+      "width": 870,
+      "height": 6,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_button"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        66,
+        169,
+        132,
+        235
+      ],
+      "center": [
+        99,
+        202
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "Medicine Profile",
+      "text": "Medicine Profile",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        165,
+        167,
+        608,
+        238
+      ],
+      "center": [
+        386,
+        202
+      ],
+      "width": 443,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medicine_profile"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Edit Medicine",
+      "text": "",
+      "content_desc": "Edit Medicine",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        948,
+        169,
+        1014,
+        235
+      ],
+      "center": [
+        981,
+        202
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_edit_medicine"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Change photo",
+      "text": "",
+      "content_desc": "Change photo",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        219,
+        482,
+        255,
+        518
+      ],
+      "center": [
+        237,
+        500
+      ],
+      "width": 36,
+      "height": 36,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_change_photo"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Dolo-650",
+      "text": "Dolo-650",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        303,
+        386,
+        577,
+        463
+      ],
+      "center": [
+        440,
+        424
+      ],
+      "width": 274,
+      "height": 77,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_dolo_650"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "1 tablet",
+      "text": "1 tablet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        303,
+        463,
+        450,
+        515
+      ],
+      "center": [
+        376,
+        489
+      ],
+      "width": 147,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_1_tablet"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        822,
+        428,
+        931,
+        473
+      ],
+      "center": [
+        876,
+        450
+      ],
+      "width": 109,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "Purpose: Take one tablet with water every 6 to 8 hours as directed by the physician, not exceeding 4000 mg in 24 hours.",
+      "text": "Purpose: Take one tablet with water every 6 to 8 hours as directed by the physician, not exceeding 4000 mg in 24 hours.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        143,
+        588,
+        937,
+        720
+      ],
+      "center": [
+        540,
+        654
+      ],
+      "width": 794,
+      "height": 132,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_purpose_take_one_tablet_with_water"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "Take Now",
+      "text": "Take Now",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        254,
+        820,
+        449,
+        872
+      ],
+      "center": [
+        351,
+        846
+      ],
+      "width": 195,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_take_now"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Edit",
+      "text": "Edit",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        757,
+        820,
+        834,
+        872
+      ],
+      "center": [
+        795,
+        846
+      ],
+      "width": 77,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_edit"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Pause",
+      "text": "Pause",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        296,
+        972,
+        401,
+        1017
+      ],
+      "center": [
+        348,
+        994
+      ],
+      "width": 105,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_pause"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Archive",
+      "text": "Archive",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        728,
+        972,
+        857,
+        1017
+      ],
+      "center": [
+        792,
+        994
+      ],
+      "width": 129,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_archive"
+    },
+    {
+      "index": 21,
+      "role": "TEXT",
+      "label": "Schedule & Dosage Times",
+      "text": "Schedule & Dosage Times",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1201,
+        677,
+        1259
+      ],
+      "center": [
+        391,
+        1230
+      ],
+      "width": 572,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_schedule_dosage_times"
+    },
+    {
+      "index": 22,
+      "role": "TEXT",
+      "label": "Frequency",
+      "text": "Frequency",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        138,
+        1331,
+        292,
+        1375
+      ],
+      "center": [
+        215,
+        1353
+      ],
+      "width": 154,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_frequency"
+    },
+    {
+      "index": 23,
+      "role": "TEXT",
+      "label": "Once daily",
+      "text": "Once daily",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        138,
+        1386,
+        346,
+        1438
+      ],
+      "center": [
+        242,
+        1412
+      ],
+      "width": 208,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_once_daily"
+    },
+    {
+      "index": 24,
+      "role": "TEXT",
+      "label": "Duration",
+      "text": "Duration",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        587,
+        1331,
+        714,
+        1375
+      ],
+      "center": [
+        650,
+        1353
+      ],
+      "width": 127,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_duration"
+    },
+    {
+      "index": 25,
+      "role": "TEXT",
+      "label": "Ongoing",
+      "text": "Ongoing",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        587,
+        1386,
+        754,
+        1438
+      ],
+      "center": [
+        670,
+        1412
+      ],
+      "width": 167,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_ongoing"
+    },
+    {
+      "index": 26,
+      "role": "TEXT",
+      "label": "Scheduled Dose Times",
+      "text": "Scheduled Dose Times",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1510,
+        493,
+        1555
+      ],
+      "center": [
+        299,
+        1532
+      ],
+      "width": 388,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_scheduled_dose_times"
+    },
+    {
+      "index": 27,
+      "role": "TEXT",
+      "label": "No fixed times (As needed)",
+      "text": "No fixed times (As needed)",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1577,
+        634,
+        1629
+      ],
+      "center": [
+        369,
+        1603
+      ],
+      "width": 529,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_fixed_times_as_needed"
+    },
+    {
+      "index": 28,
+      "role": "TEXT",
+      "label": "Adherence Rate",
+      "text": "Adherence Rate",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1806,
+        454,
+        1864
+      ],
+      "center": [
+        279,
+        1835
+      ],
+      "width": 349,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_adherence_rate"
+    },
+    {
+      "index": 29,
+      "role": "TEXT",
+      "label": "0 of 0 doses taken",
+      "text": "0 of 0 doses taken",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        1875,
+        465,
+        1927
+      ],
+      "center": [
+        285,
+        1901
+      ],
+      "width": 360,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0_of_0_doses_taken"
+    },
+    {
+      "index": 30,
+      "role": "TEXT",
+      "label": "100%",
+      "text": "100%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        822,
+        1838,
+        942,
+        1896
+      ],
+      "center": [
+        882,
+        1867
+      ],
+      "width": 120,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_100"
+    },
+    {
+      "index": 31,
+      "role": "TEXT",
+      "label": "Supply & Refill",
+      "text": "Supply & Refill",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        2109,
+        425,
+        2167
+      ],
+      "center": [
+        265,
+        2138
+      ],
+      "width": 320,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_supply_refill"
+    },
+    {
+      "index": 32,
+      "role": "TEXT",
+      "label": "Low Stock",
+      "text": "Low Stock",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        766,
+        2115,
+        942,
+        2160
+      ],
+      "center": [
+        854,
+        2137
+      ],
+      "width": 176,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_low_stock"
+    },
+    {
+      "index": 33,
+      "role": "TEXT",
+      "label": "Current Supply: 0 units",
+      "text": "Current Supply: 0 units",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        105,
+        2204,
+        559,
+        2256
+      ],
+      "center": [
+        332,
+        2230
+      ],
+      "width": 454,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_current_supply_0_units"
+    },
+    {
+      "index": 34,
+      "role": "TEXT",
+      "label": "Threshold: 0%",
+      "text": "Threshold: 0%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        754,
+        2204,
+        975,
+        2248
+      ],
+      "center": [
+        864,
+        2226
+      ],
+      "width": 221,
+      "height": 44,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_threshold_0"
+    }
+  ]
+}

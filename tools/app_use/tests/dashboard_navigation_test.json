@@ -1,0 +1,60 @@
+{
+  "name": "Medac Navigation and Search Smoke Test",
+  "steps": [
+    {
+      "step": 1,
+      "action": "tap",
+      "target": "Medicines",
+      "delay_after": 0.8
+    },
+    {
+      "step": 2,
+      "action": "assert_text",
+      "text": "Search medicines",
+      "timeout": 3.0
+    },
+    {
+      "step": 3,
+      "action": "type",
+      "target": "Search",
+      "text": "Dolo",
+      "delay_after": 0.8
+    },
+    {
+      "step": 4,
+      "action": "assert_text",
+      "text": "Dolo-650",
+      "timeout": 3.0
+    },
+    {
+      "step": 5,
+      "action": "tap",
+      "target": "Clear",
+      "delay_after": 0.5
+    },
+    {
+      "step": 6,
+      "action": "tap",
+      "target": "Reminders",
+      "delay_after": 0.8
+    },
+    {
+      "step": 7,
+      "action": "assert_text",
+      "text": "07:00",
+      "timeout": 3.0
+    },
+    {
+      "step": 8,
+      "action": "tap",
+      "target": "Today",
+      "delay_after": 0.8
+    },
+    {
+      "step": 9,
+      "action": "assert_text",
+      "text": "Daily Progress",
+      "timeout": 3.0
+    }
+  ]
+}

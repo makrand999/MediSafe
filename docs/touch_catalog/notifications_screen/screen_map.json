@@ -1,0 +1,241 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 8,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "Back",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        33,
+        33,
+        165,
+        165
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 132,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_back"
+    },
+    {
+      "index": 1,
+      "role": "TEXT",
+      "label": "Back",
+      "text": "",
+      "content_desc": "Back",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        66,
+        66,
+        132,
+        132
+      ],
+      "center": [
+        99,
+        99
+      ],
+      "width": 66,
+      "height": 66,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_back"
+    },
+    {
+      "index": 2,
+      "role": "TEXT",
+      "label": "Notifications",
+      "text": "Notifications",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        165,
+        64,
+        512,
+        135
+      ],
+      "center": [
+        338,
+        99
+      ],
+      "width": 347,
+      "height": 71,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_notifications"
+    },
+    {
+      "index": 3,
+      "role": "TEXT",
+      "label": "Daily Progress",
+      "text": "Daily Progress",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        110,
+        314,
+        430,
+        372
+      ],
+      "center": [
+        270,
+        343
+      ],
+      "width": 320,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_daily_progress"
+    },
+    {
+      "index": 4,
+      "role": "TEXT",
+      "label": "0 of 0 doses",
+      "text": "0 of 0 doses",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        110,
+        383,
+        352,
+        435
+      ],
+      "center": [
+        231,
+        409
+      ],
+      "width": 242,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0_of_0_doses"
+    },
+    {
+      "index": 5,
+      "role": "TEXT",
+      "label": "0%",
+      "text": "0%",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        839,
+        345,
+        903,
+        403
+      ],
+      "center": [
+        871,
+        374
+      ],
+      "width": 64,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Scheduled Dose Reminders",
+      "text": "Scheduled Dose Reminders",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        594,
+        657,
+        652
+      ],
+      "center": [
+        356,
+        623
+      ],
+      "width": 602,
+      "height": 58,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_scheduled_dose_reminders"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "No active notifications",
+      "text": "No active notifications",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        696,
+        491,
+        748
+      ],
+      "center": [
+        273,
+        722
+      ],
+      "width": 436,
+      "height": 52,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_active_notifications"
+    }
+  ]
+}

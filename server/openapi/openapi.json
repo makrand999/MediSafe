@@ -1,0 +1,108 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Medac API",
+    "version": "0.1.1",
+    "description": "Medac backend — 11 phases. Public base path: /medac/api/v1 (nginx strips /medac). Fastify exposes /api/v1 internally. Muse Spark muse-spark-1.2-contributor fixed."
+  },
+  "servers": [
+    {
+      "url": "/medac/api/v1",
+      "description": "Public API base"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message", "request_id"],
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" },
+              "request_id": { "type": "string" },
+              "details": { "type": "object" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health/live": {
+      "get": {
+        "operationId": "healthLive",
+        "summary": "Liveness probe",
+        "responses": { "200": { "description": "ok" } }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "healthReady",
+        "summary": "Readiness (DB+migrations)",
+        "responses": {
+          "200": { "description": "ready" },
+          "503": { "description": "not_ready" }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "operationId": "getVersion",
+        "summary": "Build version",
+        "responses": { "200": { "description": "version" } }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "operationId": "getOpenApi",
+        "summary": "OpenAPI contract",
+        "responses": { "200": { "description": "OpenAPI" } }
+      }
+    },
+    "/patients/{patientId}/intelligence/label-interpretations": {
+      "post": {
+        "operationId": "interpretMedicineLabel",
+        "summary": "Interpret a medicine label or OCR text with Muse Spark",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageBase64": { "type": "string" },
+                  "mimeType": { "type": "string", "enum": ["image/jpeg", "image/png", "image/webp"] },
+                  "ocrText": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "interpretation" },
+          "400": { "description": "Invalid image" }
+        }
+      }
+    }
+  }
+}

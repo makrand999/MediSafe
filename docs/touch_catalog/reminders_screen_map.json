@@ -1,0 +1,618 @@
+{
+  "screen_size": [
+    1080,
+    2392
+  ],
+  "total_elements": 21,
+  "elements": [
+    {
+      "index": 0,
+      "role": "BUTTON",
+      "label": "22:00",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        83,
+        293,
+        224,
+        425
+      ],
+      "center": [
+        153,
+        359
+      ],
+      "width": 141,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_2200"
+    },
+    {
+      "index": 1,
+      "role": "BUTTON",
+      "label": "07:00",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        297,
+        293,
+        438,
+        425
+      ],
+      "center": [
+        367,
+        359
+      ],
+      "width": 141,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_0700"
+    },
+    {
+      "index": 2,
+      "role": "CHECKBOX",
+      "label": "",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        854,
+        452,
+        997,
+        584
+      ],
+      "center": [
+        925,
+        518
+      ],
+      "width": 143,
+      "height": 132,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": true,
+      "checked": false,
+      "enabled": true,
+      "slug": "checkbox_checkbox"
+    },
+    {
+      "index": 3,
+      "role": "BUTTON",
+      "label": "Today",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        0,
+        2056,
+        253,
+        2276
+      ],
+      "center": [
+        126,
+        2166
+      ],
+      "width": 253,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_today"
+    },
+    {
+      "index": 4,
+      "role": "BUTTON",
+      "label": "Medicines",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        275,
+        2056,
+        528,
+        2276
+      ],
+      "center": [
+        401,
+        2166
+      ],
+      "width": 253,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_medicines"
+    },
+    {
+      "index": 5,
+      "role": "BUTTON",
+      "label": "Profile",
+      "text": "",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.view.View",
+      "bounds": [
+        826,
+        2056,
+        1080,
+        2276
+      ],
+      "center": [
+        953,
+        2166
+      ],
+      "width": 254,
+      "height": 220,
+      "clickable": true,
+      "focusable": true,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "button_profile"
+    },
+    {
+      "index": 6,
+      "role": "TEXT",
+      "label": "Quiet hours",
+      "text": "Quiet hours",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        186,
+        279,
+        231
+      ],
+      "center": [
+        181,
+        208
+      ],
+      "width": 196,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_quiet_hours"
+    },
+    {
+      "index": 7,
+      "role": "TEXT",
+      "label": "No notifications between these times \u2014 tap to change",
+      "text": "No notifications between these times \u2014 tap to change",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        259,
+        801,
+        294
+      ],
+      "center": [
+        442,
+        276
+      ],
+      "width": 718,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_notifications_between_these_time"
+    },
+    {
+      "index": 8,
+      "role": "TEXT",
+      "label": "22:00",
+      "text": "22:00",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        111,
+        339,
+        196,
+        378
+      ],
+      "center": [
+        153,
+        358
+      ],
+      "width": 85,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_2200"
+    },
+    {
+      "index": 9,
+      "role": "TEXT",
+      "label": "\u2014",
+      "text": "\u2014",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        246,
+        336,
+        275,
+        381
+      ],
+      "center": [
+        260,
+        358
+      ],
+      "width": 29,
+      "height": 45,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_elem_9"
+    },
+    {
+      "index": 10,
+      "role": "TEXT",
+      "label": "07:00",
+      "text": "07:00",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        325,
+        339,
+        410,
+        378
+      ],
+      "center": [
+        367,
+        358
+      ],
+      "width": 85,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_0700"
+    },
+    {
+      "index": 11,
+      "role": "TEXT",
+      "label": "Discreet",
+      "text": "Discreet",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        477,
+        213,
+        519
+      ],
+      "center": [
+        148,
+        498
+      ],
+      "width": 130,
+      "height": 42,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_discreet"
+    },
+    {
+      "index": 12,
+      "role": "TEXT",
+      "label": "Lock screen shows only \u201cReminder\u201d",
+      "text": "Lock screen shows only \u201cReminder\u201d",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        525,
+        563,
+        560
+      ],
+      "center": [
+        323,
+        542
+      ],
+      "width": 480,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_lock_screen_shows_only_reminder"
+    },
+    {
+      "index": 13,
+      "role": "TEXT",
+      "label": "Active",
+      "text": "Active",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        668,
+        152,
+        703
+      ],
+      "center": [
+        103,
+        685
+      ],
+      "width": 97,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_active"
+    },
+    {
+      "index": 14,
+      "role": "TEXT",
+      "label": "No active reminders \u2014 add a medicine to schedule them.",
+      "text": "No active reminders \u2014 add a medicine to schedule them.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        775,
+        997,
+        814
+      ],
+      "center": [
+        540,
+        794
+      ],
+      "width": 914,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_active_reminders_add_a_medicine"
+    },
+    {
+      "index": 15,
+      "role": "TEXT",
+      "label": "Paused",
+      "text": "Paused",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        55,
+        897,
+        167,
+        932
+      ],
+      "center": [
+        111,
+        914
+      ],
+      "width": 112,
+      "height": 35,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_paused"
+    },
+    {
+      "index": 16,
+      "role": "TEXT",
+      "label": "No paused reminders.",
+      "text": "No paused reminders.",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        83,
+        1004,
+        997,
+        1043
+      ],
+      "center": [
+        540,
+        1023
+      ],
+      "width": 914,
+      "height": 39,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_no_paused_reminders"
+    },
+    {
+      "index": 17,
+      "role": "TEXT",
+      "label": "Today",
+      "text": "Today",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        75,
+        2185,
+        178,
+        2235
+      ],
+      "center": [
+        126,
+        2210
+      ],
+      "width": 103,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_today"
+    },
+    {
+      "index": 18,
+      "role": "TEXT",
+      "label": "Medicines",
+      "text": "Medicines",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        314,
+        2185,
+        489,
+        2235
+      ],
+      "center": [
+        401,
+        2210
+      ],
+      "width": 175,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_medicines"
+    },
+    {
+      "index": 19,
+      "role": "TEXT",
+      "label": "Reminders",
+      "text": "Reminders",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        586,
+        2185,
+        768,
+        2235
+      ],
+      "center": [
+        677,
+        2210
+      ],
+      "width": 182,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_reminders"
+    },
+    {
+      "index": 20,
+      "role": "TEXT",
+      "label": "Profile",
+      "text": "Profile",
+      "content_desc": "",
+      "resource_id": "",
+      "class_name": "android.widget.TextView",
+      "bounds": [
+        897,
+        2185,
+        1008,
+        2235
+      ],
+      "center": [
+        952,
+        2210
+      ],
+      "width": 111,
+      "height": 50,
+      "clickable": false,
+      "focusable": false,
+      "editable": false,
+      "scrollable": false,
+      "checkable": false,
+      "checked": false,
+      "enabled": true,
+      "slug": "text_profile"
+    }
+  ]
+}
