@@ -1009,9 +1009,11 @@ fun MedRemindAddMedicationScreen(
     val context = LocalContext.current
     val frequencies = listOf("Once daily", "Twice daily", "Three times daily", "Four times daily", "As needed")
     val durations = listOf("7", "14", "30", "90", "∞ Ongoing")
+    val forms = listOf("Tablet", "Capsule", "Liquid", "Injection", "Inhaler", "Drops", "Topical", "Other")
 
     var name by remember(draft.name) { mutableStateOf(draft.name) }
     var dosage by remember(draft.genericNameAndDose) { mutableStateOf(draft.genericNameAndDose) }
+    var form by remember(draft.form) { mutableStateOf(draft.form.ifBlank { "Tablet" }) }
     var selectedFrequency by remember(draft.frequency) { mutableStateOf(draft.frequency.ifBlank { "Once daily" }) }
     var selectedDuration by remember(draft.duration) { mutableStateOf(draft.duration.ifBlank { "Ongoing" }) }
     var startDate by remember(draft.startDate) {
@@ -1022,6 +1024,8 @@ fun MedRemindAddMedicationScreen(
     var times by remember(draft.times) {
         mutableStateOf(if (draft.times.isNotEmpty()) draft.times else listOf("09:00"))
     }
+    var purpose by remember(draft.purpose) { mutableStateOf(draft.purpose) }
+    var instruction by remember(draft.instruction) { mutableStateOf(draft.instruction) }
     var remindersEnabled by remember(draft.remindersEnabled) { mutableStateOf(draft.remindersEnabled) }
     var refillTrackingEnabled by remember(draft.refillTrackingEnabled) { mutableStateOf(draft.refillTrackingEnabled) }
     var notes by remember(draft.notes) { mutableStateOf(draft.notes) }
@@ -1192,6 +1196,52 @@ fun MedRemindAddMedicationScreen(
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
+            }
+
+            // Form Selection Chips
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text(
+                    text = "Form",
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                    color = TextPrimary
+                )
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    forms.forEach { f ->
+                        val selected = form.equals(f, ignoreCase = true)
+                        FilterChip(
+                            selected = selected,
+                            onClick = {
+                                form = f
+                                onDraftChange(draft.copy(form = f))
+                            },
+                            label = {
+                                Text(
+                                    text = f,
+                                    style = MaterialTheme.typography.bodyMedium.copy(
+                                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+                                    )
+                                )
+                            },
+                            shape = RoundedCornerShape(12.dp),
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MedRemindGreen,
+                                selectedLabelColor = Color.White,
+                                containerColor = CardSurface,
+                                labelColor = TextPrimary
+                            ),
+                            border = FilterChipDefaults.filterChipBorder(
+                                enabled = true,
+                                selected = selected,
+                                borderColor = BorderSubtle,
+                                selectedBorderColor = MedRemindGreen
+                            )
+                        )
+                    }
+                }
             }
 
             // 3. How often? Frequency Chips
@@ -1455,10 +1505,62 @@ fun MedRemindAddMedicationScreen(
                 }
             }
 
-            // 9. Notes & Special Instructions
+            // 9. Purpose / What it's used for
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(
-                    text = "Notes & Instructions",
+                    text = "What it's used for",
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                    color = TextPrimary
+                )
+                OutlinedTextField(
+                    value = purpose,
+                    onValueChange = {
+                        purpose = it
+                        onDraftChange(draft.copy(purpose = it))
+                    },
+                    placeholder = { Text("e.g., Relieves pain and fever, blood pressure") },
+                    minLines = 2,
+                    shape = RoundedCornerShape(14.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = CardSurface,
+                        unfocusedContainerColor = CardSurface,
+                        focusedBorderColor = MedRemindGreen,
+                        unfocusedBorderColor = BorderSubtle
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            // 10. Instructions
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(
+                    text = "Instructions",
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                    color = TextPrimary
+                )
+                OutlinedTextField(
+                    value = instruction,
+                    onValueChange = {
+                        instruction = it
+                        onDraftChange(draft.copy(instruction = it))
+                    },
+                    placeholder = { Text("e.g., Take with water after meals") },
+                    minLines = 2,
+                    shape = RoundedCornerShape(14.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = CardSurface,
+                        unfocusedContainerColor = CardSurface,
+                        focusedBorderColor = MedRemindGreen,
+                        unfocusedBorderColor = BorderSubtle
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            // 11. Additional Notes
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(
+                    text = "Additional Notes",
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
                     color = TextPrimary
                 )
@@ -1468,8 +1570,8 @@ fun MedRemindAddMedicationScreen(
                         notes = it
                         onDraftChange(draft.copy(notes = it))
                     },
-                    placeholder = { Text("Add notes or special instructions...") },
-                    minLines = 3,
+                    placeholder = { Text("Add any extra notes...") },
+                    minLines = 2,
                     shape = RoundedCornerShape(14.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = CardSurface,
@@ -1502,6 +1604,9 @@ fun MedRemindAddMedicationScreen(
                             draft.copy(
                                 name = name.trim(),
                                 genericNameAndDose = dosage.trim(),
+                                form = form.trim(),
+                                purpose = purpose.trim(),
+                                instruction = instruction.trim(),
                                 frequency = selectedFrequency,
                                 duration = selectedDuration,
                                 startDate = startDate,
@@ -2345,6 +2450,7 @@ fun MedRemindEditMedicineDialog(
     var times by remember { mutableStateOf(if (medicine.times.isNotEmpty()) medicine.times else listOf("09:00")) }
     var foodTiming by remember { mutableStateOf(medicine.foodTiming) }
     var purpose by remember { mutableStateOf(medicine.purpose) }
+    var instruction by remember { mutableStateOf(medicine.instruction) }
     var remindersEnabled by remember { mutableStateOf(medicine.statusOrActive == "active") }
     var refillTrackingEnabled by remember { mutableStateOf(medicine.refillTrackingEnabled) }
     var currentSupply by remember { mutableStateOf(medicine.currentSupply.toString()) }
@@ -2615,6 +2721,19 @@ fun MedRemindEditMedicineDialog(
                         )
                     }
 
+                    // Instructions
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("Instructions", style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold), color = TextPrimary)
+                        OutlinedTextField(
+                            value = instruction,
+                            onValueChange = { instruction = it },
+                            placeholder = { Text("e.g., Take with water after meals") },
+                            singleLine = true,
+                            shape = RoundedCornerShape(14.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+
                     // Reminders Switch (only meaningful for active/paused medicines;
                     // discontinued/archived keep their lifecycle status on save)
                     if (medicine.statusOrActive == "active" || medicine.statusOrActive == "paused") {
@@ -2725,6 +2844,7 @@ fun MedRemindEditMedicineDialog(
                                     times = times,
                                     foodTiming = foodTiming.trim(),
                                     purpose = purpose.trim(),
+                                    instruction = instruction.trim(),
                                     status = toggledStatus,
                                     refillTrackingEnabled = refillTrackingEnabled,
                                     currentSupply = currentSupply.toIntOrNull() ?: medicine.currentSupply,

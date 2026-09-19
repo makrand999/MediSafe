@@ -8,6 +8,8 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -129,6 +131,7 @@ fun AiAddMedicineScreen(
     isIdentifying: Boolean,
     aiError: String?,
     onCapturePhoto: () -> Unit,
+    onNameChange: (String) -> Unit = {},
     onDosageChange: (String) -> Unit,
     onSave: () -> Unit,
     onRetry: () -> Unit = {},
@@ -171,14 +174,21 @@ fun AiAddMedicineScreen(
                     }
                 }
             }
-            if (draft.purpose.isNotBlank()) {
+            if (draft.purpose.isNotBlank() || draft.instruction.isNotBlank()) {
                 item {
                     Surface(shape = RoundedCornerShape(14.dp), color = BlueInfo, border = BorderStroke(0.5.dp, BorderSubtle), modifier = Modifier.fillMaxWidth()) {
-                        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("What it's used for", style = MaterialTheme.typography.labelMedium, color = BlueInfoText)
-                            Text(draft.purpose, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
-                            if(draft.instruction.isNotBlank()){
-                                Text(draft.instruction, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            if (draft.purpose.isNotBlank()) {
+                                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                    Text("What it's used for", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold), color = BlueInfoText)
+                                    Text(draft.purpose, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                                }
+                            }
+                            if (draft.instruction.isNotBlank()) {
+                                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                    Text("Instructions", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold), color = BlueInfoText)
+                                    Text(draft.instruction, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                                }
                             }
                         }
                     }
@@ -202,13 +212,41 @@ fun AiAddMedicineScreen(
             item {
                 DrugTypeaheadField(
                     draft = draft,
-                    onFormChange = onFormChange,
+                    onNameChange = onNameChange,
                     onDosageChange = onDosageChange,
                     uncertainFields = uncertainFields,
                     viewModel = viewModel
                 )
             }
             if ("entered_name" in uncertainFields) item { ClarifyingQuestionRow(clarifyingQuestions.firstOrNull() ?: "Is this the correct name?") }
+            // Form selector chips
+            item {
+                val forms = listOf("Tablet", "Capsule", "Liquid", "Injection", "Inhaler", "Drops", "Other")
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("Form", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, letterSpacing = 0.6.sp), color = TextSecondary)
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())
+                    ) {
+                        forms.forEach { f ->
+                            val sel = draft.form.equals(f, ignoreCase = true) || (draft.form.isBlank() && f == "Tablet")
+                            Surface(
+                                modifier = Modifier.clickable { onFormChange(f) },
+                                shape = RoundedCornerShape(12.dp),
+                                color = if (sel) NavyPrimary else CardSurface,
+                                border = BorderStroke(0.5.dp, if (sel) NavyPrimary else BorderSubtle)
+                            ) {
+                                Text(
+                                    text = f,
+                                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = if (sel) FontWeight.Bold else FontWeight.Normal),
+                                    color = if (sel) CardSurface else TextPrimary
+                                )
+                            }
+                        }
+                    }
+                }
+            }
             item {
                 var dosageOpen by rememberSaveable { mutableStateOf(false) }
                 val dosageLabel = draft.genericNameAndDose.ifBlank { "Select dosage" }
@@ -226,8 +264,8 @@ fun AiAddMedicineScreen(
                         if ("strength" in uncertainFields) {
                             UncertainFieldBox(label = "Strength / dose", value = draft.genericNameAndDose, onValueChange = onDosageChange)
                         } else {
-                            val isTablet = draft.form == "tablet" || draft.form.isBlank()
-                            val isLiquid = draft.form == "liquid" || draft.form == "syrup" || draft.form == "drops"
+                            val isTablet = draft.form.equals("tablet", ignoreCase = true) || draft.form.isBlank()
+                            val isLiquid = draft.form.equals("liquid", ignoreCase = true) || draft.form.equals("syrup", ignoreCase = true) || draft.form.equals("drops", ignoreCase = true)
                             if (isTablet) {
                                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
                                     listOf("Half", "Full").forEach { opt ->
@@ -245,30 +283,30 @@ fun AiAddMedicineScreen(
                 }
             }
             clarifyingQuestions.drop(1).forEach { q -> item { ClarifyingQuestionRow(q) } }
-            // Other info — collapsed by default, dropdown description instead of showing content directly
+            // What it's used for (Purpose) & Instructions
             item {
-                var otherOpen by rememberSaveable { mutableStateOf(false) }
-                val otherSummary = when {
-                    draft.purpose.isNotBlank() && draft.instruction.isNotBlank() -> "Purpose + instructions"
-                    draft.purpose.isNotBlank() -> draft.purpose.take(28) + if(draft.purpose.length>28) "…" else ""
-                    draft.instruction.isNotBlank() -> draft.instruction.take(28) + if(draft.instruction.length>28) "…" else ""
-                    else -> "Add details"
-                }
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Surface(shape = RoundedCornerShape(14.dp), color = CardSurface, border = BorderStroke(0.5.dp, BorderSubtle), modifier = Modifier.fillMaxWidth().clickable { otherOpen = !otherOpen }) {
-                        Row(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text("Other info", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, letterSpacing = 0.6.sp), color = TextSecondary)
-                                Text(otherSummary, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp), color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                            }
-                            Text(if (otherOpen) "▴" else "▾", style = MaterialTheme.typography.titleMedium, color = TextSecondary)
-                        }
+                Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("What it's used for", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, letterSpacing = 0.6.sp), color = TextSecondary)
+                        OutlinedTextField(
+                            value = draft.purpose,
+                            onValueChange = onPurposeChange,
+                            modifier = Modifier.fillMaxWidth(),
+                            placeholder = { Text("e.g. Relieves pain and fever") },
+                            minLines = 2,
+                            shape = RoundedCornerShape(14.dp)
+                        )
                     }
-                    if (otherOpen) {
-                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                            OutlinedTextField(value = draft.purpose, onValueChange = onPurposeChange, modifier = Modifier.fillMaxWidth(), label = { Text("What it's used for") }, placeholder = { Text("e.g. Relieves pain and fever") }, minLines = 2, shape = RoundedCornerShape(14.dp))
-                            OutlinedTextField(value = draft.instruction, onValueChange = onInstructionChange, modifier = Modifier.fillMaxWidth(), label = { Text("Instruction (optional)") }, placeholder = { Text("e.g. Take with water") }, minLines = 2, shape = RoundedCornerShape(14.dp))
-                        }
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("Instructions", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, letterSpacing = 0.6.sp), color = TextSecondary)
+                        OutlinedTextField(
+                            value = draft.instruction,
+                            onValueChange = onInstructionChange,
+                            modifier = Modifier.fillMaxWidth(),
+                            placeholder = { Text("e.g. Take with water after meals") },
+                            minLines = 2,
+                            shape = RoundedCornerShape(14.dp)
+                        )
                     }
                 }
             }
@@ -1949,7 +1987,7 @@ fun AboutScreen(onBack: () -> Unit) {
 @Composable
 private fun DrugTypeaheadField(
     draft: MedicineDraft,
-    onFormChange: (String) -> Unit,
+    onNameChange: (String) -> Unit,
     onDosageChange: (String) -> Unit,
     uncertainFields: List<String>,
     viewModel: MedacViewModel
@@ -1964,9 +2002,9 @@ private fun DrugTypeaheadField(
     }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if ("entered_name" in uncertainFields || "candidate_name" in uncertainFields) {
-            UncertainFieldBox(label = "Medicine name", value = draft.name, onValueChange = onFormChange)
+            UncertainFieldBox(label = "Medicine name", value = draft.name, onValueChange = onNameChange)
         } else {
-            OutlinedTextField(value = draft.name, onValueChange = onFormChange, modifier = Modifier.fillMaxWidth(), label = { Text("Medicine name") }, placeholder = { Text("e.g. Lisinopril") }, singleLine = true, shape = RoundedCornerShape(14.dp))
+            OutlinedTextField(value = draft.name, onValueChange = onNameChange, modifier = Modifier.fillMaxWidth(), label = { Text("Medicine name") }, placeholder = { Text("e.g. Lisinopril") }, singleLine = true, shape = RoundedCornerShape(14.dp))
         }
         if (searching) {
             Text("Searching...", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp), color = TextSecondary)
@@ -1980,7 +2018,7 @@ private fun DrugTypeaheadField(
                     results.take(6).forEachIndexed { idx, item ->
                         Row(modifier = Modifier.fillMaxWidth().clickable {
                             viewModel.selectDrugConcept(item)
-                            onFormChange(item.effectiveName)
+                            onNameChange(item.effectiveName)
                             // apply dose if item name contains strength
                             Regex("""\d+(\.\d+)?\s*(mg|mcg|g|mg/mL)""", RegexOption.IGNORE_CASE).find(item.effectiveName)?.value?.let { onDosageChange(it) }
                         }.padding(horizontal = 14.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {

@@ -57,6 +57,7 @@ data class MedicationDto(
     val route: String?,
     @SerializedName("dose_quantity_value") val doseQuantityValue: String,
     @SerializedName("dose_quantity_unit") val doseQuantityUnit: String,
+    @SerializedName("indication_text") val indicationText: String? = null,
     @SerializedName("label_instructions_text") val labelInstructionsText: String?,
     @SerializedName("normalization_status") val normalizationStatus: String?,
     val status: String,
@@ -73,11 +74,13 @@ data class CreateMedicationRequest(
     val route: String? = null,
     @SerializedName("dose_quantity_value") val doseQuantityValue: String,
     @SerializedName("dose_quantity_unit") val doseQuantityUnit: String,
+    @SerializedName("indication_text") val indicationText: String? = null,
     @SerializedName("label_instructions_text") val labelInstructionsText: String? = null,
     @SerializedName("normalization_status") val normalizationStatus: String = "unresolved",
     val status: String = "active",
     @SerializedName("high_attention_user_flag") val highAttention: Boolean = false,
-    @SerializedName("start_date") val startDate: String? = null
+    @SerializedName("start_date") val startDate: String? = null,
+    @SerializedName("end_date") val endDate: String? = null
 )
 data class UpdateMedicationRequest(
     @SerializedName("entered_name") val enteredName: String? = null,
@@ -87,6 +90,7 @@ data class UpdateMedicationRequest(
     val route: String? = null,
     @SerializedName("dose_quantity_value") val doseQuantityValue: String? = null,
     @SerializedName("dose_quantity_unit") val doseQuantityUnit: String? = null,
+    @SerializedName("indication_text") val indicationText: String? = null,
     @SerializedName("label_instructions_text") val labelInstructionsText: String? = null,
     val status: String? = null,
     @SerializedName("high_attention_user_flag") val highAttention: Boolean? = null,

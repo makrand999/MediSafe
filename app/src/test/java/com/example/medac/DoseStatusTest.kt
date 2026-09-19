@@ -34,6 +34,31 @@ class DoseStatusTest {
     }
 
     @Test
+    fun testServerStrengthUnit_matchesServerEnumCasing() {
+        assertEquals("mL", serverStrengthUnit("ml"))
+        assertEquals("mg", serverStrengthUnit("mg"))
+        assertEquals("mcg", serverStrengthUnit("mcg"))
+        assertNull(serverStrengthUnit(null))
+    }
+
+    @Test
+    fun testNormalizeFormRouteDoseUnit_serverMappings() {
+        assertEquals("tablet", normalizeFormForServer("Tablet"))
+        assertEquals("capsule", normalizeFormForServer("CAPSULE"))
+        assertEquals("cream", normalizeFormForServer("Topical"))
+        assertEquals("other", normalizeFormForServer("Syrup"))
+        assertNull(normalizeFormForServer(""))
+        assertEquals("injection", normalizeRouteForForm("Injection"))
+        assertEquals("inhalation", normalizeRouteForForm("inhaler"))
+        assertEquals("ophthalmic", normalizeRouteForForm("Drops"))
+        assertEquals("oral", normalizeRouteForForm("Tablet"))
+        assertEquals("mL", normalizeDoseUnitForForm("Liquid"))
+        assertEquals("puff", normalizeDoseUnitForForm("Inhaler"))
+        assertEquals("drop", normalizeDoseUnitForForm("drops"))
+        assertEquals("tablet", normalizeDoseUnitForForm("Tablet"))
+    }
+
+    @Test
     fun testFindMedicine_prefersIdFallsBackToName() {
         val meds = listOf(
             ManagedMedicine(id = 1L, name = "Aspirin", genericNameAndDose = "100mg"),

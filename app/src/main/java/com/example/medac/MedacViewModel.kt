@@ -593,12 +593,15 @@ class MedacViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // map to server CreateMedicationRequest — decimals as strings (§1.4)
-                val (strengthVal, strengthUnit) = parseStrengthDose(d.genericNameAndDose)
+                val (rawStrengthVal, rawStrengthUnit) = parseStrengthDose(d.genericNameAndDose)
+                val strengthUnit = serverStrengthUnit(rawStrengthUnit)
+                val strengthVal = if (strengthUnit != null) rawStrengthVal else null
                 val doseVal = strengthVal ?: "1"
-                val doseUnit = when(d.form.lowercase()){
-                    "liquid"->"mL"; "tablet"->"tablet"; "capsule"->"capsule"; else->"tablet"
-                }
+                val doseUnit = normalizeDoseUnitForForm(d.form)
+                val serverForm = normalizeFormForServer(d.form)
+                val serverRoute = normalizeRouteForForm(d.form)
                 val isoStartDate = com.example.medac.data.MedacDateUtils.normalizeToIsoDate(d.startDate)
+                val isoEndDate = com.example.medac.data.MedacDateUtils.computeEndDate(isoStartDate, d.duration)
                 val effectiveFrom = if (isoStartDate != null) {
                     try {
                         java.time.LocalDate.parse(isoStartDate).atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toString()
@@ -609,14 +612,16 @@ class MedacViewModel : ViewModel() {
                     enteredName = d.name.trim(),
                     enteredStrengthValue = strengthVal,
                     enteredStrengthUnit = strengthUnit,
-                    form = d.form.ifBlank{null},
-                    route = "oral",
+                    form = serverForm,
+                    route = serverRoute,
                     doseQuantityValue = doseVal,
                     doseQuantityUnit = doseUnit,
-                    labelInstructionsText = d.instruction.ifBlank{ d.purpose.ifBlank{null}},
+                    indicationText = d.purpose.trim().ifBlank { null },
+                    labelInstructionsText = d.instruction.trim().ifBlank { null },
                     status = "active",
                     highAttention = false,
-                    startDate = isoStartDate
+                    startDate = isoStartDate,
+                    endDate = isoEndDate
                 )
                 val dto = MedacRepository.createMedication(ctx, pid, req)
                 // schedule
@@ -679,7 +684,13 @@ class MedacViewModel : ViewModel() {
                         ?: meds.firstOrNull { it.id.hashCode().toLong() == updated.id }?.id
                 }
                 if (serverId != null) {
-                    val (strengthVal, strengthUnit) = parseStrengthDose(updated.genericNameAndDose)
+                    val (rawStrengthVal, rawStrengthUnit) = parseStrengthDose(updated.genericNameAndDose)
+                    val strengthUnit = serverStrengthUnit(rawStrengthUnit)
+                    val strengthVal = if (strengthUnit != null) rawStrengthVal else null
+                    val doseVal = strengthVal ?: "1"
+                    val doseUnit = normalizeDoseUnitForForm(updated.form)
+                    val serverForm = normalizeFormForServer(updated.form)
+                    val serverRoute = normalizeRouteForForm(updated.form)
                     val isoStartDate = com.example.medac.data.MedacDateUtils.normalizeToIsoDate(updated.startDate)
                     val isoEndDate = com.example.medac.data.MedacDateUtils.computeEndDate(isoStartDate, updated.duration)
 
@@ -687,9 +698,12 @@ class MedacViewModel : ViewModel() {
                         enteredName = updated.name.trim(),
                         enteredStrengthValue = strengthVal,
                         enteredStrengthUnit = strengthUnit,
-                        form = updated.form.ifBlank { null },
-                        route = "oral",
-                        labelInstructionsText = updated.instruction.ifBlank { updated.purpose.ifBlank { null } },
+                        form = serverForm,
+                        route = serverRoute,
+                        doseQuantityValue = doseVal,
+                        doseQuantityUnit = doseUnit,
+                        indicationText = updated.purpose.trim().ifBlank { null },
+                        labelInstructionsText = updated.instruction.trim().ifBlank { null },
                         status = updated.statusOrActive,
                         startDate = isoStartDate,
                         endDate = isoEndDate
@@ -1416,6 +1430,7 @@ class MedacViewModel : ViewModel() {
                     name=s.name,
                     genericNameAndDose=s.genericNameAndDose,
                     purpose=s.purpose,
+                    instruction=s.instruction,
                     times=s.times,
                     isAiEnhanced=false
                 )
@@ -1436,8 +1451,8 @@ class MedacViewModel : ViewModel() {
                     val interp = resp.interpretation
                     val name = med?.name?.takeIf{it.isNotBlank()} ?: interp?.candidateName ?: _draft.value.name
                     val generic = med?.genericName ?: med?.genericNameAlt ?: interp?.candidateGenericName
-                    val purpose = med?.purpose ?: interp?.labelDirectionsText ?: _draft.value.purpose
-                    val instr = med?.instructions
+                    val purpose = med?.purpose?.takeIf{it.isNotBlank()} ?: _draft.value.purpose
+                    val instr = med?.instructions?.takeIf{it.isNotBlank()} ?: interp?.labelDirectionsText ?: _draft.value.instruction
                     val form = med?.form ?: interp?.form ?: _draft.value.form
                     val times = med?.suggestedTimes ?: med?.suggestedTimesAlt
                     android.util.Log.d("MedacAI","label-interpretation success: medName=${med?.name} interpName=${interp?.candidateName}")
@@ -1447,9 +1462,9 @@ class MedacViewModel : ViewModel() {
                         detectedSummary= if(name.isNotBlank()) "AI identified: $name" else _draft.value.detectedSummary,
                         detectedText=ocrText,
                         name=name,
-                        genericNameAndDose=_draft.value.genericNameAndDose,
-                        purpose=purpose ?: _draft.value.purpose,
-                        instruction=instr ?: _draft.value.instruction,
+                        genericNameAndDose=if (!generic.isNullOrBlank()) generic else _draft.value.genericNameAndDose,
+                        purpose=purpose,
+                        instruction=instr,
                         form=form ?: _draft.value.form,
                         times=times?.distinct()?.sorted()?.takeIf{it.isNotEmpty()} ?: _draft.value.times,
                         isAiEnhanced=name.isNotBlank(),
@@ -1480,6 +1495,7 @@ class MedacViewModel : ViewModel() {
                             name=s.name,
                             genericNameAndDose=s.genericNameAndDose,
                             purpose=s.purpose,
+                            instruction=s.instruction,
                             times=s.times
                         )
                     }
@@ -1496,6 +1512,7 @@ class MedacViewModel : ViewModel() {
                         name=s.name,
                         genericNameAndDose=s.genericNameAndDose,
                         purpose=s.purpose,
+                        instruction=s.instruction,
                         times=s.times
                     )
                     try{
@@ -1528,8 +1545,9 @@ class MedacViewModel : ViewModel() {
                                 photoUri=localPhotoUri,
                                 cardImageUri=photoUriStr,
                                 name=winner.name,
-                                purpose=listOf(winner.purpose,winner.instructions).filter{it.isNotBlank()}.joinToString("\n").ifBlank { _draft.value.purpose },
-                                genericNameAndDose=_draft.value.genericNameAndDose,
+                                purpose=winner.purpose.ifBlank { _draft.value.purpose },
+                                instruction=winner.instructions.ifBlank { _draft.value.instruction },
+                                genericNameAndDose=winner.genericName.ifBlank { _draft.value.genericNameAndDose },
                                 times=winner.suggestedTimes.distinct().sorted().ifEmpty { _draft.value.times },
                                 isAiEnhanced=true, form=winner.form.ifBlank { _draft.value.form },
                                 aiConfidence="high",
@@ -1918,11 +1936,15 @@ class MedacViewModel : ViewModel() {
             fallbackTimes.isNotEmpty() -> fallbackTimes.distinct().sorted()
             else -> emptyList()
         }
+        val strength = if (!dto.enteredStrengthValue.isNullOrBlank() && !dto.enteredStrengthUnit.isNullOrBlank()) {
+            "${dto.enteredStrengthValue} ${dto.enteredStrengthUnit}"
+        } else null
+        val dose = strength ?: existing?.genericNameAndDose?.takeIf { it.isNotBlank() } ?: "${dto.doseQuantityValue} ${dto.doseQuantityUnit}".trim()
         return ManagedMedicine(
             id = id,
             name = dto.enteredName,
-            genericNameAndDose = "${dto.doseQuantityValue} ${dto.doseQuantityUnit}",
-            purpose = dto.labelInstructionsText ?: existing?.purpose.orEmpty(),
+            genericNameAndDose = dose,
+            purpose = dto.indicationText ?: existing?.purpose.orEmpty(),
             times = times,
             photoUris = existing?.photoUris ?: emptyList(),
             ocrText = existing?.ocrText.orEmpty(),
@@ -1984,7 +2006,18 @@ class MedacViewModel : ViewModel() {
 
     private fun applyFallbackDraft(photoUri: Uri?, ocrText: String){
         _isAnalyzingPhoto.value=false; val s=buildDraftSuggestion(ocrText)
-        _draft.value=_draft.value.copy(photoUri=photoUri, cardImageUri=photoUri?.toString(), detectedSummary=s.summary, detectedText=s.fullText, name=s.name, genericNameAndDose=s.genericNameAndDose, purpose=s.purpose, times=s.times, isAiEnhanced=false)
+        _draft.value=_draft.value.copy(
+            photoUri=photoUri,
+            cardImageUri=photoUri?.toString(),
+            detectedSummary=s.summary,
+            detectedText=s.fullText,
+            name=s.name,
+            genericNameAndDose=s.genericNameAndDose,
+            purpose=s.purpose,
+            instruction=s.instruction,
+            times=s.times,
+            isAiEnhanced=false
+        )
     }
     private fun buildDraftSuggestion(rawText:String): OcrDraftSuggestion{
         val lines=rawText.lines().map{ it.trim()}.filter{ it.isNotBlank()}
@@ -1992,8 +2025,17 @@ class MedacViewModel : ViewModel() {
         val name=lines.firstOrNull().orEmpty()
         val dose=Regex("""\b\d+(\.\d+)?\s?(mg|mcg|g|ml)\b""", RegexOption.IGNORE_CASE).find(rawText)?.value.orEmpty()
         val instr=lines.firstOrNull{ it.contains("take",true)||it.contains("after",true)||it.contains("before",true)||it.contains("daily",true)}.orEmpty()
+        val purpose=lines.firstOrNull{ it.contains("for ",true)||it.contains("relie",true)||it.contains("pain",true)||it.contains("fever",true)||it.contains("cough",true)||it.contains("cold",true)}.orEmpty()
         val times=when{ rawText.contains("three times",true)->listOf("08:00","14:00","20:00"); rawText.contains("twice",true)||rawText.contains("2 times",true)->listOf("08:00","20:00"); rawText.contains("once",true)||rawText.contains("daily",true)->listOf("08:00"); else->listOf("08:00")}
-        return OcrDraftSuggestion(summary,name,dose,instr,times,rawText.trim())
+        return OcrDraftSuggestion(
+            summary = summary,
+            name = name,
+            genericNameAndDose = dose,
+            purpose = purpose,
+            instruction = instr,
+            times = times,
+            fullText = rawText.trim()
+        )
     }
     private fun buildPrescriptionMedicines(rawText:String, uri:Uri): List<ManagedMedicine>{
         val lines=rawText.lines().map{ it.trim().trim('-','*','•')}.filter{ l-> l.length>=3 && !l.contains("doctor",true)&&!l.contains("hospital",true)&&!l.contains("clinic",true)&&!l.contains("patient",true)&&!l.contains("date",true)}

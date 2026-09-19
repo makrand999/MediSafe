@@ -78,7 +78,8 @@ data class OcrDraftSuggestion(
     val summary: String,
     val name: String,
     val genericNameAndDose: String,
-    val purpose: String,
+    val purpose: String = "",
+    val instruction: String = "",
     val times: List<String>,
     val fullText: String
 )
@@ -209,12 +210,20 @@ fun isValidReminderTime(value: String): Boolean {
  * Canonical strength parser for free-text dose strings ("100mg", "2 x 5 mL").
  * Returns (value, lowercase unit); either side is null when absent. Single
  * home for the regexes so create/update paths can't drift apart.
+ * NOTE: the server StrengthUnitEnum is case-sensitive and expects "mL" —
+ * callers mapping to server payloads must use [serverStrengthUnit].
  */
 fun parseStrengthDose(doseText: String): Pair<String?, String?> {
     val value = Regex("""\d+(\.\d+)?""").find(doseText)?.value
     val unit = Regex("""(mg|mcg|g|mL|ml)""", RegexOption.IGNORE_CASE).find(doseText)?.value?.lowercase()
     return value to unit
 }
+
+/**
+ * Maps a [parseStrengthDose] unit to the exact casing the server
+ * StrengthUnitEnum accepts ("ml" → "mL"; everything else passes through).
+ */
+fun serverStrengthUnit(unit: String?): String? = if (unit == "ml") "mL" else unit
 
 fun suggestedTimesForPrescriptionLine(line: String): List<String> {
     val normalized = line.lowercase(Locale.getDefault())
@@ -242,3 +251,50 @@ fun suggestedTimesForPrescriptionLine(line: String): List<String> {
         else -> listOf("08:00")
     }
 }
+
+fun normalizeFormForServer(form: String): String? {
+    val f = form.trim().lowercase(Locale.getDefault())
+    return when (f) {
+        "tablet" -> "tablet"
+        "capsule" -> "capsule"
+        "liquid" -> "liquid"
+        "injection" -> "injection"
+        "inhaler" -> "inhaler"
+        "drops" -> "drops"
+        "patch" -> "patch"
+        "cream" -> "cream"
+        "ointment" -> "ointment"
+        "suppository" -> "suppository"
+        "topical" -> "cream"
+        "other" -> "other"
+        else -> if (f.isNotBlank()) "other" else null
+    }
+}
+
+fun normalizeRouteForForm(form: String): String {
+    val f = form.trim().lowercase(Locale.getDefault())
+    return when (f) {
+        "injection" -> "injection"
+        "inhaler" -> "inhalation"
+        "drops" -> "ophthalmic"
+        "topical", "cream", "ointment" -> "topical"
+        "patch" -> "transdermal"
+        "suppository" -> "rectal"
+        else -> "oral"
+    }
+}
+
+fun normalizeDoseUnitForForm(form: String): String {
+    val f = form.trim().lowercase(Locale.getDefault())
+    return when (f) {
+        "liquid" -> "mL"
+        "capsule" -> "capsule"
+        "tablet" -> "tablet"
+        "inhaler" -> "puff"
+        "drops" -> "drop"
+        "patch" -> "patch"
+        "injection" -> "units"
+        else -> "tablet"
+    }
+}
+

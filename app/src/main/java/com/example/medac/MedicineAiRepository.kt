@@ -63,15 +63,16 @@ object MedicineAiRepository {
                         val name = interp.optString("candidate_name", interp.optString("name",""))
                         val genericName = interp.optString("candidate_generic_name","")
                         val form = interp.optString("form","")
-                        val purpose = interp.optString("label_directions_text","")
+                        val directions = interp.optString("label_directions_text","")
+                        val purpose = interp.optString("purpose", interp.optString("indication_text",""))
                         val conf = interp.optDouble("confidence",0.7)
-                        return@withContext AuthApiResult.Success(AiMedicine(name, genericName, purpose, "", listOf("08:00"), form, conf, conf))
+                        return@withContext AuthApiResult.Success(AiMedicine(name, genericName, purpose, directions, listOf("08:00"), form, conf, conf))
                     }
                 }
                 if(med==null) med=json
                 val name = med.optString("name", med.optString("candidate_name",""))
                 val genericName = med.optString("genericName", med.optString("generic_name", med.optString("candidate_generic_name","")))
-                val purpose = med.optString("purpose", med.optString("label_directions_text",""))
+                val purpose = med.optString("purpose", med.optString("indication_text",""))
                 val instructions = med.optString("instructions", med.optString("label_directions_text",""))
                 val form = med.optString("form", med.optString("form_factor", ""))
                 val imageConfidence = med.optDouble("imageConfidence", med.optDouble("image_confidence", med.optDouble("confidence",0.7)))
@@ -126,16 +127,17 @@ object MedicineAiRepository {
                         val name=interp.optString("name", interp.optString("candidate_name",""))
                         val genericName=interp.optString("genericName", interp.optString("candidate_generic_name",""))
                         val form=interp.optString("form","")
-                        val purpose=interp.optString("label_directions_text", interp.optString("purpose",""))
+                        val directions=interp.optString("label_directions_text","")
+                        val purpose=interp.optString("purpose", interp.optString("indication_text",""))
                         val conf=interp.optDouble("confidence",0.7)
                         android.util.Log.d("MedicineAiRepository","identify-text via interpretation alias: name=$name")
-                        return@withContext AuthApiResult.Success(AiMedicine(name, genericName, purpose, "", listOf("08:00"), form, conf, conf))
+                        return@withContext AuthApiResult.Success(AiMedicine(name, genericName, purpose, directions, listOf("08:00"), form, conf, conf))
                     }
                 }
                 if(med==null) med=json
                 val name = med.optString("name", med.optString("candidate_name",""))
                 val genericName = med.optString("genericName", med.optString("generic_name", med.optString("candidate_generic_name","")))
-                val purpose = med.optString("purpose", med.optString("label_directions_text",""))
+                val purpose = med.optString("purpose", med.optString("indication_text",""))
                 val instructions = med.optString("instructions", med.optString("label_directions_text",""))
                 val form = med.optString("form", "")
                 val imageConfidence = med.optDouble("imageConfidence", med.optDouble("image_confidence", med.optDouble("confidence",0.7)))

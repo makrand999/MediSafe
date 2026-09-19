@@ -606,11 +606,17 @@ fun MedacRoot(initialIntent: Intent? = null) {
                         viewModel.updateDraft(
                             name = updated.name,
                             genericNameAndDose = updated.genericNameAndDose,
+                            purpose = updated.purpose,
+                            form = updated.form,
+                            foodTiming = updated.foodTiming,
+                            instruction = updated.instruction,
                             frequency = updated.frequency,
                             duration = updated.duration,
                             startDate = updated.startDate,
                             remindersEnabled = updated.remindersEnabled,
                             refillTrackingEnabled = updated.refillTrackingEnabled,
+                            currentSupply = updated.currentSupply,
+                            refillThresholdPercent = updated.refillThresholdPercent,
                             notes = updated.notes
                         )
                         viewModel.updateDraftTimes(updated.times)
@@ -844,7 +850,8 @@ fun MedacRoot(initialIntent: Intent? = null) {
                     onFoodTimingChange = { viewModel.updateDraft(foodTiming = it) },
                     onTimeChange = { viewModel.updateDraftTimes(it) },
                     onInstructionChange = { viewModel.updateDraft(instruction = it) },
-                    onFormChange = { viewModel.updateDraft(name = it) },
+                    onNameChange = { viewModel.updateDraft(name = it) },
+                    onFormChange = { viewModel.updateDraft(form = it) },
                     onPurposeChange = { viewModel.updateDraft(purpose = it) },
                     step = addStep,
                     onStepChange = { addStep = it },
