@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName
 // ── Auth ──
 data class RegisterRequest(val email: String, val password: String, val preferred_locale: String? = null)
 data class RegisterResponse(@SerializedName("user_id") val userId: String)
-data class VerifyEmailRequest(val token: String)
-data class ResendVerificationRequest(val email: String)
 data class LoginRequest(
     val email: String,
     val password: String,

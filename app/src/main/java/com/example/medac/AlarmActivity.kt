@@ -12,6 +12,7 @@ import android.view.KeyEvent
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
@@ -35,19 +36,22 @@ class AlarmActivity : ComponentActivity() {
         }
     }
 
+    // Hoisted so a second firing alarm can replace the displayed dose via
+    // onNewIntent instead of being silently dropped (singleTask).
+    private val currentDose = androidx.compose.runtime.mutableStateOf(ActiveAlarm("", "", 0L))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setupLockscreenFlags()
 
-        val medicineName = intent.getStringExtra("medicine_name") ?: "Scheduled Medication"
-        val time = intent.getStringExtra("time") ?: ""
+        currentDose.value = doseFromIntent(intent)
 
         // Ensure the single audio owner is ringing (no-op if already started
         // by ReminderReceiver). Best-effort: may be denied in background on
         // Android 14 — the full-screen notification remains.
         try {
-            AlarmService.start(this, medicineName, time)
+            AlarmService.start(this, currentDose.value.medicineName, currentDose.value.time)
         } catch (_: Exception) {}
 
         // Register dismiss broadcast from notification actions
@@ -58,39 +62,87 @@ class AlarmActivity : ComponentActivity() {
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
+        // Back behaves exactly like "Go to Home (Skip)" — a bare finish()
+        // would close the UI while the alarm kept ringing.
+        onBackPressedDispatcher.addCallback(this) { performGoHome() }
+
         setContent {
             MedacTheme {
+                val dose = currentDose.value
                 DueMedicineAlarmFullScreen(
-                    medicineName = medicineName,
-                    time = time,
+                    medicineName = dose.medicineName,
+                    time = dose.time,
                     instructions = "",
                     onMarkTaken = {
                         AlarmService.stop(this)
-                        logDoseDirectly(this, medicineName, time, "TAKEN")
-                        ActiveAlarmStore.removeActiveAlarm(this, medicineName, time)
-                        cancelNotifications(medicineName, time)
-                        Toast.makeText(this, "$medicineName marked as taken", Toast.LENGTH_SHORT).show()
-                        finish()
+                        logDoseDirectly(this, dose.medicineName, dose.time, "TAKEN")
+                        ActiveAlarmStore.removeActiveAlarm(this, dose.medicineName, dose.time)
+                        cancelNotifications(dose.medicineName, dose.time)
+                        Toast.makeText(this, "${dose.medicineName} marked as taken", Toast.LENGTH_SHORT).show()
+                        if (!advanceToNextAlarm()) finish()
                     },
-                    onGoToHome = {
+                    onSnooze = {
                         AlarmService.stop(this)
-                        ActiveAlarmStore.removeActiveAlarm(this, medicineName, time)
-                        cancelNotifications(medicineName, time)
-                        val homeIntent = Intent(this, MainActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        }
-                        startActivity(homeIntent)
-                        finish()
-                    }
+                        ActiveAlarmStore.removeActiveAlarm(this, dose.medicineName, dose.time)
+                        scheduleSnoozeReminder(this, dose.medicineName, dose.time, DEFAULT_SNOOZE_DELAY_MINUTES)
+                        cancelNotifications(dose.medicineName, dose.time)
+                        Toast.makeText(this, "Snoozed for $DEFAULT_SNOOZE_DELAY_MINUTES minutes", Toast.LENGTH_SHORT).show()
+                        if (!advanceToNextAlarm()) finish()
+                    },
+                    onGoToHome = { performGoHome() }
                 )
             }
         }
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val dose = doseFromIntent(intent)
+        if (dose.medicineName.isNotBlank()) {
+            currentDose.value = dose
+            try {
+                AlarmService.start(this, dose.medicineName, dose.time)
+            } catch (_: Exception) {}
+        }
+    }
+
+    private fun doseFromIntent(intent: Intent?): ActiveAlarm {
+        val medicineName = intent?.getStringExtra("medicine_name") ?: "Scheduled Medication"
+        val time = intent?.getStringExtra("time") ?: ""
+        return ActiveAlarm(medicineName, time, System.currentTimeMillis())
+    }
+
+    /**
+     * After handling the displayed dose, show the next still-firing alarm (if
+     * any) instead of closing. Returns true when another alarm took over.
+     */
+    private fun advanceToNextAlarm(): Boolean {
+        val next = ActiveAlarmStore.getActiveAlarm(this) ?: return false
+        if (next.medicineName == currentDose.value.medicineName && next.time == currentDose.value.time) return false
+        currentDose.value = next
+        try {
+            AlarmService.start(this, next.medicineName, next.time)
+        } catch (_: Exception) {}
+        return true
+    }
+
+    private fun performGoHome() {
+        val dose = currentDose.value
+        AlarmService.stop(this)
+        ActiveAlarmStore.removeActiveAlarm(this, dose.medicineName, dose.time)
+        cancelNotifications(dose.medicineName, dose.time)
+        val homeIntent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        startActivity(homeIntent)
+        finish()
+    }
+
     private fun cancelNotifications(medicineName: String, time: String) {
         val notifManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notifManager.cancel(("$medicineName|$time|alarm_notif").hashCode())
-        notifManager.cancel(("$medicineName|$time|pre_notif").hashCode())
+        notifManager.cancel(alarmNotificationId(medicineName, time))
+        notifManager.cancel(preNotificationId(medicineName, time))
         notifManager.cancel(AlarmService.NOTIFICATION_ID)
     }
 

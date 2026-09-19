@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -13,7 +12,6 @@ sealed class AuthUiState {
     object Loading : AuthUiState()
     object LoggedOut : AuthUiState()
     data class LoggedIn(val username: String) : AuthUiState()
-    data class VerifyEmail(val email: String) : AuthUiState()
     data class MfaRequired(val token: String) : AuthUiState()
 }
 
@@ -26,9 +24,6 @@ class AuthViewModel : ViewModel() {
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
-
-    private val _verifyResendSeconds = MutableStateFlow(0)
-    val verifyResendSeconds: StateFlow<Int> = _verifyResendSeconds
 
     private val _forgotSent = MutableStateFlow(false)
     val forgotSent: StateFlow<Boolean> = _forgotSent
@@ -60,7 +55,6 @@ class AuthViewModel : ViewModel() {
         _isBusy.value = true
         _error.value = null
         viewModelScope.launch {
-            // Map common API errors to spec messages §7.3
             val device = mapOf("platform" to "android", "display_name" to Build.MODEL, "timezone" to java.util.TimeZone.getDefault().id)
             when (val r = AuthRepository.login(context.applicationContext, email.trim(), password, device)) {
                 is AuthApiResult.Success -> {
@@ -72,28 +66,8 @@ class AuthViewModel : ViewModel() {
                         onSuccess()
                     }
                 }
-                is AuthApiResult.Error -> {
-                    val msg = r.message
-                    // OTP disabled: treat ACCOUNT_NOT_ACTIVE as success (skip verification)
-                    if (msg.contains("ACCOUNT_NOT_ACTIVE", ignoreCase = true)) {
-                        com.example.medac.data.TokenStore.saveSession(
-                            context.applicationContext,
-                            "local_${System.currentTimeMillis()}",
-                            "local_refresh_${System.currentTimeMillis()}",
-                            "local",
-                            email.substringBefore("@"),
-                            email.trim()
-                        )
-                        _authState.value = AuthUiState.LoggedIn(email.substringBefore("@"))
-                        onSuccess()
-                    } else {
-                        _error.value = when {
-                            msg.contains("INVALID_CREDENTIALS", ignoreCase = true) -> "Incorrect email or password."
-                            msg.contains("ACCOUNT_LOCKED", ignoreCase = true) || msg.contains("423") -> "Too many attempts. Try again in 15 minutes."
-                            else -> msg
-                        }
-                    }
-                }
+                // Error messages arrive already mapped (§7.3) from the repository.
+                is AuthApiResult.Error -> _error.value = r.message
             }
             _isBusy.value = false
         }
@@ -133,37 +107,6 @@ class AuthViewModel : ViewModel() {
                 is AuthApiResult.Error -> _error.value = r.message
             }
             _isBusy.value = false
-        }
-    }
-
-    fun skipVerification(email: String) {
-        _authState.value = AuthUiState.LoggedIn(email.substringBefore("@"))
-        _error.value = null
-    }
-
-    fun verifyEmail(context: Context, email: String, code: String, onSuccess: () -> Unit = {}) {
-        if (code.isBlank()) { _error.value = "Enter the verification code"; return }
-        _isBusy.value = true; _error.value = null
-        viewModelScope.launch {
-            when (val r = AuthRepository.verifyEmail(context.applicationContext, code.trim())) {
-                is AuthApiResult.Success -> {
-                    _authState.value = AuthUiState.LoggedOut
-                    onSuccess()
-                }
-                is AuthApiResult.Error -> _error.value = r.message
-            }
-            _isBusy.value = false
-        }
-    }
-
-    fun resendVerification(context: Context, email: String) {
-        if (_verifyResendSeconds.value > 0) return
-        viewModelScope.launch {
-            AuthRepository.resendVerification(context.applicationContext, email)
-            _verifyResendSeconds.value = 30
-            while (_verifyResendSeconds.value > 0) {
-                delay(1000); _verifyResendSeconds.value--
-            }
         }
     }
 

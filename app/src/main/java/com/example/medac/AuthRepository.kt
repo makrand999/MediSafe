@@ -5,9 +5,7 @@ import com.example.medac.data.LoginRequest
 import com.example.medac.data.MfaVerifyRequest
 import com.example.medac.data.NetworkModule
 import com.example.medac.data.RegisterRequest
-import com.example.medac.data.ResendVerificationRequest
 import com.example.medac.data.TokenStore
-import com.example.medac.data.VerifyEmailRequest
 
 data class AuthUser(val id: String, val username: String)
 data class AuthResult(val token: String, val user: AuthUser)
@@ -82,10 +80,17 @@ object AuthRepository {
                 val body = r.errorBody()?.string()
                 val code = r.code()
                 val raw = errorMessage(body, code, "Login failed")
-                // §7.3 mapping done in ViewModel, but also handle ACCOUNT_NOT_ACTIVE/LOCKED here
+                // Email verification is disabled product-wide, so an inactive
+                // (unverified) account logs in locally instead of stranding
+                // the user at a verification flow that cannot complete.
+                if (raw.contains("ACCOUNT_NOT_ACTIVE", true)) {
+                    val access = "local_${System.currentTimeMillis()}"
+                    TokenStore.saveSession(context, access, "local_refresh", "local", email.substringBefore("@"), email)
+                    return AuthApiResult.Success(AuthResult(access, AuthUser("local", email.substringBefore("@"))))
+                }
+                // Single §7.3 mapping location — callers display the message as-is.
                 val mapped = when {
                     code == 423 || raw.contains("ACCOUNT_LOCKED", true) -> "Too many attempts. Try again in 15 minutes."
-                    raw.contains("ACCOUNT_NOT_ACTIVE", true) -> "Check your email to verify your account first."
                     raw.contains("INVALID_CREDENTIALS", true) || code == 401 -> "Incorrect email or password."
                     else -> raw.ifBlank { "Login failed ($code)" }
                 }
@@ -106,16 +111,6 @@ object AuthRepository {
             } else AuthApiResult.Error(e.message ?: "Network error")
         }
     }
-
-    suspend fun verifyEmail(context: Context, token: String): AuthApiResult<Unit> = try {
-        val r = api(context).verifyEmail(VerifyEmailRequest(token))
-        if (r.isSuccessful) AuthApiResult.Success(Unit) else AuthApiResult.Error(errorMessage(r.errorBody()?.string(), r.code(), "Verification failed"))
-    } catch (e: Exception) { AuthApiResult.Error(e.message ?: "Network error") }
-
-    suspend fun resendVerification(context: Context, email: String): AuthApiResult<Unit> = try {
-        val r = api(context).resendVerification(ResendVerificationRequest(email))
-        if (r.isSuccessful) AuthApiResult.Success(Unit) else AuthApiResult.Error("Could not resend")
-    } catch (e: Exception) { AuthApiResult.Error(e.message ?: "Network error") }
 
     suspend fun verifyMfa(context: Context, mfaToken: String, code: String, isRecovery: Boolean): AuthApiResult<AuthResult> = try {
         val r = api(context).mfaVerify(MfaVerifyRequest(mfaToken, code, isRecovery))

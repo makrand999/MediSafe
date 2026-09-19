@@ -16,6 +16,7 @@ class ReminderReceiver : BroadcastReceiver() {
     companion object {
         const val ACTION_TAKE_DOSE = "com.example.medac.ACTION_TAKE_DOSE"
         const val ACTION_DELAY_DOSE = "com.example.medac.ACTION_DELAY_DOSE"
+        const val ACTION_SKIP_DOSE = "com.example.medac.ACTION_SKIP_DOSE"
         const val ACTION_DISMISS_ALARM_ACTIVITY = "com.example.medac.ACTION_DISMISS_ALARM_ACTIVITY"
     }
 
@@ -23,8 +24,8 @@ class ReminderReceiver : BroadcastReceiver() {
         val medicineName = intent.getStringExtra("medicine_name") ?: "Medicine"
         val time = intent.getStringExtra("time") ?: ""
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notifId = ("$medicineName|$time|alarm_notif").hashCode()
-        val preNotifId = ("$medicineName|$time|pre_notif").hashCode()
+        val notifId = alarmNotificationId(medicineName, time)
+        val preNotifId = preNotificationId(medicineName, time)
 
         when (intent.action) {
             ACTION_TAKE_DOSE -> {
@@ -43,6 +44,27 @@ class ReminderReceiver : BroadcastReceiver() {
                 notificationManager.cancel(notifId)
                 notificationManager.cancel(preNotifId)
                 context.sendBroadcast(Intent(ACTION_DISMISS_ALARM_ACTIVITY).setPackage(context.packageName))
+                return
+            }
+            ACTION_SKIP_DOSE -> {
+                // Same semantics as the full-screen "Go to Home (Skip)": silence
+                // and dismiss WITHOUT registering a dose outcome.
+                ActiveAlarmStore.removeActiveAlarm(context, medicineName, time)
+                AlarmService.stop(context)
+                notificationManager.cancel(notifId)
+                notificationManager.cancel(preNotifId)
+                context.sendBroadcast(Intent(ACTION_DISMISS_ALARM_ACTIVITY).setPackage(context.packageName))
+                try {
+                    val homeIntent = Intent(context, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    }
+                    context.startActivity(homeIntent)
+                } catch (e: Exception) {
+                    // Background activity launch may be blocked on API 29+; the
+                    // alarm is already silenced and cleared above, so there is
+                    // nothing ringing left behind.
+                    android.util.Log.d("ReminderReceiver", "Skip: home launch blocked: ${e.message}")
+                }
                 return
             }
         }
@@ -132,14 +154,31 @@ class ReminderReceiver : BroadcastReceiver() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            // Direct action to go to home / skip
-            val homeIntent = Intent(context, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            // Direct action to go to home / skip: must silence and clear via the
+            // receiver first — a bare getActivity would leave the alarm ringing.
+            val skipIntent = Intent(context, ReminderReceiver::class.java).apply {
+                action = ACTION_SKIP_DOSE
+                putExtra("medicine_name", medicineName)
+                putExtra("time", time)
             }
-            val homePendingIntent = PendingIntent.getActivity(
+            val homePendingIntent = PendingIntent.getBroadcast(
                 context,
                 ("$medicineName|$time|home").hashCode(),
-                homeIntent,
+                skipIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            // Direct action to snooze — same triple as the foreground-service
+            // notification and the full-screen UI.
+            val delayIntent = Intent(context, ReminderReceiver::class.java).apply {
+                action = ACTION_DELAY_DOSE
+                putExtra("medicine_name", medicineName)
+                putExtra("time", time)
+            }
+            val delayPendingIntent = PendingIntent.getBroadcast(
+                context,
+                ("$medicineName|$time|delay").hashCode(),
+                delayIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
@@ -156,6 +195,7 @@ class ReminderReceiver : BroadcastReceiver() {
                 .setContentIntent(openAppPendingIntent)
                 .setFullScreenIntent(fullScreenPendingIntent, true)
                 .addAction(android.R.drawable.checkbox_on_background, "✓ Taken", takePendingIntent)
+                .addAction(android.R.drawable.ic_menu_recent_history, "⏱ Delay ${DEFAULT_SNOOZE_DELAY_MINUTES}m", delayPendingIntent)
                 .addAction(android.R.drawable.ic_menu_today, "Home / Skip", homePendingIntent)
                 .setOngoing(true)
                 .setAutoCancel(false)
@@ -185,7 +225,7 @@ class ReminderReceiver : BroadcastReceiver() {
             }
             val openAppPendingIntent = PendingIntent.getActivity(
                 context,
-                0,
+                preAlarmOpenRequestCode(medicineName, time),
                 openAppIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )

@@ -300,9 +300,6 @@ object MedacRepository {
     }
 
     // ── Inventory / adherence ──
-    suspend fun inventory(ctx: Context, pid: String, mid: String): InventoryResponse? = withContext(Dispatchers.IO) {
-        try { val r = api(ctx).inventory(pid, mid); if (r.isSuccessful) r.body() else null } catch (_: Exception) { null }
-    }
     suspend fun getInventory(ctx: Context, pid: String, mid: String): InventoryResponse? = withContext(Dispatchers.IO) {
         try { val r = api(ctx).inventory(pid, mid); if (r.isSuccessful) r.body() else null } catch (_: Exception) { null }
     }
@@ -315,7 +312,6 @@ object MedacRepository {
     suspend fun updateInventorySettings(ctx: Context, pid: String, mid: String, req: InventorySettingsRequest): InventoryAccount? = withContext(Dispatchers.IO) {
         try { val r = api(ctx).updateInventorySettings(pid, mid, req); if (r.isSuccessful) r.body()?.account else null } catch (_: Exception) { null }
     }
-    suspend fun adherence(ctx: Context, pid: String, from: String, to: String): AdherenceReportDto? = getAdherenceReport(ctx, pid, from, to, null)
 
     // ── Expirations ──
     suspend fun listExpirations(ctx: Context, pid: String, mid: String): List<ExpirationDto> = withContext(Dispatchers.IO) {

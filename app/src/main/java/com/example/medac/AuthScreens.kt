@@ -226,45 +226,6 @@ private fun PasswordCheckRow(label: String, ok: Boolean) {
 }
 
 @Composable
-fun VerifyEmailScreen(
-    email: String,
-    isBusy: Boolean,
-    error: String?,
-    onVerify: (String) -> Unit,
-    onResend: () -> Unit,
-    onBackToLogin: () -> Unit,
-    resendSecondsLeft: Int = 0,
-    onSkip: (() -> Unit)? = null
-) {
-    var code by rememberSaveable { mutableStateOf("") }
-    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Verify your email", style = MaterialTheme.typography.headlineMedium, color = NavyPrimary)
-        Spacer(Modifier.height(8.dp))
-        Text("We sent a code to $email. Enter it below to verify your account.", style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
-        Spacer(Modifier.height(24.dp))
-        if (!error.isNullOrBlank()) {
-            Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.errorContainer, modifier = Modifier.fillMaxWidth()) {
-                Text(error, modifier = Modifier.padding(12.dp), color = MaterialTheme.colorScheme.onErrorContainer, style = MaterialTheme.typography.bodyMedium)
-            }
-            Spacer(Modifier.height(12.dp))
-        }
-        OutlinedTextField(value = code, onValueChange = { code = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Verification code") }, singleLine = true, shape = RoundedCornerShape(14.dp))
-        Spacer(Modifier.height(16.dp))
-        Button(onClick = { onVerify(code.trim()) }, enabled = !isBusy && code.isNotBlank(), modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(14.dp)) { Text(if (isBusy) "Verifying..." else "Verify") }
-        Spacer(Modifier.height(12.dp))
-        Button(onClick = onResend, enabled = resendSecondsLeft == 0 && !isBusy, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(14.dp)) {
-            Text(if (resendSecondsLeft > 0) "Resend in ${resendSecondsLeft}s" else "Resend email")
-        }
-        Spacer(Modifier.height(12.dp))
-        if (onSkip != null) {
-            Button(onClick = onSkip, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(14.dp)) { Text("Skip for now") }
-            Spacer(Modifier.height(12.dp))
-        }
-        TextButton(onClick = onBackToLogin, modifier = Modifier.heightIn(min = 48.dp)) { Text("Back to login") }
-    }
-}
-
-@Composable
 fun MfaScreen(
     isBusy: Boolean,
     error: String?,

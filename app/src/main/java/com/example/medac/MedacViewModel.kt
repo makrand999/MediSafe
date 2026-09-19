@@ -233,7 +233,24 @@ class MedacViewModel : ViewModel() {
                 // stable ids so alarms + dose logs survive cloud sync.
                 val existingByName = _medicines.value.associateBy { it.name.lowercase(Locale.getDefault()) }
                 _medicines.value = medDtos.map { dto ->
-                    medicationDtoToManaged(dto, existingByName[dto.enteredName.lowercase(Locale.getDefault())])
+                    val existing = existingByName[dto.enteredName.lowercase(Locale.getDefault())]
+                    val fallbackTimes = if (existing == null || existing.times.isEmpty()) {
+                        try {
+                            val schedules = MedacRepository.listSchedules(context, pid, dto.id)
+                            val activeVersion = schedules.firstOrNull { it.effectiveUntil == null } ?: schedules.lastOrNull()
+                            val timesFromActive = activeVersion?.fixedTimes?.map { it.localTime }.orEmpty()
+                            if (timesFromActive.isNotEmpty()) {
+                                timesFromActive
+                            } else {
+                                schedules.flatMap { it.fixedTimes.orEmpty().map { ft -> ft.localTime } }
+                            }
+                        } catch (_: Exception) {
+                            emptyList()
+                        }
+                    } else {
+                        emptyList()
+                    }
+                    medicationDtoToManaged(dto, existing, fallbackTimes)
                 }
                 persistMedicines()
             }
@@ -576,9 +593,8 @@ class MedacViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // map to server CreateMedicationRequest — decimals as strings (§1.4)
-                val strengthVal = Regex("""\d+(\.\d+)?""").find(d.genericNameAndDose)?.value
-                val strengthUnit = Regex("""(mg|mcg|g|mL|ml)""", RegexOption.IGNORE_CASE).find(d.genericNameAndDose)?.value?.lowercase()
-                val doseVal = Regex("""\d+(\.\d+)?""").find(d.genericNameAndDose)?.value ?: "1"
+                val (strengthVal, strengthUnit) = parseStrengthDose(d.genericNameAndDose)
+                val doseVal = strengthVal ?: "1"
                 val doseUnit = when(d.form.lowercase()){
                     "liquid"->"mL"; "tablet"->"tablet"; "capsule"->"capsule"; else->"tablet"
                 }
@@ -634,7 +650,7 @@ class MedacViewModel : ViewModel() {
     }
     fun updateMedicine(updated: ManagedMedicine) {
         val ctx = appContext ?: return
-        val prev = _medicines.value.firstOrNull { it.id == updated.id || it.name.equals(updated.name, ignoreCase = true) }
+        val prev = findMedicine(_medicines.value, updated.id, updated.name)
         prev?.times?.forEach { cancelMedicineReminder(ctx, prev.name, it) }
         _pausedReminderKeys.value = _pausedReminderKeys.value.filterNot { it.startsWith("${prev?.name ?: updated.name}|") }.toSet()
         persistPausedReminders()
@@ -658,8 +674,7 @@ class MedacViewModel : ViewModel() {
                     serverId = meds.firstOrNull { it.enteredName.equals(updated.name, true) }?.id
                 }
                 if (serverId != null) {
-                    val strengthVal = Regex("""\d+(\.\d+)?""").find(updated.genericNameAndDose)?.value
-                    val strengthUnit = Regex("""(mg|mcg|g|mL|ml)""", RegexOption.IGNORE_CASE).find(updated.genericNameAndDose)?.value?.lowercase()
+                    val (strengthVal, strengthUnit) = parseStrengthDose(updated.genericNameAndDose)
                     val isoStartDate = com.example.medac.data.MedacDateUtils.normalizeToIsoDate(updated.startDate)
                     val isoEndDate = com.example.medac.data.MedacDateUtils.computeEndDate(isoStartDate, updated.duration)
 
@@ -819,8 +834,8 @@ class MedacViewModel : ViewModel() {
         }
         return null
     }
-    fun markDoseTaken(medicineId:Long, medicineName:String, time:String, doseAmount:String=""){
-        val date=todayStr(); val key=doseLogKey(medicineId,date,time)
+    fun markDoseTaken(medicineId:Long, medicineName:String, time:String, doseAmount:String="", date:String=todayStr()){
+        val key=doseLogKey(medicineId,date,time)
         val entry=DoseLogEntry(id=key, medicineId=medicineId, medicineName=medicineName, time=time, date=date, status="TAKEN", doseAmount=doseAmount, updatedAt=System.currentTimeMillis())
         _doseLogs.value=listOf(entry)+_doseLogs.value.filterNot{ it.id==key}; persistDoseLogs()
         // server
@@ -828,7 +843,7 @@ class MedacViewModel : ViewModel() {
         if(pid!=null && ctx!=null){
             viewModelScope.launch(Dispatchers.IO){
                 try{
-                    val med = _medicines.value.firstOrNull { it.id == medicineId || it.name.equals(medicineName, true) }
+                    val med = findMedicine(_medicines.value, medicineId, medicineName)
                     var serverMedId = med?.let { serverIdFor(it) }
                     if (serverMedId == null) {
                         val meds = MedacRepository.refreshMedications(ctx, pid)
@@ -843,15 +858,15 @@ class MedacViewModel : ViewModel() {
             }
         }
     }
-    fun markDoseSkipped(medicineId:Long, medicineName:String, time:String, reason:String){
-        val date=todayStr(); val key=doseLogKey(medicineId,date,time)
+    fun markDoseSkipped(medicineId:Long, medicineName:String, time:String, reason:String, date:String=todayStr()){
+        val key=doseLogKey(medicineId,date,time)
         val entry=DoseLogEntry(id=key, medicineId=medicineId, medicineName=medicineName, time=time, date=date, status="SKIPPED", reason=reason.trim(), updatedAt=System.currentTimeMillis())
         _doseLogs.value=listOf(entry)+_doseLogs.value.filterNot{ it.id==key}; persistDoseLogs()
         val pid=_activePatientId.value; val ctx=appContext
         if(pid!=null && ctx!=null){
             viewModelScope.launch(Dispatchers.IO){
                 try{
-                    val med = _medicines.value.firstOrNull { it.id == medicineId || it.name.equals(medicineName, true) }
+                    val med = findMedicine(_medicines.value, medicineId, medicineName)
                     var serverMedId = med?.let { serverIdFor(it) }
                     if (serverMedId == null) {
                         val meds = MedacRepository.refreshMedications(ctx, pid)
@@ -868,32 +883,7 @@ class MedacViewModel : ViewModel() {
     }
     fun clearDoseLog(medicineId:Long, time:String, date:String=todayStr()){ val k=doseLogKey(medicineId,date,time); _doseLogs.value=_doseLogs.value.filterNot{ it.id==k}; persistDoseLogs()}
     fun logsForMedicine(medicineId:Long): List<DoseLogEntry> = _doseLogs.value.filter{ it.medicineId==medicineId}.sortedByDescending{ it.date+it.time}
-    fun adherenceFor(medicineId:Long): Pair<Int,Int>{ val logs=_doseLogs.value.filter{ it.medicineId==medicineId}; return logs.count{ it.status=="TAKEN"} to logs.size}
-    fun snoozeDose(medicineId:Long, medicineName:String, time:String, delayMinutes:Int){
-        val ctx=appContext?:return
-        scheduleSnoozeReminder(ctx, medicineName, time, delayMinutes)
-        val pid=_activePatientId.value
-        if(pid!=null) viewModelScope.launch(Dispatchers.IO){
-            try{
-                val med = _medicines.value.firstOrNull { it.id == medicineId || it.name.equals(medicineName, true) }
-                val serverMedId = med?.let { serverIdFor(it) } ?: medicineId.toString()
-                MedacRepository.logDose(ctx, pid, serverMedId, null, "snoozed", null, null, null)
-            }catch(_:Exception){}
-        }
-    }
-    fun adherencePercent(medicineId:Long): Int{ val (t,tot)=adherenceFor(medicineId); if(tot==0) return 0; return t*100/tot}
     fun clearAiError(){ _aiError.value=null}
-
-    fun todayProgress(): Pair<Int, Int> {
-        val sched = todaySchedule()
-        val total = sched.size
-        if (total == 0) return 0 to 0
-        val taken = sched.count { item ->
-            val log = getDoseLog(item.medicineId, item.time, todayStr(), item.medicineName)
-            log?.status == "TAKEN"
-        }
-        return taken to total
-    }
 
     fun scheduleForDate(date: LocalDate): List<DoseScheduleItem> {
         val dateStr = date.toString()
@@ -953,13 +943,6 @@ class MedacViewModel : ViewModel() {
         persistDoseLogs()
     }
 
-    fun inventoryUiFor(medicineId: String): InventoryUi? {
-        val r = _inventories.value[medicineId] ?: return null
-        val bal = r.balance ?: return null
-        val thresh = r.account?.lowStockThresholdValue?.toDoubleOrNull()?.toInt() ?: 7
-        val forecast = r.forecastDays?.toInt()
-        return InventoryUi(remaining = bal.toInt(), threshold = thresh, forecastDays = forecast)
-    }
     fun transactionsFor(medicineId: String): List<com.example.medac.data.InventoryTransactionDto> = _inventoryTransactions.value[medicineId].orEmpty()
     fun expirationsFor(medicineId: String): List<com.example.medac.data.ExpirationDto> = _expirations.value[medicineId].orEmpty()
 
@@ -1170,8 +1153,6 @@ class MedacViewModel : ViewModel() {
     fun serverIdFor(medicine: ManagedMedicine): String? {
         return _serverMeds.value.firstOrNull { it.enteredName.equals(medicine.name, true) }?.id
     }
-    fun resolveMedicationId(medicine: ManagedMedicine, pid: String? = null): String? = serverIdFor(medicine)
-
     // ── Alert preferences / generate §13 ──
     fun loadAlertPreferences() {
         val pid = _activePatientId.value ?: return
@@ -1571,28 +1552,6 @@ class MedacViewModel : ViewModel() {
             }
             _aiIdentifying.value=false; _isAnalyzingPhoto.value=false
         }
-    }
-
-    private suspend fun runOcrForConfidence(context: Context, uri: Uri): Pair<String, Double> {
-        return try {
-            val res = GoogleLensOcrClient.recognizeText(context, uri)
-            Pair(res.fullText.trim(), 1.0)
-        } catch (e: Exception) {
-            android.util.Log.w("MedacOCR", "Google Lens runOcrForConfidence failed: ${e.message}")
-            Pair("", 0.0)
-        }
-    }
-
-    private fun compressToBase64(context: Context, uri: Uri): String?{
-        return try{
-            val input=context.contentResolver.openInputStream(uri) ?: return null
-            val bytes=input.readBytes(); input.close()
-            var bmp=android.graphics.BitmapFactory.decodeByteArray(bytes,0,bytes.size) ?: return null
-            val maxSide=1024; val scale=maxOf(bmp.width,bmp.height).toFloat()/maxSide
-            if(scale>1f){ val nw=(bmp.width/scale).toInt().coerceAtLeast(1); val nh=(bmp.height/scale).toInt().coerceAtLeast(1); bmp=android.graphics.Bitmap.createScaledBitmap(bmp,nw,nh,true)}
-            val out=java.io.ByteArrayOutputStream(); bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG,85,out); val comp=out.toByteArray(); if(comp.size>4*1024*1024) return null
-            android.util.Base64.encodeToString(comp, android.util.Base64.NO_WRAP)
-        }catch(_:Exception){ null}
     }
 
     // ── Intelligence: instruction parse, conversations/messages, drafts, summaries, proposals §16.2-16.6 ──

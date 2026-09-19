@@ -31,11 +31,6 @@ enum class DoseStatus {
     MISSED
 }
 
-enum class ScanMode {
-    OCR,
-    PRESCRIPTION
-}
-
 data class DoseScheduleItem(
     val medicineId: Long = 0L,
     val medicineName: String,
@@ -131,15 +126,6 @@ fun showDatePicker(context: Context, initial: String?, onSelected: (String) -> U
     android.app.DatePickerDialog(context, { _, y, m, d -> onSelected(String.format(Locale.getDefault(), "%04d-%02d-%02d", y, m + 1, d)) }, init.year, init.monthValue - 1, init.dayOfMonth).show()
 }
 
-fun currentPeriod(now: LocalTime = LocalTime.now()): String {
-    val h = now.hour
-    return when (h) {
-        in 5..11 -> "Morning"
-        in 12..16 -> "Afternoon"
-        else -> "Night"
-    }
-}
-
 fun periodForTime(time: String): String {
     val h = parseTime(time)?.hour ?: return "Night"
     return when (h) {
@@ -150,6 +136,13 @@ fun periodForTime(time: String): String {
 }
 
 fun doseLogKey(medicineId: Long, date: String, time: String): String = "${medicineId}_${date}_${time}"
+
+/**
+ * Canonical adherence percentage: null when there is nothing to measure, so
+ * every ring/label in the app shows "no data" instead of a made-up 0% or 100%.
+ */
+fun adherencePercentOrNull(taken: Int, total: Int): Int? =
+    if (total <= 0) null else (taken.coerceAtLeast(0) * 100) / total
 
 fun todayDateString(): String = java.time.LocalDate.now().toString()
 
@@ -173,6 +166,19 @@ fun isDoseTaken(
     }
 }
 
+/**
+ * Canonical local medicine lookup: stable id first, case-insensitive name as
+ * the tolerance fallback (alarm receiver / notification paths may log under a
+ * name before a cloud-sync id change). Every local id-or-name join goes
+ * through here so the tolerance rule can't drift per call site.
+ */
+fun findMedicine(
+    medicines: List<ManagedMedicine>,
+    medicineId: Long,
+    medicineName: String
+): ManagedMedicine? =
+    medicines.firstOrNull { it.id == medicineId || it.name.equals(medicineName, ignoreCase = true) }
+
 fun doseStatusForLog(time: String, log: DoseLogEntry?): DoseStatus {
     if (log != null) {
         return when (log.status) {
@@ -193,22 +199,21 @@ data class AlertItem(
     val message: String
 )
 
-data class InventoryUi(
-    val remaining: Int,
-    val threshold: Int,
-    val forecastDays: Int?
-)
-
 enum class AddMedicineStep { Capture, Review, Schedule }
-
-data class ScheduleDraftUi(
-    val type: String = "fixed_times",
-    val times: List<String> = emptyList(),
-    val timingMode: String = "local_clock" // local_clock | elapsed_interval
-)
 
 fun isValidReminderTime(value: String): Boolean {
     return Regex("""^([01]\d|2[0-3]):[0-5]\d$""").matches(value)
+}
+
+/**
+ * Canonical strength parser for free-text dose strings ("100mg", "2 x 5 mL").
+ * Returns (value, lowercase unit); either side is null when absent. Single
+ * home for the regexes so create/update paths can't drift apart.
+ */
+fun parseStrengthDose(doseText: String): Pair<String?, String?> {
+    val value = Regex("""\d+(\.\d+)?""").find(doseText)?.value
+    val unit = Regex("""(mg|mcg|g|mL|ml)""", RegexOption.IGNORE_CASE).find(doseText)?.value?.lowercase()
+    return value to unit
 }
 
 fun suggestedTimesForPrescriptionLine(line: String): List<String> {

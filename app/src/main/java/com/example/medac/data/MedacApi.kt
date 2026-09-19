@@ -6,8 +6,6 @@ import retrofit2.http.*
 interface MedacApi {
     // Auth
     @POST("auth/register") suspend fun register(@Body body: RegisterRequest): Response<RegisterResponse>
-    @POST("auth/verify-email") suspend fun verifyEmail(@Body body: VerifyEmailRequest): Response<Map<String, Any>>
-    @POST("auth/resend-verification") suspend fun resendVerification(@Body body: ResendVerificationRequest): Response<Map<String, Any>>
     @POST("auth/login") suspend fun login(@Body body: LoginRequest): Response<LoginResponse>
     @POST("auth/mfa/verify") suspend fun mfaVerify(@Body body: MfaVerifyRequest): Response<LoginResponse>
     @POST("auth/refresh") suspend fun refresh(@Body body: RefreshRequest): Response<LoginResponse>

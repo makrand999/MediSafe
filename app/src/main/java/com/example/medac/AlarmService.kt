@@ -139,6 +139,18 @@ class AlarmService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        val skipIntent = Intent(this, ReminderReceiver::class.java).apply {
+            action = ReminderReceiver.ACTION_SKIP_DOSE
+            putExtra("medicine_name", medicineName)
+            putExtra("time", time)
+        }
+        val skipPendingIntent = PendingIntent.getBroadcast(
+            this,
+            ("$medicineName|$time|home").hashCode(),
+            skipIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setContentTitle("Medicine Alarm: $medicineName")
@@ -148,7 +160,8 @@ class AlarmService : Service() {
             .setFullScreenIntent(fullScreenPendingIntent, true)
             .setContentIntent(fullScreenPendingIntent)
             .addAction(android.R.drawable.checkbox_on_background, "✓ Taken", takePendingIntent)
-            .addAction(android.R.drawable.ic_menu_recent_history, "⏱ Delay 3m", delayPendingIntent)
+            .addAction(android.R.drawable.ic_menu_recent_history, "⏱ Delay ${DEFAULT_SNOOZE_DELAY_MINUTES}m", delayPendingIntent)
+            .addAction(android.R.drawable.ic_menu_today, "Home / Skip", skipPendingIntent)
             .setOngoing(true)
             .setAutoCancel(false)
             .build()

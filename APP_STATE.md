@@ -107,5 +107,7 @@ Main libraries in use:
 
 ## Known leftover / next-step notes
 
-- `ApiService.kt` and Retrofit/OkHttp dependencies exist but are not wired to any runtime flow.
+- Legacy `ApiService.kt` was removed (2026-09); Retrofit/OkHttp remain in use via `data/MedacApi.kt` + `NetworkModule.kt`.
+- Email verification is disabled product-wide: register auto-logs-in locally and there is no verify flow.
+- The prescription bulk-import ViewModel flow (`analyzePrescriptionPhoto` / `savePrescriptionImport`) has no UI entry point yet.
 - `tools/` no longer contains ChatGPT-specific harnesses.

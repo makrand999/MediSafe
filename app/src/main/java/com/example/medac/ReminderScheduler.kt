@@ -162,6 +162,21 @@ private fun alarmRequestCode(medicineName: String, time: String, isAlarm: Boolea
 }
 
 /**
+ * Canonical notification IDs / PendingIntent request codes for the alarm path.
+ * Every ID is derived from the dose key (`medicineName|time`) plus a purpose
+ * suffix so simultaneously-firing doses never overwrite each other's
+ * notifications or tap targets.
+ */
+fun alarmNotificationId(medicineName: String, time: String): Int =
+    "$medicineName|$time|alarm_notif".hashCode()
+
+fun preNotificationId(medicineName: String, time: String): Int =
+    "$medicineName|$time|pre_notif".hashCode()
+
+fun preAlarmOpenRequestCode(medicineName: String, time: String): Int =
+    "$medicineName|$time|pre_open".hashCode()
+
+/**
  * Returns today's date formatted as YYYY-MM-DD safely on all Android API levels (minSdk 24+).
  */
 fun currentDateFormatted(): String {

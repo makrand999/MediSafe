@@ -1,22 +1,5 @@
 package com.example.medac
 
-import com.google.gson.annotations.SerializedName
-
-// API Request/Response Models
-data class SendRequest(val message: String)
-data class SendResponse(
-    val message: String,
-    val reply: String,
-    @SerializedName("duration_ms") val durationMs: Int
-)
-
-data class UploadResponse(
-    val status: String,
-    val filename: String,
-    @SerializedName("upload_status") val uploadStatus: String,
-    val detail: String
-)
-
 // Local Reminder Model
 data class MedicineReminder(
     val id: Long = System.currentTimeMillis(),
@@ -48,9 +31,9 @@ data class ManagedMedicine(
     val refillThresholdPercent: Int = 0,
     val notes: String = ""
 )
-
 // Null (legacy record) counts as active
 val ManagedMedicine.statusOrActive: String get() = status ?: "active"
+
 
 data class DoseLogEntry(
     val id: String = "",
@@ -64,5 +47,3 @@ data class DoseLogEntry(
     val note: String? = null,
     val updatedAt: Long = System.currentTimeMillis()
 )
-
-data class ChatMessage(val text: String, val isUser: Boolean)

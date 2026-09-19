@@ -44,6 +44,7 @@ import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Snooze
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -73,6 +74,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medac.DEFAULT_SNOOZE_DELAY_MINUTES
 import com.example.medac.ui.theme.AsteriskGold
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -269,7 +271,11 @@ fun SwipeToConfirmSlider(
  * - Clear medicine details and scheduled time
  * - Pulsing visual alarm icon
  * - A swipe to set the medicine taken
+ * - A snooze button to re-fire the alarm after the default delay
  * - A button to go to the home page (skip registering the medicine taken or not)
+ *
+ * The Taken / Snooze / Skip triple matches the notification actions so every
+ * alarm surface offers the same choices.
  */
 @Composable
 fun DueMedicineAlarmFullScreen(
@@ -277,6 +283,7 @@ fun DueMedicineAlarmFullScreen(
     time: String,
     instructions: String = "",
     onMarkTaken: () -> Unit,
+    onSnooze: () -> Unit,
     onGoToHome: () -> Unit
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "alarm_pulse")
@@ -437,7 +444,39 @@ fun DueMedicineAlarmFullScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // 2. A button to go to home page (skip registering the medicine taken or not)
+                    // 2. Snooze — same default delay as the notification action
+                    OutlinedButton(
+                        onClick = onSnooze,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(54.dp),
+                        shape = RoundedCornerShape(27.dp),
+                        border = BorderStroke(1.dp, Color(0xFF475569)),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color(0xFF1E293B).copy(alpha = 0.5f),
+                            contentColor = Color(0xFFE2E8F0)
+                        )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Snooze,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = Color(0xFFCBD5E1)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Snooze ${DEFAULT_SNOOZE_DELAY_MINUTES} min",
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 16.sp
+                            ),
+                            color = Color(0xFFCBD5E1)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // 3. A button to go to home page (skip registering the medicine taken or not)
                     OutlinedButton(
                         onClick = onGoToHome,
                         modifier = Modifier
@@ -470,7 +509,7 @@ fun DueMedicineAlarmFullScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "Swipe to log dose, or tap Home to skip registering",
+                        text = "Swipe to log dose, snooze, or tap Home to skip registering",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color(0xFF64748B),
                         textAlign = TextAlign.Center

@@ -137,6 +137,7 @@ import com.example.medac.DoseLogEntry
 import com.example.medac.DoseScheduleItem
 import com.example.medac.ManagedMedicine
 import com.example.medac.MedicineDraft
+import com.example.medac.adherencePercentOrNull
 import com.example.medac.isDoseTaken
 import com.example.medac.showDatePicker
 import com.example.medac.showTimePicker
@@ -231,7 +232,7 @@ fun MedRemindAsteriskIcon(
  */
 @Composable
 fun MedRemindProgressRing(
-    percent: Int,
+    percent: Int?,
     modifier: Modifier = Modifier,
     sizeDp: Int = 76,
     strokeWidthDp: Int = 8,
@@ -239,7 +240,7 @@ fun MedRemindProgressRing(
     trackColor: Color = Color(0xFFE2E8F0)
 ) {
     val animatedProgress by animateFloatAsState(
-        targetValue = (percent.coerceIn(0, 100)) / 100f,
+        targetValue = ((percent ?: 0).coerceIn(0, 100)) / 100f,
         label = "progress_ring"
     )
 
@@ -268,7 +269,7 @@ fun MedRemindProgressRing(
             }
         }
         Text(
-            text = "$percent%",
+            text = if (percent == null) "– –" else "$percent%",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
             color = TextPrimary
         )
@@ -284,7 +285,7 @@ fun DailyProgressCard(
     totalDoses: Int,
     modifier: Modifier = Modifier
 ) {
-    val percent = if (totalDoses > 0) (takenDoses * 100) / totalDoses else 0
+    val percent = adherencePercentOrNull(takenDoses, totalDoses)
 
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -1100,7 +1101,7 @@ fun MedRemindAddMedicationScreen(
                                 color = TextSecondary
                             )
                         }
-                        TextButton(onClick = onScanPhoto) {
+                        TextButton(onClick = { if (!isAnalyzing) onScanPhoto() }) {
                             Text("Retake", color = MedRemindGreen, fontWeight = FontWeight.Bold)
                         }
                     }
@@ -1109,7 +1110,7 @@ fun MedRemindAddMedicationScreen(
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(onClick = onScanPhoto),
+                        .clickable(onClick = { if (!isAnalyzing) onScanPhoto() }),
                     shape = RoundedCornerShape(16.dp),
                     color = Color(0xFFDCFCE7),
                     border = BorderStroke(1.dp, Color(0xFF86EFAC))
@@ -1512,7 +1513,7 @@ fun MedRemindAddMedicationScreen(
                         )
                         onSave()
                     },
-                    enabled = name.isNotBlank(),
+                    enabled = name.isNotBlank() && !isAnalyzing,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp),
@@ -1522,6 +1523,25 @@ fun MedRemindAddMedicationScreen(
                         contentColor = Color.White
                     )
                 ) {
+                    if (isAnalyzing) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(20.dp),
+                                color = Color.White,
+                                strokeWidth = 2.dp
+                            )
+                            Text(
+                                text = "Analyzing photo…",
+                                style = MaterialTheme.typography.labelLarge.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp
+                                )
+                            )
+                        }
+                    } else {
                     Text(
                         text = "Add Medication",
                         style = MaterialTheme.typography.labelLarge.copy(
@@ -1529,6 +1549,7 @@ fun MedRemindAddMedicationScreen(
                             fontSize = 16.sp
                         )
                     )
+                    }
                 }
 
                 OutlinedButton(
@@ -1652,7 +1673,7 @@ fun MedRemindNotificationsScreen(
 fun MedRemindCalendarScreen(
     scheduleForDate: (LocalDate) -> List<DoseScheduleItem>,
     doseLogs: List<DoseLogEntry>,
-    onTakeDose: (DoseScheduleItem) -> Unit,
+    onTakeDose: (DoseScheduleItem, String) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1842,7 +1863,7 @@ fun MedRemindCalendarScreen(
                     MedRemindScheduleCard(
                         item = item,
                         isTaken = isTaken,
-                        onTakeClick = { onTakeDose(item) }
+                        onTakeClick = { onTakeDose(item, selectedDate.toString()) }
                     )
                 }
             }
@@ -1865,14 +1886,15 @@ fun MedRemindHistoryLogScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var selectedFilter by remember { mutableStateOf("All") } // All | Taken | Missed
+    var selectedFilter by remember { mutableStateOf("All") } // All | Taken | Skipped | Missed
     var showConfirmClear by remember { mutableStateOf(false) }
 
-    val filterOptions = listOf("All", "Taken", "Missed")
+    val filterOptions = listOf("All", "Taken", "Skipped", "Missed")
 
     val filteredLogs = when (selectedFilter) {
         "Taken" -> doseLogs.filter { it.status == "TAKEN" }
-        "Missed" -> doseLogs.filter { it.status == "MISSED" || it.status == "SKIPPED" }
+        "Skipped" -> doseLogs.filter { it.status == "SKIPPED" }
+        "Missed" -> doseLogs.filter { it.status == "MISSED" }
         else -> doseLogs
     }
 
@@ -2593,7 +2615,9 @@ fun MedRemindEditMedicineDialog(
                         )
                     }
 
-                    // Reminders Switch
+                    // Reminders Switch (only meaningful for active/paused medicines;
+                    // discontinued/archived keep their lifecycle status on save)
+                    if (medicine.statusOrActive == "active" || medicine.statusOrActive == "paused") {
                     Surface(
                         shape = RoundedCornerShape(14.dp),
                         color = Color(0xFFF8FAFC),
@@ -2612,6 +2636,7 @@ fun MedRemindEditMedicineDialog(
                                 colors = SwitchDefaults.colors(checkedThumbColor = Color.White, checkedTrackColor = MedRemindGreen)
                             )
                         }
+                    }
                     }
 
                     // Refill Tracking Switch
@@ -2684,6 +2709,12 @@ fun MedRemindEditMedicineDialog(
 
                         Button(
                             onClick = {
+                                // The reminders toggle maps to active/paused; any other
+                                // lifecycle status (discontinued/archived) is preserved.
+                                val toggledStatus = when (medicine.statusOrActive) {
+                                    "active", "paused" -> if (remindersEnabled) "active" else "paused"
+                                    else -> medicine.status
+                                }
                                 val updated = medicine.copy(
                                     name = name.trim(),
                                     genericNameAndDose = dosage.trim(),
@@ -2694,6 +2725,7 @@ fun MedRemindEditMedicineDialog(
                                     times = times,
                                     foodTiming = foodTiming.trim(),
                                     purpose = purpose.trim(),
+                                    status = toggledStatus,
                                     refillTrackingEnabled = refillTrackingEnabled,
                                     currentSupply = currentSupply.toIntOrNull() ?: medicine.currentSupply,
                                     refillThresholdPercent = refillThreshold.toIntOrNull() ?: medicine.refillThresholdPercent,
@@ -2919,7 +2951,7 @@ fun MedRemindMedicineDetailScreen(
 
     val takenCount = logs.count { it.status == "TAKEN" }
     val totalCount = logs.size
-    val adherence = if (totalCount > 0) (takenCount * 100) / totalCount else 100
+    val adherence = adherencePercentOrNull(takenCount, totalCount)
 
     val isGoodSupply = medicine.currentSupply > 10
 

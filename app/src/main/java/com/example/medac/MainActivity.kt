@@ -116,12 +116,13 @@ class MainActivity : ComponentActivity() {
 fun MedacRoot(initialIntent: Intent? = null) {
     val context = LocalContext.current
     val authViewModel: AuthViewModel = viewModel()
+    val viewModel: MedacViewModel = viewModel()
+    val scope = rememberCoroutineScope()
     val authState by authViewModel.authState.collectAsState()
     val authBusy by authViewModel.isBusy.collectAsState()
     val authError by authViewModel.error.collectAsState()
-    val resendSeconds by authViewModel.verifyResendSeconds.collectAsState()
     val forgotSent by authViewModel.forgotSent.collectAsState()
-    var authMode by rememberSaveable { mutableStateOf("login") } // login | register | forgot | mfa | verify
+    var authMode by rememberSaveable { mutableStateOf("login") } // login | register | forgot
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -153,7 +154,13 @@ fun MedacRoot(initialIntent: Intent? = null) {
                     "login" -> LoginScreen(
                         isBusy = authBusy,
                         error = authError,
-                        onLogin = { e, p -> authViewModel.login(context, e, p) {} },
+                        onLogin = { e, p ->
+                            authViewModel.login(context, e, p) {
+                                scope.launch {
+                                    try { viewModel.refreshServer(context) } catch (_: Exception) {}
+                                }
+                            }
+                        },
                         onNavigateToRegister = { authViewModel.clearError(); authMode = "register" },
                         onNavigateToForgot = { authViewModel.clearError(); authViewModel.resetForgot(); authMode = "forgot" },
                         onClearError = { authViewModel.clearError() }
@@ -161,7 +168,7 @@ fun MedacRoot(initialIntent: Intent? = null) {
                     "register" -> RegisterScreen(
                         isBusy = authBusy,
                         error = authError,
-                        onRegister = { e, p -> authViewModel.register(context, e, p) { authMode = "verify" } },
+                        onRegister = { e, p -> authViewModel.register(context, e, p) { authMode = "login" } },
                         onNavigateToLogin = { authViewModel.clearError(); authMode = "login" },
                         onClearError = { authViewModel.clearError() }
                     )
@@ -175,28 +182,18 @@ fun MedacRoot(initialIntent: Intent? = null) {
                     else -> LoginScreen(
                         isBusy = authBusy,
                         error = authError,
-                        onLogin = { e, p -> authViewModel.login(context, e, p) {} },
-                        onNavigateToRegister = { authMode = "register" },
-                        onNavigateToForgot = { authMode = "forgot" },
-                        onClearError = {}
+                        onLogin = { e, p ->
+                            authViewModel.login(context, e, p) {
+                                scope.launch {
+                                    try { viewModel.refreshServer(context) } catch (_: Exception) {}
+                                }
+                            }
+                        },
+                        onNavigateToRegister = { authViewModel.clearError(); authMode = "register" },
+                        onNavigateToForgot = { authViewModel.clearError(); authViewModel.resetForgot(); authMode = "forgot" },
+                        onClearError = { authViewModel.clearError() }
                     )
                 }
-            }
-            return
-        }
-        is AuthUiState.VerifyEmail -> {
-            BackHandler { authViewModel.goToLogin(); authMode = "login" }
-            Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                VerifyEmailScreen(
-                    email = s.email,
-                    isBusy = authBusy,
-                    error = authError,
-                    onVerify = { code -> authViewModel.verifyEmail(context, s.email, code) { authMode = "login"; authViewModel.goToLogin() } },
-                    onResend = { authViewModel.resendVerification(context, s.email) },
-                    onBackToLogin = { authViewModel.goToLogin(); authMode = "login" },
-                    resendSecondsLeft = resendSeconds,
-                    onSkip = { authViewModel.skipVerification(s.email) }
-                )
             }
             return
         }
@@ -215,7 +212,6 @@ fun MedacRoot(initialIntent: Intent? = null) {
         is AuthUiState.LoggedIn -> {}
     }
 
-    val viewModel: MedacViewModel = viewModel()
     val medicines by viewModel.medicines.collectAsState()
     val draft by viewModel.draft.collectAsState()
     val isAnalyzingPhoto by viewModel.isAnalyzingPhoto.collectAsState()
@@ -228,7 +224,6 @@ fun MedacRoot(initialIntent: Intent? = null) {
     val isOfflineState by viewModel.isOffline.collectAsState()
     val isSyncingState by viewModel.isSyncing.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
 
     var dueAlarm by remember { mutableStateOf<ActiveAlarm?>(null) }
 
@@ -531,12 +526,13 @@ fun MedacRoot(initialIntent: Intent? = null) {
         val medInstruction = med?.instruction?.ifBlank { med.genericNameAndDose } ?: ""
 
         BackHandler {
+            // Same as "Go to Home (Skip)": silence and dismiss without logging.
             InAppAlarmPlayer.stop()
             AlarmService.stop(context)
             ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
             val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
-            notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
+            notifManager.cancel(alarmNotificationId(currentDue.medicineName, currentDue.time))
+            notifManager.cancel(preNotificationId(currentDue.medicineName, currentDue.time))
             notifManager.cancel(AlarmService.NOTIFICATION_ID)
             dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
             isPinUnlocked = true
@@ -555,21 +551,35 @@ fun MedacRoot(initialIntent: Intent? = null) {
                 logDoseDirectly(context, currentDue.medicineName, currentDue.time, "TAKEN")
                 ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
                 val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
-                notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
+                notifManager.cancel(alarmNotificationId(currentDue.medicineName, currentDue.time))
+                notifManager.cancel(preNotificationId(currentDue.medicineName, currentDue.time))
                 notifManager.cancel(AlarmService.NOTIFICATION_ID)
                 dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
                 isPinUnlocked = true
                 currentTab = MedacTab.TODAY
                 android.widget.Toast.makeText(context, "${currentDue.medicineName} marked as taken", android.widget.Toast.LENGTH_SHORT).show()
             },
+            onSnooze = {
+                InAppAlarmPlayer.stop()
+                AlarmService.stop(context)
+                ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
+                scheduleSnoozeReminder(context, currentDue.medicineName, currentDue.time, DEFAULT_SNOOZE_DELAY_MINUTES)
+                val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notifManager.cancel(alarmNotificationId(currentDue.medicineName, currentDue.time))
+                notifManager.cancel(preNotificationId(currentDue.medicineName, currentDue.time))
+                notifManager.cancel(AlarmService.NOTIFICATION_ID)
+                dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
+                isPinUnlocked = true
+                currentTab = MedacTab.TODAY
+                android.widget.Toast.makeText(context, "Snoozed for $DEFAULT_SNOOZE_DELAY_MINUTES minutes", android.widget.Toast.LENGTH_SHORT).show()
+            },
             onGoToHome = {
                 InAppAlarmPlayer.stop()
                 AlarmService.stop(context)
                 ActiveAlarmStore.removeActiveAlarm(context, currentDue.medicineName, currentDue.time)
                 val notifManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|alarm_notif").hashCode())
-                notifManager.cancel(("${currentDue.medicineName}|${currentDue.time}|pre_notif").hashCode())
+                notifManager.cancel(alarmNotificationId(currentDue.medicineName, currentDue.time))
+                notifManager.cancel(preNotificationId(currentDue.medicineName, currentDue.time))
                 notifManager.cancel(AlarmService.NOTIFICATION_ID)
                 dueAlarm = ActiveAlarmStore.getActiveAlarm(context)
                 isPinUnlocked = true
@@ -622,8 +632,8 @@ fun MedacRoot(initialIntent: Intent? = null) {
                 MedRemindCalendarScreen(
                     scheduleForDate = { date -> viewModel.scheduleForDate(date) },
                     doseLogs = doseLogs,
-                    onTakeDose = { item ->
-                        viewModel.markDoseTaken(item.medicineId, item.medicineName, item.time)
+                    onTakeDose = { item, date ->
+                        viewModel.markDoseTaken(item.medicineId, item.medicineName, item.time, date = date)
                     },
                     onBack = { activeMedRemindScreen = null }
                 )
