@@ -668,10 +668,15 @@ class MedacViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 var serverId = serverIdFor(updated)
+                if (serverId == null && prev != null) {
+                    serverId = serverIdFor(prev)
+                }
                 if (serverId == null) {
                     val meds = MedacRepository.refreshMedications(ctx, pid)
                     _serverMeds.value = meds
                     serverId = meds.firstOrNull { it.enteredName.equals(updated.name, true) }?.id
+                        ?: prev?.let { p -> meds.firstOrNull { it.enteredName.equals(p.name, true) }?.id }
+                        ?: meds.firstOrNull { it.id.hashCode().toLong() == updated.id }?.id
                 }
                 if (serverId != null) {
                     val (strengthVal, strengthUnit) = parseStrengthDose(updated.genericNameAndDose)

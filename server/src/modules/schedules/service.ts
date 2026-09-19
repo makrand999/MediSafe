@@ -1,7 +1,7 @@
 /**
  * Schedule service — versioning, preview, occurrence persistence §5.5, §6.4, §6.5, §14
  */
-import { eq, and, desc, gte, lte, sql } from "drizzle-orm";
+import { eq, and, asc, desc, gte, inArray, lte, sql } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import type { MedacDb } from "../../db/index.js";
 import * as schema from "../../db/schema.js";
@@ -270,11 +270,21 @@ async function previewForVersion(db: MedacDb, version: typeof schema.medicationS
   return occurrences.slice(0, 30);
 }
 
-export async function listSchedules(db: MedacDb, userId: string, patientId: string, medicationId: string): Promise<Array<typeof schema.medicationScheduleVersions.$inferSelect>> {
+export type ScheduleVersionWithFixedTimes = typeof schema.medicationScheduleVersions.$inferSelect & { fixedTimes: Array<typeof schema.scheduleFixedTimes.$inferSelect> };
+
+export async function listSchedules(db: MedacDb, userId: string, patientId: string, medicationId: string): Promise<Array<ScheduleVersionWithFixedTimes>> {
   await requirePermissionOnPatient(db, userId, patientId, "schedule:read");
   await assertMedicationBelongs(db, patientId, medicationId);
   const versions = await db.query.medicationScheduleVersions.findMany({ where: eq(schema.medicationScheduleVersions.medicationId, medicationId), orderBy: [desc(schema.medicationScheduleVersions.versionNumber)] });
-  return versions;
+  if (versions.length === 0) return [];
+  const allFixed = await db.query.scheduleFixedTimes.findMany({ where: inArray(schema.scheduleFixedTimes.scheduleVersionId, versions.map(v => v.id)) });
+  const byVersion = new Map<string, typeof allFixed>();
+  for (const ft of allFixed) {
+    const list = byVersion.get(ft.scheduleVersionId) ?? [];
+    list.push(ft);
+    byVersion.set(ft.scheduleVersionId, list);
+  }
+  return versions.map(v => ({ ...v, fixedTimes: byVersion.get(v.id) ?? [] }));
 }
 
 export async function getSchedule(db: MedacDb, userId: string, patientId: string, medicationId: string, versionId: string): Promise<{ version: typeof schema.medicationScheduleVersions.$inferSelect; fixedTimes: Array<typeof schema.scheduleFixedTimes.$inferSelect>; interval?: typeof schema.scheduleIntervals.$inferSelect; cycle?: typeof schema.scheduleCycles.$inferSelect; taperSteps: Array<typeof schema.taperSteps.$inferSelect>; preview: ReturnType<typeof generateOccurrences> }> {
@@ -360,10 +370,17 @@ export async function listOccurrences(db: MedacDb, userId: string, patientId: st
   if (query.cursor) {
     try { cursorId = Buffer.from(query.cursor, "base64url").toString("utf8"); } catch {}
   }
-  let occs = await db.query.doseOccurrences.findMany({ where: eq(schema.doseOccurrences.patientId, patientId), orderBy: [desc(schema.doseOccurrences.scheduledAtUtc)], limit: limit + 1 });
-  // Filter by date if provided (since we fetched desc, filter)
+  // Push the date window into SQL: occurrences are pre-generated ~60 days
+  // into the future, so fetching "latest N" then filtering in memory returns
+  // only far-future rows and an empty page for today.
+  const conditions = [eq(schema.doseOccurrences.patientId, patientId)];
+  if (fromDate) conditions.push(gte(schema.doseOccurrences.scheduledAtUtc, fromDate));
+  if (toDate) conditions.push(lte(schema.doseOccurrences.scheduledAtUtc, toDate));
+  const orderBy = fromDate ? [asc(schema.doseOccurrences.scheduledAtUtc)] : [desc(schema.doseOccurrences.scheduledAtUtc)];
+  let occs = await db.query.doseOccurrences.findMany({ where: and(...conditions), orderBy, limit: limit + 1 });
+  // Defensive in-memory filter for the same window.
   if (fromDate) occs = occs.filter(o => o.scheduledAtUtc >= fromDate!);
-  if (toDate) occs = occs.filter(o => o.scheduledAtUtc < toDate!);
+  if (toDate) occs = occs.filter(o => o.scheduledAtUtc <= toDate!);
   // Cursor filter
   if (cursorId) {
     const idx = occs.findIndex(o => o.id === cursorId);

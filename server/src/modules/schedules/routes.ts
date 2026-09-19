@@ -27,7 +27,7 @@ export async function scheduleRoutes(fastify: FastifyInstance): Promise<void> {
     const db = getDb();
     const { user } = ctx(req);
     const versions = await service.listSchedules(db, user.id, p.data.patientId, p.data.medicationId);
-    return reply.send({ schedules: versions.map(toApi) });
+    return reply.send({ schedules: versions.map(v => toApi(v, v.fixedTimes)) });
   });
 
   fastify.post("/patients/:patientId/medications/:medicationId/schedules", async (req, reply) => {
@@ -51,7 +51,7 @@ export async function scheduleRoutes(fastify: FastifyInstance): Promise<void> {
     const db = getDb();
     const { user } = ctx(req);
     const result = await service.getSchedule(db, user.id, p.data.patientId, p.data.medicationId, p.data.versionId);
-    return reply.send({ schedule: toApi(result.version), fixed_times: result.fixedTimes, interval: result.interval, cycle: result.cycle, taper_steps: result.taperSteps, preview: result.preview });
+    return reply.send({ schedule: toApi(result.version, result.fixedTimes), fixed_times: result.fixedTimes, interval: result.interval, cycle: result.cycle, taper_steps: result.taperSteps, preview: result.preview });
   });
 
   fastify.post("/patients/:patientId/medications/:medicationId/schedules/:versionId/supersede", async (req, reply) => {
@@ -81,7 +81,7 @@ export async function scheduleRoutes(fastify: FastifyInstance): Promise<void> {
   });
 }
 
-function toApi(v: Record<string, unknown>): Record<string, unknown> {
+export function toApi(v: Record<string, unknown>, fixedTimes?: Array<{ localTime: string; doseQuantityValue: unknown; doseQuantityUnit: string | null }>): Record<string, unknown> {
   return {
     id: v.id,
     medication_id: v.medicationId,
@@ -95,6 +95,11 @@ function toApi(v: Record<string, unknown>): Record<string, unknown> {
     created_by_user_id: v.createdByUserId,
     created_at: v.createdAt,
     updated_at: v.updatedAt,
+    fixed_times: fixedTimes?.map(ft => ({
+      local_time: ft.localTime,
+      dose_quantity_value: ft.doseQuantityValue ? String(ft.doseQuantityValue) : "1",
+      dose_quantity_unit: ft.doseQuantityUnit ?? "tablet",
+    })) ?? null,
   };
 }
 
