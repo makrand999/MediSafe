@@ -46,6 +46,34 @@ val StatusRedContainer = Color(0xFFFEE2E2)
 val WarningRed = Color(0xFFDC2626)
 val PausedMuted = Color(0xFFF1F5F9)
 
+// ── Time-of-Day (Circadian) accents ──────────────────────────────────────────
+// A deliberately restrained family: all four sit in the same lightness band
+// (4.9:1–7.8:1 on white) and are desaturated enough to read as ONE system
+// rather than a rainbow. Colour is a signal here, not a surface — schedule
+// cards stay neutral and only the rail, dot and chapter chip carry the hue.
+val PeriodMorningAccent = Color(0xFFA16207)   // ochre
+val PeriodAfternoonAccent = Color(0xFF0369A1) // steel blue
+val PeriodEveningAccent = Color(0xFF9F3F52)   // muted plum
+val PeriodNightAccent = Color(0xFF3F4E8C)     // slate indigo
+
+// ── Neutral schedule surfaces ────────────────────────────────────────────────
+val ScheduleCardSurface = Color(0xFFFFFFFF)
+val ScheduleCardSurfaceTaken = Color(0xFFF8FAFC)
+val ScheduleCardBorder = Color(0xFFEAEEF3)
+val ScheduleIconWell = Color(0xFFF6F8FA)
+val ScheduleChipText = Color(0xFF0F172A)
+val ScheduleChipCount = Color(0xFF475569)
+
+// ── Schedule actions ─────────────────────────────────────────────────────────
+// Brand green for "Take" so the period accents stay the only chromatic
+// variation on the screen (the old hot orange fought every chapter tint).
+val TakenPillContainer = Color(0xFFF0FDF4)
+val TakenPillText = Color(0xFF166534)
+
+// Neutral that stays >=4.5:1 on any subtle tint (unlike TextSecondary, which
+// only clears AA on pure white / AppBackground).
+val TextSecondaryOnTint = Color(0xFF475569)
+
 // Backwards compatibility aliases
 val NavyPrimary = MedRemindGreen
 val NavyDark = MedRemindDarkGreen

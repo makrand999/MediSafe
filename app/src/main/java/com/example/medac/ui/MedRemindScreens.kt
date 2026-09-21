@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -63,8 +64,10 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Inventory
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Medication
+import androidx.compose.material.icons.filled.NightlightRound
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.Person
@@ -75,6 +78,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.WbSunny
+import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -139,6 +144,7 @@ import com.example.medac.ManagedMedicine
 import com.example.medac.MedicineDraft
 import com.example.medac.adherencePercentOrNull
 import com.example.medac.isDoseTaken
+import com.example.medac.parseTime
 import com.example.medac.showDatePicker
 import com.example.medac.showTimePicker
 import com.example.medac.todayDateString
@@ -150,16 +156,30 @@ import com.example.medac.ui.theme.MedRemindDarkGreen
 import com.example.medac.ui.theme.MedRemindGreen
 import com.example.medac.ui.theme.MedRemindLightGreen
 import com.example.medac.ui.theme.MedRemindSplashGreen
+import com.example.medac.ui.theme.PeriodAfternoonAccent
+import com.example.medac.ui.theme.PeriodEveningAccent
+import com.example.medac.ui.theme.PeriodMorningAccent
+import com.example.medac.ui.theme.PeriodNightAccent
 import com.example.medac.ui.theme.QuickActionBlue
 import com.example.medac.ui.theme.QuickActionGreen
 import com.example.medac.ui.theme.QuickActionOrange
 import com.example.medac.ui.theme.QuickActionPurple
+import com.example.medac.ui.theme.ScheduleCardBorder
+import com.example.medac.ui.theme.ScheduleCardSurface
+import com.example.medac.ui.theme.ScheduleCardSurfaceTaken
+import com.example.medac.ui.theme.ScheduleChipCount
+import com.example.medac.ui.theme.ScheduleChipText
+import com.example.medac.ui.theme.ScheduleIconWell
 import com.example.medac.ui.theme.StatusGreen
 import com.example.medac.ui.theme.StatusGreenContainer
 import com.example.medac.ui.theme.TakeButtonOrange
 import com.example.medac.ui.theme.TakenBadgeGreen
+import com.example.medac.ui.theme.TakenPillContainer
+import com.example.medac.ui.theme.TakenPillText
 import com.example.medac.ui.theme.TextPrimary
 import com.example.medac.ui.theme.TextSecondary
+import com.example.medac.ui.theme.TextSecondaryOnTint
+import com.example.medac.ui.theme.TextMuted
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -378,6 +398,156 @@ fun QuickActionTile(
 }
 
 /**
+ * Time-of-day period for glanceable tinting of today's schedule cards.
+ *
+ * Deliberately colour-free so the classification stays trivially unit-testable
+ * on the JVM; the palette lives in [DayPeriodColors] (theme-owned).
+ *
+ * - Morning:   05:00–11:59
+ * - Afternoon: 12:00–16:59
+ * - Evening:   17:00–20:59
+ * - Night:     21:00–04:59 (labelled "Bedtime")
+ */
+enum class DayPeriod(val label: String, val sectionTitle: String) {
+    MORNING("Morning", "Morning Routine"),
+    AFTERNOON("Afternoon", "Midday & Afternoon"),
+    EVENING("Evening", "Evening"),
+    NIGHT("Bedtime", "Night & Bedtime")
+}
+
+/** Theme palette for a [DayPeriod]. Kept separate from the enum so the enum
+ *  carries no `Color` dependency and can be tested without a graphics runtime.
+ *  Schedule surfaces are intentionally neutral — identity is carried by
+ *  [accent] on the rail, the dot and the chapter chip. */
+data class DayPeriodColors(
+    val accent: Color,
+    val chipBackground: Color,
+    val icon: ImageVector
+)
+
+val DayPeriod.colors: DayPeriodColors
+    get() = when (this) {
+        DayPeriod.MORNING -> DayPeriodColors(
+            accent = PeriodMorningAccent,
+            chipBackground = Color(0xFFF9F6F0),
+            icon = Icons.Filled.WbSunny
+        )
+        DayPeriod.AFTERNOON -> DayPeriodColors(
+            accent = PeriodAfternoonAccent,
+            chipBackground = Color(0xFFF0F6F9),
+            icon = Icons.Filled.LightMode
+        )
+        DayPeriod.EVENING -> DayPeriodColors(
+            accent = PeriodEveningAccent,
+            chipBackground = Color(0xFFF9F3F5),
+            icon = Icons.Filled.WbTwilight
+        )
+        DayPeriod.NIGHT -> DayPeriodColors(
+            accent = PeriodNightAccent,
+            chipBackground = Color(0xFFF3F4F8),
+            icon = Icons.Filled.NightlightRound
+        )
+    }
+
+/** Chronological order the schedule groups are rendered in. */
+val orderedDayPeriods: List<DayPeriod> = listOf(
+    DayPeriod.MORNING,
+    DayPeriod.AFTERNOON,
+    DayPeriod.EVENING,
+    DayPeriod.NIGHT
+)
+
+fun dayPeriodForHour(hour: Int): DayPeriod = when (hour) {
+    in 5..11 -> DayPeriod.MORNING
+    in 12..16 -> DayPeriod.AFTERNOON
+    in 17..20 -> DayPeriod.EVENING
+    else -> DayPeriod.NIGHT
+}
+
+/**
+ * Best-effort hour extraction from a dose time string. Schedule rows are
+ * normalised to "HH:mm", so [parseTime] handles the real data; the trailing
+ * regex only keeps 12-hour callers ("8:00 AM", "9 PM") working. Null when
+ * unparseable.
+ */
+private fun doseHourOrNull(value: String): Int? {
+    val trimmed = value.trim()
+    if (trimmed.isEmpty()) return null
+    parseTime(trimmed)?.let { return it.hour }
+    val match = Regex("""^(\d{1,2})(?::\d{2})?\s*([AaPp])\.?[Mm]\.?$""").find(trimmed) ?: return null
+    val hour12 = match.groupValues[1].toIntOrNull()?.takeIf { it in 1..12 } ?: return null
+    val isPm = match.groupValues[2].equals("P", ignoreCase = true)
+    return when {
+        isPm && hour12 < 12 -> hour12 + 12
+        !isPm && hour12 == 12 -> 0
+        else -> hour12
+    }
+}
+
+/**
+ * Classifies a dose time string into a [DayPeriod]. Unparseable input falls
+ * back to [DayPeriod.MORNING]; schedule rows are pre-filtered to valid
+ * "HH:mm" values, so this is a defensive default rather than a common path.
+ */
+fun dayPeriodForTime(time: String): DayPeriod {
+    val hour = doseHourOrNull(time) ?: return DayPeriod.MORNING
+    return dayPeriodForHour(hour)
+}
+
+/**
+ * Section banner introducing a group of same-period doses. The completion
+ * count uses the full-strength [DayPeriodColors.badgeText] so it clears AA on
+ * the translucent container tint.
+ */
+@Composable
+private fun DayPeriodSectionHeader(period: DayPeriod, takenCount: Int, totalCount: Int) {
+    val palette = period.colors
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
+            .background(palette.chipBackground)
+            .padding(horizontal = 10.dp, vertical = 7.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(9.dp)
+        ) {
+            // Solid accent tile — the one confident hit of colour per chapter.
+            Box(
+                modifier = Modifier
+                    .size(22.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(palette.accent),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = palette.icon,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(13.dp)
+                )
+            }
+            Text(
+                text = period.sectionTitle.uppercase(),
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 0.8.sp
+                ),
+                color = ScheduleChipText
+            )
+        }
+        Text(
+            text = "$takenCount of $totalCount",
+            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
+            color = ScheduleChipCount
+        )
+    }
+}
+
+/**
  * Today's schedule item card with Asterisk star icon, details, and Take / Taken button.
  */
 @Composable
@@ -385,30 +555,55 @@ fun MedRemindScheduleCard(
     item: DoseScheduleItem,
     isTaken: Boolean,
     onTakeClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    /**
+     * When the caller already groups doses under a "Morning Routine"-style
+     * section header, the per-card period chip becomes redundant. Defaults to
+     * true so screens that render a flat list keep the glanceable label.
+     */
+    showPeriodChip: Boolean = true
 ) {
+    val period = dayPeriodForTime(item.time)
+    val palette = period.colors
+    val cardColor = if (isTaken) ScheduleCardSurfaceTaken else ScheduleCardSurface
+    val railColor = if (isTaken) TakenPillText else palette.accent
+    val metaColor = TextSecondaryOnTint
+    val cardShape = RoundedCornerShape(16.dp)
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp),
-        color = CardSurface,
-        border = BorderStroke(1.dp, BorderSubtle),
-        shadowElevation = 1.dp
+        shape = cardShape,
+        color = cardColor,
+        border = BorderStroke(1.dp, ScheduleCardBorder),
+        shadowElevation = if (isTaken) 0.dp else 1.dp
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(14.dp)
+                .height(IntrinsicSize.Min),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Photo thumbnail or Asterisk icon in tinted box
+            // Left rail: the only full-height hit of period colour.
+            Box(
+                modifier = Modifier
+                    .width(3.dp)
+                    .fillMaxHeight()
+                    .background(railColor)
+            )
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp, vertical = 14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+            // Photo thumbnail or Asterisk mark in a neutral well
             val photoUri = item.cardImageUri
             Box(
                 modifier = Modifier
-                    .size(46.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFFFFF7ED))
-                    .border(0.5.dp, BorderSubtle, RoundedCornerShape(12.dp)),
+                    .size(44.dp)
+                    .clip(RoundedCornerShape(11.dp))
+                    .background(ScheduleIconWell)
+                    .border(1.dp, ScheduleCardBorder, RoundedCornerShape(11.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 if (!photoUri.isNullOrBlank()) {
@@ -420,43 +615,81 @@ fun MedRemindScheduleCard(
                     )
                 } else {
                     MedRemindAsteriskIcon(
-                        modifier = Modifier.size(24.dp),
-                        color = AsteriskGold,
+                        modifier = Modifier.size(22.dp),
+                        color = if (isTaken) TextMuted else palette.accent,
                         strokeWidth = 4.5f
                     )
                 }
             }
 
-            // Info
-            Column(modifier = Modifier.weight(1f)) {
+            // Info - uncluttered hierarchy with full width title and dedicated metadata
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(3.dp)
+            ) {
+                // Time with a period dot; the chip is only for flat-list callers.
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    if (showPeriodChip) {
+                        Box(
+                            modifier = Modifier
+                                .size(7.dp)
+                                .clip(CircleShape)
+                                .background(palette.accent)
+                        )
+                    }
+                    Text(
+                        text = item.time,
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp,
+                            letterSpacing = 0.3.sp
+                        ),
+                        color = metaColor
+                    )
+                    if (showPeriodChip) {
+                        Text(
+                            text = period.label.uppercase(),
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 10.sp,
+                                letterSpacing = 0.7.sp
+                            ),
+                            color = palette.accent
+                        )
+                    }
+                }
+
+                // Full-width title without truncation from badges
                 Text(
                     text = item.medicineName,
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = TextPrimary,
-                    maxLines = 1,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 16.sp
+                    ),
+                    color = if (isTaken) TextSecondary else TextPrimary,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
+
                 if (item.genericNameAndDose.isNotBlank()) {
                     Text(
                         text = formatCleanDose(item.genericNameAndDose),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = metaColor,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-                Text(
-                    text = item.time,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
-                    color = TextSecondary
-                )
             }
 
             // Button
             if (isTaken) {
                 Surface(
                     shape = RoundedCornerShape(20.dp),
-                    color = StatusGreenContainer
+                    color = TakenPillContainer
                 ) {
                     Row(
                         modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
@@ -466,13 +699,13 @@ fun MedRemindScheduleCard(
                         Icon(
                             imageVector = Icons.Default.Check,
                             contentDescription = null,
-                            tint = TakenBadgeGreen,
-                            modifier = Modifier.size(16.dp)
+                            tint = TakenPillText,
+                            modifier = Modifier.size(15.dp)
                         )
                         Text(
                             text = "Taken",
-                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                            color = TakenBadgeGreen
+                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                            color = TakenPillText
                         )
                     }
                 }
@@ -481,19 +714,20 @@ fun MedRemindScheduleCard(
                     onClick = onTakeClick,
                     shape = RoundedCornerShape(20.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = TakeButtonOrange,
+                        containerColor = MedRemindGreen,
                         contentColor = Color.White
                     ),
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                        horizontal = 20.dp,
+                        horizontal = 22.dp,
                         vertical = 8.dp
                     )
                 ) {
                     Text(
                         text = "Take",
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
                     )
                 }
+            }
             }
         }
     }
@@ -975,13 +1209,34 @@ fun MedRemindDashboardScreen(
                 }
             }
         } else {
-            items(schedule) { item ->
-                val isTaken = isDoseTaken(item, doseLogs, todayDateString())
-                MedRemindScheduleCard(
-                    item = item,
-                    isTaken = isTaken,
-                    onTakeClick = { onTakeDose(item) }
-                )
+            // Group schedule items into Daytime Chapters. Each chapter is a
+            // single lazy item holding a tight inner Column (10dp between its
+            // cards) so the outer 20dp spacing reads as a chapter break —
+            // Gestalt proximity, not just a coloured header.
+            val groupedByPeriod = schedule.groupBy { dayPeriodForTime(it.time) }
+
+            orderedDayPeriods.forEach { period ->
+                val itemsInPeriod = groupedByPeriod[period] ?: emptyList()
+                if (itemsInPeriod.isNotEmpty()) {
+                    val periodTakenCount = itemsInPeriod.count { isDoseTaken(it, doseLogs, todayDateString()) }
+                    item(key = "period-${period.name}") {
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            DayPeriodSectionHeader(
+                                period = period,
+                                takenCount = periodTakenCount,
+                                totalCount = itemsInPeriod.size
+                            )
+                            itemsInPeriod.forEach { dose ->
+                                MedRemindScheduleCard(
+                                    item = dose,
+                                    isTaken = isDoseTaken(dose, doseLogs, todayDateString()),
+                                    showPeriodChip = false,
+                                    onTakeClick = { onTakeDose(dose) }
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
 
