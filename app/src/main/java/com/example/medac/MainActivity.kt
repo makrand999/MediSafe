@@ -142,6 +142,88 @@ fun MedacRoot(initialIntent: Intent? = null) {
 
     LaunchedEffect(Unit) { authViewModel.checkSession(context) }
 
+    // Automatic update check on startup
+    var updateAvailable by remember { mutableStateOf<AppUpdateManager.UpdateCheckResult?>(null) }
+    var isDownloadingUpdate by remember { mutableStateOf(false) }
+    var downloadProgress by remember { mutableIntStateOf(0) }
+    var updateError by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(Unit) {
+        val check = AppUpdateManager.checkForUpdate(context)
+        if (check.updateAvailable) {
+            updateAvailable = check
+        }
+    }
+
+    updateAvailable?.let { updateInfo ->
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = {
+                if (!isDownloadingUpdate) updateAvailable = null
+            },
+            title = { Text("Update Available") },
+            text = {
+                androidx.compose.foundation.layout.Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
+                ) {
+                    Text("A new version of Medac is available from the server.")
+                    Text(
+                        "Updating will download the latest APK and reset local app data to ensure a clean launch without migration conflicts.",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    if (isDownloadingUpdate) {
+                        androidx.compose.material3.LinearProgressIndicator(
+                            progress = { downloadProgress / 100f },
+                            modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
+                        )
+                        Text(
+                            "Downloading: $downloadProgress%",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                    updateError?.let { err ->
+                        Text(err, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (!isDownloadingUpdate) {
+                            isDownloadingUpdate = true
+                            updateError = null
+                            scope.launch {
+                                val apkFile = AppUpdateManager.downloadApk(context) { progress ->
+                                    downloadProgress = progress
+                                }
+                                if (apkFile != null) {
+                                    AppUpdateManager.clearAppData(context, updateInfo.remoteLastModified)
+                                    val activity = context as? android.app.Activity
+                                    if (activity != null) {
+                                        AppUpdateManager.installApk(activity, apkFile)
+                                    }
+                                } else {
+                                    isDownloadingUpdate = false
+                                    updateError = "Download failed. Please check network connection."
+                                }
+                            }
+                        }
+                    },
+                    enabled = !isDownloadingUpdate
+                ) {
+                    Text(if (isDownloadingUpdate) "Downloading..." else "Update Now")
+                }
+            },
+            dismissButton = {
+                if (!isDownloadingUpdate) {
+                    TextButton(onClick = { updateAvailable = null }) {
+                        Text("Later")
+                    }
+                }
+            }
+        )
+    }
+
     when (val s = authState) {
         is AuthUiState.Loading -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
@@ -274,7 +356,7 @@ fun MedacRoot(initialIntent: Intent? = null) {
         }
     }
 
-    var isPinUnlocked by rememberSaveable { mutableStateOf(false) }
+    var isPinUnlocked by rememberSaveable { mutableStateOf(true) }
     var activeMedRemindScreen by rememberSaveable { mutableStateOf<String?>(null) }
     var showMedRemindSuccessDialog by remember { mutableStateOf(false) }
 
@@ -589,11 +671,7 @@ fun MedacRoot(initialIntent: Intent? = null) {
         return
     }
 
-    // Welcome / PIN Screen if locked
-    if (!isPinUnlocked) {
-        WelcomePinScreen(onUnlock = { isPinUnlocked = true })
-        return
-    }
+    // Welcome / PIN Screen bypassed per user request
 
     // MedRemind Sub-Screens Overlay
     activeMedRemindScreen?.let { screen ->
