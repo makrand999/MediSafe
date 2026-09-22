@@ -109,15 +109,24 @@ listens on `http://127.0.0.1:8045` and is wired up like this in `/opt/medac/env/
 ```
 MUSE_SPARK_BASE_URL=http://127.0.0.1:8045/v1
 MUSE_SPARK_API_KEY=<gateway API_KEY from /etc/antigravity.env>
-MUSE_SPARK_MODEL=gemini-3.8-flash-high
+MUSE_SPARK_MODEL=gemini-3.8-flash-low
 MUSE_SPARK_ALLOW_HTTP=true
 ```
 
-Verified against the gateway (2026-09-21): `/chat/completions` with Bearer auth,
-`response_format: json_object`, tool calls (`finish_reason: tool_calls`), and vision via
-`image_url` data URLs. Latency for a label-OCR round trip: ~3 s (gemini-3.8-flash-high),
-~6 s (gemini-3-pro-high). Gemini answers are frequently markdown-fenced, which
-`parseJsonStrict` now strips deterministically.
+Verified against the gateway (2026-09-22) with the app's real legacy contract
+(`LegacyMedicineSchema` + legacy label prompts), 3 runs each:
+
+| Model | Vision label | OCR text | Tool call | Unreadable image |
+|---|---|---|---|---|
+| `gemini-3.8-flash-low` | 1.99 s, 3/3 contract | 2.41 s, 3/3 | 1.76 s, 3/3 | ✅ empty name, conf 0.0 |
+| `gemini-3.8-flash-medium` | 2.33 s, 3/3 | 2.90 s, 3/3 | 1.56 s, 3/3 | ✅ empty name, conf 0.0 |
+| `gemini-3.8-flash-high` | 6.44 s, 3/3 | 5.99 s, 3/3 | 1.68 s, 3/3 | ✅ empty name, conf 0.0 |
+
+`gemini-3.8-flash-low` is the deployed default: fastest on every path, contract-valid,
+and it follows the "unreadable label" guardrail. All three models wrap JSON in
+markdown fences fairly often, which `parseJsonStrict` strips deterministically.
+`gemini-3.5-flash` is retired by the gateway (returns a plain-text notice), so it is
+not allowlisted.
 
 Rollback: point `MUSE_SPARK_BASE_URL`/`MUSE_SPARK_API_KEY`/`MUSE_SPARK_MODEL` back at the
 hosted endpoint and `systemctl restart medac-api-new medac-worker`.

@@ -55,8 +55,8 @@ describe("config validation", () => {
   });
 
   it("accepts an allowlisted local gateway model", () => {
-    const cfg = loadConfig(baseEnv({ MUSE_SPARK_MODEL: "gemini-3.8-flash-high" }));
-    expect(cfg.museSpark.model).toBe("gemini-3.8-flash-high");
+    const cfg = loadConfig(baseEnv({ MUSE_SPARK_MODEL: "gemini-3.8-flash-low" }));
+    expect(cfg.museSpark.model).toBe("gemini-3.8-flash-low");
   });
 
   it("rejects a gateway model that is not on the allowlist", () => {

@@ -12,13 +12,15 @@
  *  - "muse-spark-1.2-contributor": the original hosted contributor endpoint.
  *  - Antigravity gateway models (self-hosted, OpenAI-compatible on loopback):
  *    Gemini 3.x flash/pro. Verified against http://127.0.0.1:8045 for chat,
- *    JSON mode, tool calls and vision.
+ *    JSON mode, tool calls and vision; gemini-3.8-flash-low is the deployed
+ *    default (fastest, contract-valid, follows the unreadable-image guardrail).
  *
  * Ref: SERVER_IMPLEMENTATION_PLAN.md §12.5, §22
  */
 
 export const ALLOWED_MUSE_SPARK_MODELS = [
   "muse-spark-1.2-contributor",
+  "gemini-3.8-flash-low",
   "gemini-3.8-flash-high",
   "gemini-3.8-flash-medium",
   "gemini-3.7-flash",
