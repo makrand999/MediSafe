@@ -49,6 +49,7 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -1037,7 +1038,18 @@ fun AssistantScreen(
                             } else {
                                 Surface(shape = RoundedCornerShape(14.dp), color = CardSurface, border = BorderStroke(0.5.dp, BorderSubtle), modifier = Modifier.fillMaxWidth()) {
                                     Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                        MarkdownText(markdown = msg.text, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                                        if (msg.isStreaming && msg.text.isBlank()) {
+                                            // Tokens have not arrived yet — show that the agent is working.
+                                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                                CircularProgressIndicator(modifier = Modifier.size(14.dp), strokeWidth = 2.dp, color = NavyPrimary)
+                                                Text("Thinking…", style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp), color = TextSecondary)
+                                            }
+                                        } else {
+                                            MarkdownText(markdown = msg.text, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                                            if (msg.isStreaming) {
+                                                Text("▍", style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
+                                            }
+                                        }
                                         if (msg.limitations.isNotEmpty()) {
                                             Surface(shape = RoundedCornerShape(10.dp), color = StatusAmberContainer, modifier = Modifier.fillMaxWidth()) {
                                                 Column(modifier = Modifier.padding(8.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {

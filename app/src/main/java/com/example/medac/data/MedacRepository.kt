@@ -4,9 +4,15 @@ import android.content.Context
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.time.Instant
 import java.time.ZoneId
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 object MedacRepository {
     private val gson = Gson()
@@ -392,6 +398,95 @@ object MedacRepository {
         val r = api(ctx).sendMessage(pid, cid, CreateMessageRequest(content, role))
         if (!r.isSuccessful) throw Exception(r.errorBody()?.string() ?: "send_message ${r.code()}")
         r.body()!!
+    }
+
+    /**
+     * Streams an assistant turn over SSE. [onDelta] receives text fragments as
+     * they are generated, [onTool] receives tool names while the agent works.
+     * Returns the same payload as [sendMessage] once the stream completes.
+     * Throws when the server does not stream (caller falls back to [sendMessage]).
+     */
+    suspend fun sendMessageStream(
+        ctx: Context,
+        pid: String,
+        cid: String,
+        content: String,
+        onDelta: (String) -> Unit,
+        onTool: (String) -> Unit = {}
+    ): CreateMessageResponse = withContext(Dispatchers.IO) {
+        val token = com.example.medac.AuthRepository.getToken(ctx) ?: throw Exception("Not logged in")
+        val client = OkHttpClient.Builder()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            // Per-read timeout: each SSE frame resets it, so long answers stay alive
+            // while a stalled server still fails in bounded time.
+            .readTimeout(120, TimeUnit.SECONDS)
+            .build()
+        val body = JSONObject().put("content", content).toString()
+            .toRequestBody("application/json".toMediaType())
+        val request = Request.Builder()
+            .url(NetworkModule.BASE_URL + "patients/$pid/intelligence/conversations/$cid/messages/stream")
+            .post(body)
+            .header("Authorization", "Bearer $token")
+            .header("Accept", "text/event-stream")
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) {
+                throw Exception("stream_http_${response.code}: ${response.body?.string()?.take(200).orEmpty()}")
+            }
+            val source = response.body?.source() ?: throw Exception("stream_empty_body")
+            val parser = SseParser()
+            var result: CreateMessageResponse? = null
+            while (true) {
+                val line = source.readUtf8Line() ?: break
+                val frame = parser.accept(line) ?: continue
+                val payload = try { JSONObject(frame.data) } catch (_: Exception) { JSONObject() }
+                when (frame.event) {
+                    "delta" -> payload.optString("text").takeIf { it.isNotEmpty() }?.let(onDelta)
+                    "tool" -> payload.optString("name").takeIf { it.isNotEmpty() }?.let(onTool)
+                    "done" -> result = CreateMessageResponse(
+                        message = payload.optString("message"),
+                        factsUsed = parseFacts(payload.optJSONArray("facts_used")),
+                        proposals = parseProposals(payload.optJSONArray("proposals")),
+                        limitations = parseStrings(payload.optJSONArray("limitations")),
+                        aiRunId = payload.optString("ai_run_id").takeIf { it.isNotEmpty() },
+                        turnCount = payload.optInt("turn_count").takeIf { payload.has("turn_count") }
+                    )
+                    "error" -> throw Exception(payload.optString("message", "Assistant stream failed"))
+                }
+            }
+            result ?: throw Exception("stream_ended_without_result")
+        }
+    }
+
+    private fun parseStrings(array: org.json.JSONArray?): List<String>? {
+        if (array == null) return null
+        return (0 until array.length()).map { array.optString(it) }
+    }
+
+    private fun parseFacts(array: org.json.JSONArray?): List<FactUsedDto>? {
+        if (array == null) return null
+        return (0 until array.length()).map { i ->
+            val o = array.optJSONObject(i) ?: JSONObject()
+            FactUsedDto(
+                type = o.optString("type"),
+                id = o.optString("id"),
+                version = o.optInt("version").takeIf { o.has("version") }
+            )
+        }
+    }
+
+    private fun parseProposals(array: org.json.JSONArray?): List<ProposalRefDto>? {
+        if (array == null) return null
+        return (0 until array.length()).map { i ->
+            val o = array.optJSONObject(i) ?: JSONObject()
+            ProposalRefDto(
+                proposalId = o.optString("proposal_id", o.optString("proposalId")),
+                actionType = o.optString("action_type", o.optString("actionType")),
+                requiresConfirmation = o.optBoolean("requires_confirmation", true),
+                expiresAt = o.optString("expires_at", o.optString("expiresAt"))
+            )
+        }
     }
     suspend fun createScheduleDraft(ctx: Context, pid: String, medicationId: String? = null, constraints: String? = null, timezone: String? = null, wakeTime: String? = null, sleepTime: String? = null): ScheduleDraftResponse = withContext(Dispatchers.IO) {
         val req = ScheduleDraftRequest(medicationId, constraints, timezone, wakeTime, sleepTime)

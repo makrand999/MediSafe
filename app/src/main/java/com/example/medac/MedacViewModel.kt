@@ -35,6 +35,8 @@ data class IntelligenceChatItem(
     val id: String = UUID.randomUUID().toString(),
     val text: String,
     val isUser: Boolean,
+    /** True while tokens are still arriving for this bubble. */
+    val isStreaming: Boolean = false,
     val factsUsed: List<com.example.medac.data.FactUsedDto> = emptyList(),
     val proposals: List<com.example.medac.data.ProposalRefDto> = emptyList(),
     val limitations: List<String> = emptyList(),
@@ -1702,18 +1704,47 @@ class MedacViewModel : ViewModel() {
                     cid = conv.conversationId
                     _currentConversationId.value = cid
                 }
-                val resp = MedacRepository.sendMessage(ctx, pid, cid!!, content, "user")
-                // append assistant reply
-                val assistant = IntelligenceChatItem(
-                    text = resp.message,
-                    isUser = false,
-                    factsUsed = resp.factsUsed.orEmpty(),
-                    proposals = resp.proposals.orEmpty(),
-                    limitations = resp.limitations.orEmpty(),
-                    aiRunId = resp.aiRunId,
-                    turnCount = resp.turnCount
-                )
-                _intelligenceMessages.value = _intelligenceMessages.value + assistant
+                // Stream the reply into a placeholder bubble; if streaming is
+                // unavailable (legacy harness, proxy, old server) fall back to
+                // the JSON endpoint without losing the user's message.
+                val placeholderId = UUID.randomUUID().toString()
+                val streamed = StringBuilder()
+                _intelligenceMessages.value = _intelligenceMessages.value +
+                    IntelligenceChatItem(id = placeholderId, text = "", isUser = false, isStreaming = true)
+
+                fun updatePlaceholder(text: String, streaming: Boolean) {
+                    _intelligenceMessages.value = _intelligenceMessages.value.map {
+                        if (it.id == placeholderId) it.copy(text = text, isStreaming = streaming) else it
+                    }
+                }
+
+                val resp = try {
+                    MedacRepository.sendMessageStream(
+                        ctx, pid, cid!!, content,
+                        onDelta = { delta ->
+                            streamed.append(delta)
+                            updatePlaceholder(streamed.toString(), true)
+                        },
+                        onTool = { /* tool progress: bubble keeps the text so far */ }
+                    )
+                } catch (streamError: Exception) {
+                    android.util.Log.w("MedacAI", "stream failed, falling back: ${streamError.message}")
+                    updatePlaceholder("", true) // clear partial text before the retry
+                    MedacRepository.sendMessage(ctx, pid, cid, content, "user")
+                }
+                // finalise the bubble (streamed text wins if the server echoed nothing)
+                val finalText = resp.message.ifBlank { streamed.toString() }
+                _intelligenceMessages.value = _intelligenceMessages.value.map {
+                    if (it.id == placeholderId) it.copy(
+                        text = finalText,
+                        isStreaming = false,
+                        factsUsed = resp.factsUsed.orEmpty(),
+                        proposals = resp.proposals.orEmpty(),
+                        limitations = resp.limitations.orEmpty(),
+                        aiRunId = resp.aiRunId,
+                        turnCount = resp.turnCount
+                    ) else it
+                }
                 // fetch proposals details for confirm/reject (payload_hash + human_summary)
                 resp.proposals?.forEach { ref ->
                     try {
