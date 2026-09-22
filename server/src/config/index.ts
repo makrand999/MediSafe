@@ -1,40 +1,24 @@
 /**
  * config/index.ts
  * Validated configuration loader.
- * - MUSE_SPARK_MODEL defaults to and ONLY allows "muse-spark-1.2-contributor".
- * - Rejects startup if MUSE_SPARK_MODEL is set to any other value (throws in production and non-production).
- * - No auto-fallback to unapproved model on outage per plan §12.5.
+ * - MUSE_SPARK_MODEL is allowlist-only (see modules/intelligence/model-registry.ts);
+ *   defaults to "muse-spark-1.2-contributor" so existing deployments are unchanged.
+ * - Rejects startup if MUSE_SPARK_MODEL is set to any value outside the allowlist.
+ * - No auto-fallback to an unapproved model on outage per plan §12.5.
  * Ref: SERVER_IMPLEMENTATION_PLAN.md §22, §12.5
  */
 
-export const ALLOWED_MUSE_SPARK_MODELS = ["muse-spark-1.2-contributor"] as const;
-export type MuseSparkModel = (typeof ALLOWED_MUSE_SPARK_MODELS)[number];
-export const DEFAULT_MUSE_SPARK_MODEL: MuseSparkModel = "muse-spark-1.2-contributor";
+import { isLoopbackHttpBaseUrl } from "../modules/intelligence/muse-spark-provider.js";
+import {
+  ALLOWED_MUSE_SPARK_MODELS,
+  DEFAULT_MUSE_SPARK_MODEL,
+  parseMuseSparkModel,
+  type MuseSparkModel,
+} from "../modules/intelligence/model-registry.js";
 
-/**
- * Validates MUSE_SPARK_MODEL value.
- * - Returns DEFAULT_MUSE_SPARK_MODEL when undefined/empty.
- * - Throws if value is not in ALLOWED_MUSE_SPARK_MODELS allowlist.
- * - Never returns an alternative model; caller must not fall back.
- */
-export function parseMuseSparkModel(raw: string | undefined): MuseSparkModel {
-  const trimmed = raw?.trim();
-  if (!trimmed) return DEFAULT_MUSE_SPARK_MODEL;
-  if ((ALLOWED_MUSE_SPARK_MODELS as readonly string[]).includes(trimmed)) {
-    return trimmed as MuseSparkModel;
-  }
-  throw new Error(
-    `Invalid MUSE_SPARK_MODEL "${trimmed}". Only supported model is "${DEFAULT_MUSE_SPARK_MODEL}" (allowed: ${ALLOWED_MUSE_SPARK_MODELS.join(", ")}). Do not change — only supported model. No auto-fallback to unapproved model is permitted (plan §12.5).`,
-  );
-}
-
-/**
- * Validates that value is in allowlist; helper for other configs if needed.
- */
-export function assertAllowedMuseSparkModel(model: string): asserts model is MuseSparkModel {
-  if ((ALLOWED_MUSE_SPARK_MODELS as readonly string[]).includes(model)) return;
-  throw new Error(`Muse Spark model "${model}" is not allowed. Allowed: ${ALLOWED_MUSE_SPARK_MODELS.join(", ")}`);
-}
+// Re-exported so existing importers of the config module keep working.
+export { ALLOWED_MUSE_SPARK_MODELS, DEFAULT_MUSE_SPARK_MODEL, parseMuseSparkModel, type MuseSparkModel };
+export { assertAllowedMuseSparkModel } from "../modules/intelligence/model-registry.js";
 
 export interface MuseSparkConfig {
   apiKey: string;
@@ -153,8 +137,14 @@ export function loadConfig(envOverrides?: Record<string, string | undefined>): A
   const museSparkModel = parseMuseSparkModel(rawModel);
 
   const museSparkBaseUrl = get("MUSE_SPARK_BASE_URL", "https://api.musespark.example/v1") ?? "https://api.musespark.example/v1";
-  if (isProduction && !museSparkBaseUrl.startsWith("https://")) {
-    throw new Error("MUSE_SPARK_BASE_URL must be https:// in production");
+  // https everywhere, with one exception: the self-hosted Antigravity gateway
+  // runs on loopback http://127.0.0.1:8045 and is explicitly opted into with
+  // MUSE_SPARK_ALLOW_HTTP=true. Traffic never leaves the host.
+  const allowLoopbackHttp = get("MUSE_SPARK_ALLOW_HTTP") === "true" && isLoopbackHttpBaseUrl(museSparkBaseUrl);
+  if (isProduction && !museSparkBaseUrl.startsWith("https://") && !allowLoopbackHttp) {
+    throw new Error(
+      "MUSE_SPARK_BASE_URL must be https:// in production (http://127.0.0.1 is allowed with MUSE_SPARK_ALLOW_HTTP=true for the local gateway)",
+    );
   }
 
   const museSparkTimeoutMs = getInt("MUSE_SPARK_TIMEOUT_MS", 30000);

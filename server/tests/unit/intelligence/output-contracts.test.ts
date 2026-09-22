@@ -27,6 +27,29 @@ describe("output-contracts label interpretation", () => {
     expect(res.ok).toBe(true);
   });
 
+  it("accepts the same JSON wrapped in a markdown fence", () => {
+    // Gemini via the Antigravity gateway wraps json_object answers in ```json fences.
+    for (const fenced of [`\`\`\`json\n${validLabelJson}\n\`\`\``, `\`\`\`\n${validLabelJson}\n\`\`\``, `  \`\`\`json\n${validLabelJson}\n\`\`\`  `]) {
+      const res = parseJsonStrict(LabelInterpretationSchema, fenced);
+      expect(res.ok).toBe(true);
+    }
+  });
+
+  it("does not treat a plain string with backticks as fenced JSON", () => {
+    const res = parseJsonStrict(LabelInterpretationSchema, "not ```json at all");
+    expect(res.ok).toBe(false);
+  });
+
+  it("strips a fence before the forbidden-key repair pass", () => {
+    const fencedWithPurpose = `\`\`\`json\n${JSON.stringify({
+      ...JSON.parse(validLabelJson),
+      purpose: "for blood pressure",
+    })}\n\`\`\``;
+    const repaired = validateWithOneRepair(LabelInterpretationSchema, fencedWithPurpose);
+    expect(repaired.ok).toBe(true);
+    expect(repaired.repaired).toBe(true);
+  });
+
   it("rejects unknown keys (strict)", () => {
     const withPurpose = JSON.stringify({
       ...JSON.parse(validLabelJson),

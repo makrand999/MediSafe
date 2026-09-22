@@ -5,36 +5,35 @@
  * - Enforce HTTPS, fail startup if not HTTPS in production.
  * - Uses MUSE_SPARK_API_KEY, MUSE_SPARK_MODEL, MUSE_SPARK_TIMEOUT_MS.
  * - Circuit breaker, budget, redacted logging.
- * - MODEL IS FIXED: only "muse-spark-1.2-contributor" is supported (do not change - only supported model).
- *   No auto-fallback to unapproved model on outage per plan §12.5.
- *   Config and provider validate allowlist ["muse-spark-1.2-contributor"] and throw on any other value.
+ * - MODEL IS ALLOWLISTED: see model-registry.ts. MUSE_SPARK_MODEL selects the
+ *   model and must be on the allowlist; the adapter sends exactly that model.
+ *   No auto-fallback to an unapproved model on outage per plan §12.5.
  */
 
 import { sanitizeForLog, genericFailureMessage } from "./safety-policy.js";
 import { validateWithOneRepair } from "./output-contracts.js";
+import {
+  ALLOWED_MUSE_SPARK_MODELS,
+  assertAllowedModel,
+  DEFAULT_MUSE_SPARK_MODEL,
+  isAllowedModel,
+  parseMuseSparkModel,
+  type MuseSparkModel,
+} from "./model-registry.js";
 import type { z } from "zod";
 
-// Fixed model — do not change - only supported model
-export const ALLOWED_MUSE_SPARK_MODELS = ["muse-spark-1.2-contributor"] as const;
-export type MuseSparkModel = (typeof ALLOWED_MUSE_SPARK_MODELS)[number];
-export const FIXED_MUSE_SPARK_MODEL: MuseSparkModel = "muse-spark-1.2-contributor";
-export const DEFAULT_MUSE_SPARK_MODEL: MuseSparkModel = "muse-spark-1.2-contributor";
-export const MUSE_SPARK_MODEL_DOC = "do not change - only supported model: muse-spark-1.2-contributor" as const;
+export {
+  ALLOWED_MUSE_SPARK_MODELS,
+  DEFAULT_MUSE_SPARK_MODEL,
+  parseMuseSparkModel,
+  type MuseSparkModel,
+};
 export const ALLOWED_MODELS = ALLOWED_MUSE_SPARK_MODELS;
-
-export function parseMuseSparkModel(raw: string | undefined): MuseSparkModel {
-  const trimmed = raw?.trim();
-  if (!trimmed) return DEFAULT_MUSE_SPARK_MODEL;
-  if ((ALLOWED_MUSE_SPARK_MODELS as readonly string[]).includes(trimmed)) return trimmed as MuseSparkModel;
-  throw new Error(
-    `Invalid MUSE_SPARK_MODEL "${trimmed}". Only supported model is "${DEFAULT_MUSE_SPARK_MODEL}" (allowed: ${ALLOWED_MUSE_SPARK_MODELS.join(", ")}). Do not change - only supported model. No auto-fallback to unapproved model is permitted (plan §12.5).`,
-  );
-}
-
-export function assertFixedModel(model: string): asserts model is MuseSparkModel {
-  if ((ALLOWED_MUSE_SPARK_MODELS as readonly string[]).includes(model)) return;
-  throw new Error(`Muse Spark model "${model}" is not allowed. Only "${FIXED_MUSE_SPARK_MODEL}" is supported. No fallback to unapproved model is permitted (plan §12.5).`);
-}
+export const MUSE_SPARK_MODEL_DOC = `allowlisted models only: ${ALLOWED_MUSE_SPARK_MODELS.join(", ")}` as const;
+/** @deprecated the model is no longer hard-fixed; kept so older imports keep compiling. */
+export const FIXED_MUSE_SPARK_MODEL = DEFAULT_MUSE_SPARK_MODEL;
+/** @deprecated use assertAllowedModel. */
+export const assertFixedModel = assertAllowedModel;
 
 // ---------------------------------------------------------------------------
 // Config & validation
@@ -60,7 +59,7 @@ export function loadMuseSparkConfig(env: Record<string, string | undefined> = pr
   if (!baseUrl) throw new Error("MUSE_SPARK_BASE_URL is required");
   if (!apiKey) throw new Error("MUSE_SPARK_API_KEY is required");
   // model is validated via parseMuseSparkModel (defaults to FIXED, throws on any other)
-  assertFixedModel(model);
+  assertAllowedModel(model);
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > 120_000) {
     throw new Error("MUSE_SPARK_TIMEOUT_MS must be 1..120000");
   }
@@ -73,6 +72,18 @@ export function isProduction(env: Record<string, string | undefined> = process.e
   return env.NODE_ENV === "production" || env.APP_ENV === "production";
 }
 
+const LOOPBACK_HOSTNAMES = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
+
+/** True for an http:// URL pointed at the local host. */
+export function isLoopbackHttpBaseUrl(baseUrl: string): boolean {
+  try {
+    const parsed = new URL(baseUrl);
+    return parsed.protocol === "http:" && LOOPBACK_HOSTNAMES.has(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function validateHttpsOrThrow(baseUrl: string, env: Record<string, string | undefined> = process.env): void {
   let parsed: URL;
   try {
@@ -80,17 +91,20 @@ export function validateHttpsOrThrow(baseUrl: string, env: Record<string, string
   } catch {
     throw new Error(`MUSE_SPARK_BASE_URL is not a valid URL: ${baseUrl}`);
   }
-  if (parsed.protocol !== "https:") {
-    if (isProduction(env)) {
-      throw new Error(`MUSE_SPARK_BASE_URL must be https in production (got ${parsed.protocol})`);
-    }
-    // In non-production we still enforce https by default; allow http only if explicitly allowed?
-    // Per plan: "Enforce HTTPS, fail startup if not HTTPS in production." => warn in dev
-    // We enforce HTTPS even in dev unless caller opts out, but here we throw in prod only.
-    // For safety, we also reject non-https in dev if strict mode enabled via env.
-    if (env.MUSE_SPARK_ALLOW_HTTP === "true") return;
-    throw new Error(`MUSE_SPARK_BASE_URL must be https (got ${parsed.protocol})`);
+  if (parsed.protocol === "https:") return;
+
+  // Non-HTTPS is refused unless explicitly opted in. http is tolerated in
+  // production only for loopback (the self-hosted Antigravity gateway on
+  // http://127.0.0.1:8045, which never leaves the machine); every other base
+  // URL must be https. Dev keeps the broader MUSE_SPARK_ALLOW_HTTP escape hatch.
+  if (parsed.protocol === "http:" && env.MUSE_SPARK_ALLOW_HTTP === "true" && LOOPBACK_HOSTNAMES.has(parsed.hostname)) {
+    return;
   }
+  if (isProduction(env)) {
+    throw new Error(`MUSE_SPARK_BASE_URL must be https in production (got ${parsed.protocol})`);
+  }
+  if (env.MUSE_SPARK_ALLOW_HTTP === "true") return;
+  throw new Error(`MUSE_SPARK_BASE_URL must be https (got ${parsed.protocol})`);
 }
 
 // ---------------------------------------------------------------------------
@@ -203,10 +217,8 @@ export class MuseSparkProvider implements IntelligenceProvider {
     validateHttpsOrThrow(config.baseUrl);
     if (!config.apiKey) throw new Error("MUSE_SPARK_API_KEY required");
     if (!config.model) throw new Error("MUSE_SPARK_MODEL required");
-    // Enforce fixed model — no alternative allowed
-    assertFixedModel(config.model);
-    // Normalize to fixed (prevents drift if caller passed weird casing)
-    (this.config as { model: string }).model = FIXED_MUSE_SPARK_MODEL;
+    // Enforce allowlist — no alternative model, and no fallback on outage.
+    assertAllowedModel(config.model);
   }
 
   getCircuitState(): CircuitState {
@@ -214,13 +226,17 @@ export class MuseSparkProvider implements IntelligenceProvider {
   }
 
   private async postChatCompletions(body: unknown, signal: AbortSignal): Promise<unknown> {
-    // Hardcode fixed model; reject any alternative before network call — no fallback
+    // Send exactly the allowlisted model from config; reject any other model
+    // handed in by a caller (no fallback to unapproved models).
     const payload = body as Record<string, unknown>;
-    if (payload["model"] && payload["model"] !== FIXED_MUSE_SPARK_MODEL) {
-      throw new Error(`Attempted to call Muse Spark with unapproved model "${payload["model"]}". Only "${FIXED_MUSE_SPARK_MODEL}" is allowed. No fallback.`);
+    if (payload["model"] !== undefined && payload["model"] !== this.config.model) {
+      const attempted = String(payload["model"]);
+      if (!isAllowedModel(attempted) || attempted !== this.config.model) {
+        throw new Error(`Attempted to call the model "${attempted}" while configured for "${this.config.model}". No fallback to unapproved model is permitted (plan §12.5).`);
+      }
     }
-    (payload as Record<string, unknown>)["model"] = FIXED_MUSE_SPARK_MODEL;
-    assertFixedModel(this.config.model);
+    (payload as Record<string, unknown>)["model"] = this.config.model;
+    assertAllowedModel(this.config.model);
     if (!this.circuitBreaker.canExecute()) {
       throw Object.assign(new Error("Circuit breaker open"), { code: "CIRCUIT_OPEN" });
     }
@@ -265,12 +281,12 @@ export class MuseSparkProvider implements IntelligenceProvider {
 
   async generateStructured<T>(request: StructuredGenerationRequest<T>): Promise<T> {
     // Enforce fixed model even if caller supplies alternative
-    if (request.model) assertFixedModel(request.model);
+    if (request.model) assertAllowedModel(request.model);
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.config.timeoutMs);
     try {
       const body = {
-        model: FIXED_MUSE_SPARK_MODEL,
+        model: this.config.model,
         messages: [
           { role: "system", content: request.prompt.system },
           {
@@ -325,7 +341,7 @@ export class MuseSparkProvider implements IntelligenceProvider {
         return m;
       });
       const body = {
-        model: FIXED_MUSE_SPARK_MODEL,
+        model: this.config.model,
         messages: [{ role: "system", content: request.system }, ...mappedMessages],
         tools: request.tools,
         tool_choice: request.toolChoice ?? "auto",
@@ -353,12 +369,12 @@ export class MuseSparkProvider implements IntelligenceProvider {
   }
 
   async analyzeImage<T>(request: VisionRequest<T>): Promise<T> {
-    if ((request as { model?: string }).model) assertFixedModel((request as { model?: string }).model as string);
+    if ((request as { model?: string }).model) assertAllowedModel((request as { model?: string }).model as string);
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.config.timeoutMs);
     try {
       const body = {
-        model: FIXED_MUSE_SPARK_MODEL,
+        model: this.config.model,
         messages: [
           { role: "system", content: request.prompt.system },
           {
@@ -399,9 +415,9 @@ export class MuseSparkProvider implements IntelligenceProvider {
     return genericFailureMessage();
   }
 
-  /** Returns fixed model — no alternative. */
+  /** Returns the configured allowlisted model — no alternative, no fallback. */
   getModel(): MuseSparkModel {
-    return FIXED_MUSE_SPARK_MODEL;
+    return this.config.model as MuseSparkModel;
   }
 }
 
@@ -410,9 +426,11 @@ export function createMuseSparkProvider(config: MuseSparkConfig): MuseSparkProvi
 }
 
 export const MUSE_SPARK_PROVIDER_DOC = `
-Muse Spark provider is FIXED to model "${FIXED_MUSE_SPARK_MODEL}" only.
-- Config MUSE_SPARK_MODEL must equal "${FIXED_MUSE_SPARK_MODEL}" or startup is rejected.
-- Provider adapter hardcodes this model; any other value throws.
-- On outage/timeout/schema failure: do NOT auto-switch to another model with different privacy behavior.
-  Return INTELLIGENCE_TEMPORARILY_UNAVAILABLE and keep deterministic manual APIs operational (plan §12.5).
+Muse Spark / intelligence provider sends exactly the model named by MUSE_SPARK_MODEL,
+which must be on the model-registry allowlist (${ALLOWED_MUSE_SPARK_MODELS.join(", ")}).
+- No auto-fallback: on outage/timeout/schema failure the caller returns
+  INTELLIGENCE_TEMPORARILY_UNAVAILABLE and keeps deterministic manual APIs operational (plan §12.5).
+- Privacy note: the allowlist mixes the hosted contributor endpoint with the
+  self-hosted Antigravity gateway; switching MUSE_SPARK_BASE_URL changes which
+  upstream sees prompt content, so treat it as a reviewed config change.
 `.trim();

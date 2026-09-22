@@ -54,6 +54,29 @@ describe("config validation", () => {
     expect(() => loadConfig(baseEnv({ MUSE_SPARK_MODEL: "muse-spark-1.2-contributor-wrong" }))).toThrow();
   });
 
+  it("accepts an allowlisted local gateway model", () => {
+    const cfg = loadConfig(baseEnv({ MUSE_SPARK_MODEL: "gemini-3.8-flash-high" }));
+    expect(cfg.museSpark.model).toBe("gemini-3.8-flash-high");
+  });
+
+  it("rejects a gateway model that is not on the allowlist", () => {
+    expect(() => loadConfig(baseEnv({ MUSE_SPARK_MODEL: "gemini-9-ultra" }))).toThrow(/MUSE_SPARK_MODEL/i);
+  });
+
+  it("allows loopback http in production only with MUSE_SPARK_ALLOW_HTTP=true", () => {
+    const loopbackEnv = {
+      MUSE_SPARK_BASE_URL: "http://127.0.0.1:8045/v1",
+      MUSE_SPARK_ALLOW_HTTP: "true",
+      MUSE_SPARK_MODEL: "gemini-3.8-flash-high",
+    };
+    expect(loadConfig(baseEnv(loopbackEnv)).museSpark.baseUrl).toBe("http://127.0.0.1:8045/v1");
+    expect(() => loadConfig(baseEnv({ ...loopbackEnv, MUSE_SPARK_ALLOW_HTTP: undefined }))).toThrow(/MUSE_SPARK_BASE_URL.*https/i);
+    // The loopback exception must not leak to remote hosts.
+    expect(() =>
+      loadConfig(baseEnv({ ...loopbackEnv, MUSE_SPARK_BASE_URL: "http://insecure.example.com/v1" })),
+    ).toThrow(/MUSE_SPARK_BASE_URL.*https/i);
+  });
+
   it("accepts valid production config", () => {
     const cfg = loadConfig(baseEnv());
     expect(cfg.publicBaseUrl).toBe("https://medac.test");

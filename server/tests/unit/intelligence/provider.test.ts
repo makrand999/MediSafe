@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { MuseSparkProvider, validateHttpsOrThrow, loadMuseSparkConfig } from "../../../src/modules/intelligence/muse-spark-provider.js";
 import { sanitizeForLog, redactPhiText, validateVisionInput, verifyImageMagicBytes } from "../../../src/modules/intelligence/safety-policy.js";
 
@@ -125,5 +125,76 @@ describe("MuseSparkProvider construction", () => {
         NODE_ENV: "development",
       }),
     ).toThrow(/Only supported model/);
+  });
+});
+
+describe("MuseSparkProvider allowlist and local-gateway support", () => {
+  it("accepts allowlisted Antigravity gateway models", () => {
+    expect(
+      () =>
+        new MuseSparkProvider({
+          baseUrl: "https://gateway.example.com/v1",
+          apiKey: "k",
+          model: "gemini-3.8-flash-high",
+          timeoutMs: 5000,
+        }),
+    ).not.toThrow();
+  });
+
+  it("still rejects models outside the allowlist", () => {
+    expect(
+      () =>
+        new MuseSparkProvider({
+          baseUrl: "https://gateway.example.com/v1",
+          apiKey: "k",
+          model: "gpt-4",
+          timeoutMs: 5000,
+        }),
+    ).toThrow(/not allowed/);
+  });
+
+  it("tolerates http only for loopback and only with MUSE_SPARK_ALLOW_HTTP=true", () => {
+    const prod = { NODE_ENV: "production" };
+    expect(() => validateHttpsOrThrow("http://127.0.0.1:8045/v1", prod)).toThrow(/https/);
+    expect(() => validateHttpsOrThrow("http://127.0.0.1:8045/v1", { ...prod, MUSE_SPARK_ALLOW_HTTP: "true" })).not.toThrow();
+    expect(() => validateHttpsOrThrow("http://localhost:8045/v1", { ...prod, MUSE_SPARK_ALLOW_HTTP: "true" })).not.toThrow();
+    // The exception is loopback-only: a remote http host is still refused in production.
+    expect(() => validateHttpsOrThrow("http://gateway.example.com/v1", { ...prod, MUSE_SPARK_ALLOW_HTTP: "true" })).toThrow(/https/);
+
+    // Constructing against the gateway without the opt-in is refused.
+    expect(
+      () =>
+        new MuseSparkProvider({
+          baseUrl: "http://127.0.0.1:8045/v1",
+          apiKey: "k",
+          model: "gemini-3.8-flash-high",
+          timeoutMs: 5000,
+        }),
+    ).toThrow(/https/);
+  });
+
+  it("sends the configured allowlisted model, not a hardcoded one", async () => {
+    const bodies: Array<Record<string, unknown>> = [];
+    const fetchMock = vi.fn(async (_url: string | URL, init?: { body?: string }) => {
+      bodies.push(JSON.parse(String(init?.body)) as Record<string, unknown>);
+      return new Response(
+        JSON.stringify({ choices: [{ message: { content: "ok", tool_calls: [] } }], usage: { prompt_tokens: 1, completion_tokens: 1 } }),
+        { status: 200, headers: { "content-type": "application/json" } },
+      );
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    try {
+      const provider = new MuseSparkProvider({
+        baseUrl: "https://gateway.example.com/v1",
+        apiKey: "k",
+        model: "gemini-3.8-flash-high",
+        timeoutMs: 5000,
+      });
+      await provider.runToolTurn({ system: "s", messages: [{ role: "user", content: "hi" }], tools: [] });
+      expect(provider.getModel()).toBe("gemini-3.8-flash-high");
+      expect(bodies[0]?.["model"]).toBe("gemini-3.8-flash-high");
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

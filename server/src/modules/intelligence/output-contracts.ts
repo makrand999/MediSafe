@@ -212,12 +212,34 @@ export function validateStrict<T>(schema: z.ZodType<T>, raw: unknown): Validatio
   return { ok: false, issues: res.error.issues, repaired: false };
 }
 
+/**
+ * Strips a markdown code fence around JSON. Some upstreams (Gemini via the
+ * Antigravity gateway in particular) wrap the answer in ```json … ``` even when
+ * response_format=json_object was requested; the fence is presentation, not
+ * content, so remove it deterministically before parsing. Returns the input
+ * unchanged when there is no complete fence.
+ */
+export function stripCodeFences(text: string): string {
+  const trimmed = text.trim();
+  const match = trimmed.match(/^```[A-Za-z0-9_-]*[ \t]*\r?\n([\s\S]*?)\r?\n?```$/);
+  return match ? match[1].trim() : text;
+}
+
 export function parseJsonStrict<T>(schema: z.ZodType<T>, jsonString: string): ValidationResult<T> {
   let parsed: unknown;
   try {
     parsed = JSON.parse(jsonString);
   } catch (e) {
-    return { ok: false, issues: [{ code: "custom", message: `Invalid JSON: ${(e as Error).message}`, path: [] } as unknown as z.ZodIssue] };
+    const unfenced = stripCodeFences(jsonString);
+    if (unfenced !== jsonString) {
+      try {
+        parsed = JSON.parse(unfenced);
+      } catch {
+        return { ok: false, issues: [{ code: "custom", message: `Invalid JSON: ${(e as Error).message}`, path: [] } as unknown as z.ZodIssue] };
+      }
+    } else {
+      return { ok: false, issues: [{ code: "custom", message: `Invalid JSON: ${(e as Error).message}`, path: [] } as unknown as z.ZodIssue] };
+    }
   }
   return validateStrict(schema, parsed);
 }
@@ -247,7 +269,7 @@ export function validateWithOneRepair<T>(
   } else {
     // Default repair: try to parse, remove obviously forbidden keys, re-stringify
     try {
-      const obj = JSON.parse(rawJsonString) as Record<string, unknown>;
+      const obj = JSON.parse(stripCodeFences(rawJsonString)) as Record<string, unknown>;
       // Remove keys that are clearly not in any of our contracts (heuristic forbidden list)
       const forbidden = new Set(["purpose", "instructions", "typical_times", "typical_time", "frequency_inferred"]);
       let mutated = false;
