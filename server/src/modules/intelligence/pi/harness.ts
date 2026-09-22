@@ -38,6 +38,8 @@ export interface PiHarnessRequest {
   timeoutMs?: number;
   /** Injectable for tests; defaults to the guarded gateway stream. */
   streamFn?: StreamFn;
+  /** Client disconnect / server shutdown: aborts the run when triggered. */
+  signal?: AbortSignal;
   onEvent?: (event: AgentEvent) => void;
 }
 
@@ -152,9 +154,16 @@ export async function runPiAssistantTurn(request: PiHarnessRequest): Promise<PiH
     request.onEvent?.(event);
   });
 
+  const onAbort = () => agent.abort();
+  if (request.signal) {
+    if (request.signal.aborted) onAbort();
+    else request.signal.addEventListener("abort", onAbort, { once: true });
+  }
+
   try {
     await agent.prompt(request.question);
   } finally {
+    request.signal?.removeEventListener("abort", onAbort);
     unsubscribe();
   }
 

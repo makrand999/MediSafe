@@ -15,6 +15,7 @@ import * as schema from "../../db/schema.js";
 import { requirePermissionOnPatient } from "../patients/service.js";
 import { can as canPermission } from "../../lib/permissions.js";
 import type { IntelligenceProvider } from "./muse-spark-provider.js";
+import type { PatientAuthorization, ToolExecutor } from "./orchestrator.js";
 import { LabelInterpretationSchema } from "./output-contracts.js";
 import { getPromptTemplate } from "./prompt-registry.js";
 import {
@@ -302,17 +303,50 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
     return reply.code(204).send();
   });
 
-  // Conversations — add message and run orchestrator
-  fastify.post("/patients/:patientId/intelligence/conversations/:conversationId/messages", async (req, reply) => {
+
+  // ── Shared setup for assistant turns (JSON and SSE endpoints) ──────────────
+  interface AssistantTurnSetup {
+    provider: IntelligenceProvider;
+    runId: string;
+    startedAt: number;
+    userContent: string;
+    system: string;
+    authorization: PatientAuthorization;
+    executor: ToolExecutor;
+    hasRecentAuth: boolean;
+    conversationId: string;
+  }
+
+  /**
+   * Authenticates, validates, audits (ai_runs + encrypted user message), applies
+   * rate limits and builds the patient-scoped tool executor. Replies with the
+   * appropriate error and returns null when the turn must not run.
+   */
+  async function setupAssistantTurn(
+    req: FastifyRequest,
+    reply: FastifyReply,
+  ): Promise<AssistantTurnSetup | null> {
     const access = await authorize(req, reply, "intelligence:write");
-    if (!access) return;
-    if (!provider) return apiError(reply, req, 503, "INTELLIGENCE_UNAVAILABLE", genericFailureMessage().message);
+    if (!access) return null;
+    if (!provider) {
+      apiError(reply, req, 503, "INTELLIGENCE_UNAVAILABLE", genericFailureMessage().message);
+      return null;
+    }
     const params = z.object({ patientId: z.string().uuid(), conversationId: z.string().uuid() }).safeParse(req.params);
-    if (!params.success) return apiError(reply, req, 400, "VALIDATION_ERROR", "Invalid params");
+    if (!params.success) {
+      apiError(reply, req, 400, "VALIDATION_ERROR", "Invalid params");
+      return null;
+    }
     const body = z.object({ content: z.string().min(1).max(5000), role: z.enum(["user", "assistant"]).optional() }).safeParse(req.body);
-    if (!body.success) return apiError(reply, req, 400, "VALIDATION_ERROR", "Invalid message");
+    if (!body.success) {
+      apiError(reply, req, 400, "VALIDATION_ERROR", "Invalid message");
+      return null;
+    }
     const conv = await fastify.db.query.aiConversations.findFirst({ where: eq(schema.aiConversations.id, params.data.conversationId) });
-    if (!conv || conv.patientId !== access.patientId) return apiError(reply, req, 404, "NOT_FOUND", "Conversation not found");
+    if (!conv || conv.patientId !== access.patientId) {
+      apiError(reply, req, 404, "NOT_FOUND", "Conversation not found");
+      return null;
+    }
     const userContent = body.data.content;
     const runId = randomUUID();
     const startedAt = Date.now();
@@ -339,35 +373,27 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
       role: "user",
       contentCiphertext: encryptPayload(userContent),
     });
-    // Check rate limit
     const allowed = limiter.check(req.user.id, 1);
-    if (!allowed.allowed) return apiError(reply, req, 429, "RATE_LIMITED", "Too many intelligence requests");
+    if (!allowed.allowed) {
+      apiError(reply, req, 429, "RATE_LIMITED", "Too many intelligence requests");
+      return null;
+    }
     limiter.record(req.user.id, 1);
-    // Build orchestrator with DB tools
-    const { Orchestrator } = await import("./orchestrator.js");
     const { DbProposalService } = await import("./db-proposal-service.js");
     const { DbToolExecutor } = await import("./tool-executor.js");
-    const dbProposalService = new DbProposalService(fastify.db);
-    const executor = new DbToolExecutor(fastify.db, dbProposalService, runId, req.user.id);
-    const orchestrator = new Orchestrator(provider, executor, undefined, {
-      maxTurns: config.museSpark.maxAgentTurns,
-      maxToolCalls: config.museSpark.maxToolCalls,
-      maxOutputTokens: config.museSpark.maxOutputTokens,
-      maxTimeMs: config.museSpark.timeoutMs,
-      maxContextBytes: 16000,
-    });
+    const executor = new DbToolExecutor(fastify.db, new DbProposalService(fastify.db), runId, req.user.id);
     // Determine authorization first — must be scoped to current user, not first patient member
     const membership = await fastify.db.query.patientMemberships.findFirst({ where: and(eq(schema.patientMemberships.patientId, access.patientId), eq(schema.patientMemberships.userId, req.user.id), eq(schema.patientMemberships.status, "active" as never)) });
     const systemTemplate = getPromptTemplate("assistant_turn", "v1");
     const role = (membership?.role as string) ?? "viewer";
-    // Only advertise the tools this role can actually execute (the orchestrator
-    // sends exactly the same filtered set).
+    // Only advertise the tools this role can actually execute (both harnesses
+    // send exactly the same filtered set).
     const { listToolsFor } = await import("./tool-registry.js");
     const availableTools = listToolsFor({ can: (perm) => canPermission(role as never, perm as never) })
       .map((t) => t.name)
       .join(", ");
     const system = `${systemTemplate.system}\n\nPatient context: patientId=${access.patientId}, userId=${req.user.id}, role=${role}. Use this patientId for all tool calls (e.g., list_medications with patientId="${access.patientId}"). Do not ask the user for patientId. You have tools: ${availableTools}. Use them to answer.\n\n${injectionGuardSystemAddendum()}`;
-    const authz = {
+    const authorization: PatientAuthorization = {
       patientId: access.patientId,
       role: (membership?.role as never) ?? "viewer",
       can: (perm: string) => canPermission((membership?.role as never) ?? "viewer", perm as never),
@@ -375,6 +401,130 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
     // For simplicity, use a hasRecentAuth check via session age <5min
     const session = await fastify.db.query.authSessions.findFirst({ where: eq(schema.authSessions.id, req.user.sessionId) });
     const hasRecentAuth = session ? (Date.now() - new Date(session.createdAt).getTime() < 5 * 60 * 1000) : false;
+
+    return { provider, runId, startedAt, userContent, system, authorization, executor, hasRecentAuth, conversationId: conv.id };
+  }
+
+  // ── Assistant turn over SSE ────────────────────────────────────────────────
+  fastify.post("/patients/:patientId/intelligence/conversations/:conversationId/messages/stream", async (req, reply) => {
+    const setup = await setupAssistantTurn(req, reply);
+    if (!setup) return;
+    if (config.assistantHarness !== "pi") {
+      // Token streaming comes from Pi's event stream; the JSON endpoint remains
+      // the fallback (the app falls back automatically on a non-200 here).
+      return apiError(reply, req, 503, "STREAMING_UNAVAILABLE", "Streaming requires the Pi harness");
+    }
+    const { runId, startedAt, userContent, system, authorization, executor, conversationId } = setup;
+
+    reply.hijack();
+    const res = reply.raw;
+    res.writeHead(200, {
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
+    });
+    const send = (payload: Record<string, unknown>) => {
+      if (!res.writableEnded) res.write(`data: ${JSON.stringify(payload)}\n\n`);
+    };
+    const heartbeat = setInterval(() => {
+      if (!res.writableEnded) res.write(": ping\n\n");
+    }, 10_000);
+    // Abort the agent when the client goes away.
+    const abort = new AbortController();
+    req.raw.on("close", () => abort.abort());
+
+    try {
+      const { runPiAssistantTurn } = await import("./pi/harness.js");
+      const { buildGatewayModel } = await import("./pi/model.js");
+      const { loadConversationHistory } = await import("./pi/history.js");
+      const history = await loadConversationHistory(fastify.db, conversationId);
+      const result = await runPiAssistantTurn({
+        model: buildGatewayModel({
+          model: config.museSpark.model,
+          baseUrl: config.museSpark.baseUrl,
+          maxOutputTokens: config.museSpark.maxOutputTokens,
+        }),
+        apiKey: config.museSpark.apiKey,
+        system,
+        question: userContent,
+        history,
+        authorization,
+        executor,
+        aiRunId: runId,
+        maxTurns: config.museSpark.maxAgentTurns,
+        maxOutputTokens: config.museSpark.maxOutputTokens,
+        timeoutMs: config.museSpark.timeoutMs,
+        signal: abort.signal,
+        onEvent: (event) => {
+          if (event.type === "message_update" && event.assistantMessageEvent?.type === "text_delta") {
+            send({ type: "delta", text: event.assistantMessageEvent.delta });
+          } else if (event.type === "tool_execution_start") {
+            send({ type: "tool", name: event.toolName });
+          }
+        },
+      });
+
+      const { encryptPayload } = await import("./proposal-service.js");
+      await fastify.db.insert(schema.aiMessages).values({
+        id: randomUUID(),
+        conversationId,
+        aiRunId: runId,
+        role: "assistant",
+        contentCiphertext: encryptPayload(result.message),
+      });
+      await fastify.db
+        .update(schema.aiRuns)
+        .set({
+          status: "completed",
+          latencyMs: Date.now() - startedAt,
+          finishedAt: new Date(),
+          inputTokens: result.inputTokens,
+          outputTokens: result.outputTokens,
+        })
+        .where(eq(schema.aiRuns.id, runId));
+      fastify.log.info(
+        { aiRunId: runId, turns: result.turnCount, toolCalls: result.toolCallCount, inputTokens: result.inputTokens, outputTokens: result.outputTokens, latencyMs: Date.now() - startedAt, streamed: true },
+        "assistant turn completed",
+      );
+      send({
+        type: "done",
+        message: result.message,
+        facts_used: result.factsUsed,
+        proposals: result.proposals,
+        limitations: result.limitations,
+        ai_run_id: runId,
+        turn_count: result.turnCount,
+      });
+    } catch (e) {
+      const code = (e as { code?: string }).code ?? "ORCHESTRATOR_FAILURE";
+      await fastify.db
+        .update(schema.aiRuns)
+        .set({ status: "failed", failureCode: code, latencyMs: Date.now() - startedAt, finishedAt: new Date() })
+        .where(eq(schema.aiRuns.id, runId))
+        .catch(() => undefined);
+      fastify.log.warn({ aiRunId: runId, code }, "assistant stream failed");
+      send({ type: "error", code, message: genericFailureMessage().message });
+    } finally {
+      clearInterval(heartbeat);
+      if (!res.writableEnded) res.end();
+    }
+    return reply;
+  });
+
+  // Conversations — add message and run orchestrator
+  fastify.post("/patients/:patientId/intelligence/conversations/:conversationId/messages", async (req, reply) => {
+    const setup = await setupAssistantTurn(req, reply);
+    if (!setup) return;
+    const { provider: activeProvider, runId, startedAt, userContent, system, authorization: authz, executor, hasRecentAuth, conversationId } = setup;
+    const { Orchestrator } = await import("./orchestrator.js");
+    const orchestrator = new Orchestrator(activeProvider, executor, undefined, {
+      maxTurns: config.museSpark.maxAgentTurns,
+      maxToolCalls: config.museSpark.maxToolCalls,
+      maxOutputTokens: config.museSpark.maxOutputTokens,
+      maxTimeMs: config.museSpark.timeoutMs,
+      maxContextBytes: 16000,
+    });
     try {
       const result =
         config.assistantHarness === "pi"
@@ -384,7 +534,7 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
               const { runPiAssistantTurn } = await import("./pi/harness.js");
               const { buildGatewayModel } = await import("./pi/model.js");
               const { loadConversationHistory } = await import("./pi/history.js");
-              const history = await loadConversationHistory(fastify.db, conv.id);
+              const history = await loadConversationHistory(fastify.db, conversationId);
               return runPiAssistantTurn({
                 model: buildGatewayModel({
                   model: config.museSpark.model,
@@ -417,9 +567,10 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
               initialUserMessage: userContent,
             });
       // Store assistant message
+      const { encryptPayload } = await import("./proposal-service.js");
       await fastify.db.insert(schema.aiMessages).values({
         id: randomUUID(),
-        conversationId: conv.id,
+        conversationId,
         aiRunId: runId,
         role: "assistant",
         contentCiphertext: encryptPayload(result.message),
