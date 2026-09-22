@@ -7,6 +7,8 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medac.data.MedacRepository
+import com.example.medac.data.ScanSettings
+import com.example.medac.data.ScanStrategy
 import com.example.medac.data.TokenStore
 import com.google.gson.Gson
 import com.example.medac.ocr.GoogleLensOcrClient
@@ -79,6 +81,10 @@ class MedacViewModel : ViewModel() {
     val aiIdentifying: StateFlow<Boolean> = _aiIdentifying
     private val _aiError = MutableStateFlow<String?>(null)
     val aiError: StateFlow<String?> = _aiError
+
+    /** Default label-scan path (vision vs Google Lens OCR); persisted in ScanSettings. */
+    private val _scanVisionDefault = MutableStateFlow(ScanSettings.DEFAULT_VISION)
+    val scanVisionDefault: StateFlow<Boolean> = _scanVisionDefault
 
     // ── Patient-scoped state per §2.2 ──
     private val _patients = MutableStateFlow<List<PatientChip>>(emptyList())
@@ -187,6 +193,7 @@ class MedacViewModel : ViewModel() {
             loadPausedReminders()
             loadDoseLogs()
             loadQuietHours()
+            _scanVisionDefault.value = ScanSettings.isVisionDefault(appCtx)
             rescheduleAllActiveReminders()
             try {
                 appCtx.getSharedPreferences("dose_logs", Context.MODE_PRIVATE)
@@ -1396,6 +1403,12 @@ class MedacViewModel : ViewModel() {
     }
 
     // ── AI identify — patient-scoped per §16.1, requires_user_confirmation ──
+    fun setScanVisionDefault(enabled: Boolean) {
+        val ctx = appContext ?: return
+        ScanSettings.setVisionDefault(ctx, enabled)
+        _scanVisionDefault.value = enabled
+    }
+
     fun identifyMedicinePhoto(uri: Uri, context: Context){
         val t0=System.currentTimeMillis()
         val appCtx=context.applicationContext
@@ -1413,14 +1426,57 @@ class MedacViewModel : ViewModel() {
         )
         _aiIdentifying.value=true; _aiError.value=null; _isAnalyzingPhoto.value=true
         viewModelScope.launch{
-            val ocrText = try {
-                GoogleLensOcrClient.recognizeText(appCtx, localPhotoUri).fullText.trim()
-            } catch(e: Exception) {
-                android.util.Log.e("MedacOCR", "Google Lens OCR failed: ${e.message}", e)
-                ""
+            // OCR always runs in the background: it feeds detectedText and stays the
+            // fallback whenever vision is disabled, fails, times out or returns no name.
+            val ocrDeferred = async(Dispatchers.IO) {
+                try {
+                    GoogleLensOcrClient.recognizeText(appCtx, localPhotoUri).fullText.trim()
+                } catch(e: Exception) {
+                    android.util.Log.e("MedacOCR", "Google Lens OCR failed: ${e.message}", e)
+                    ""
+                }
             }
+
+            val pid = _activePatientId.value ?: try{ MedacRepository.ensurePatient(appCtx)} catch(_:Exception){ null}
+            if(pid!=null) _activePatientId.value=pid
+
+            // ── Vision-first (default): the image goes to the server vision model ──
+            var serverDone=false
+            if(ScanSettings.strategyFor(_scanVisionDefault.value) == ScanStrategy.VISION){
+                val visionRes = try{
+                    withTimeout(35000){ MedicineAiRepository.identify(appCtx, localPhotoUri) }
+                }catch(e:Exception){
+                    android.util.Log.w("MedacAI","vision identify failed: ${e.message}")
+                    AuthApiResult.Error(e.message ?: "vision identify failed")
+                }
+                val visionMed = (visionRes as? AuthApiResult.Success<AiMedicine>)?.data
+                if(visionMed!=null && ScanSettings.visionResultUsable(visionMed.name)){
+                    val ocrText = ocrDeferred.await()
+                    _draft.value=_draft.value.copy(
+                        photoUri=localPhotoUri,
+                        cardImageUri=photoUriStr,
+                        detectedSummary="AI identified from the image: ${visionMed.name} — please confirm",
+                        detectedText=ocrText,
+                        name=visionMed.name,
+                        genericNameAndDose=visionMed.genericName.ifBlank{ _draft.value.genericNameAndDose },
+                        purpose=visionMed.purpose.ifBlank{ _draft.value.purpose },
+                        instruction=visionMed.instructions.ifBlank{ _draft.value.instruction },
+                        times=visionMed.suggestedTimes.distinct().sorted().ifEmpty{ _draft.value.times },
+                        form=visionMed.form.ifBlank{ _draft.value.form },
+                        isAiEnhanced=true,
+                        aiConfidence="high"
+                    )
+                    _aiError.value=null
+                    serverDone=true
+                    android.util.Log.d("MedacAI","vision identify success: name=${visionMed.name}")
+                }else{
+                    android.util.Log.d("MedacAI","vision unusable — falling back to OCR text")
+                }
+            }
+
+            val ocrText = ocrDeferred.await()
             val ocrMs=System.currentTimeMillis()-t0
-            if(ocrText.isNotBlank()){
+            if(!serverDone && ocrText.isNotBlank()){
                 val s=buildDraftSuggestion(ocrText)
                 _draft.value=_draft.value.copy(
                     photoUri=localPhotoUri,
@@ -1436,11 +1492,8 @@ class MedacViewModel : ViewModel() {
                 )
                 _isAnalyzingPhoto.value=false
             }
-            val pid = _activePatientId.value ?: try{ MedacRepository.ensurePatient(appCtx)} catch(_:Exception){ null}
-            if(pid!=null) _activePatientId.value=pid
-            // Try server intelligence if patient available
-            var serverDone=false
-            if(pid!=null){
+            // Try server intelligence if patient available (skipped when vision already answered)
+            if(!serverDone && pid!=null){
                 try{
                     // Image upload code is preserved in codebase, but OCR text is always used for server identification
                     // val base64 = compressToBase64(appCtx, uri)

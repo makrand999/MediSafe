@@ -767,6 +767,7 @@ fun MedacRoot(initialIntent: Intent? = null) {
                     "security" -> SecurityScreen(onBack = { profileSub = null }, authViewModel = authViewModel)
                     "sharing" -> PeopleSharingScreen(onBack = { profileSub = null }, viewModel = viewModel)
                     "alertPrefs" -> AlertPreferencesScreen(onBack = { profileSub = null }, viewModel = viewModel)
+                    "scanSettings" -> ScanSettingsScreen(onBack = { profileSub = null }, viewModel = viewModel)
                     "report" -> DoctorReportScreen(onBack = { profileSub = null }, medicines = medicines, logs = doseLogs, viewModel = viewModel)
                     "exports" -> ExportsScreen(viewModel = viewModel)
                     "assistant" -> AssistantScreen(

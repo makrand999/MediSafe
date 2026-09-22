@@ -37,6 +37,7 @@ import androidx.compose.material.icons.automirrored.outlined.ReceiptLong
 import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
+import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Group
@@ -713,6 +714,15 @@ fun ProfileScreen(
                     title = "Alert preferences",
                     subtitle = "Delays, quiet hours",
                     onClick = { onNavigate("alertPrefs") }
+                )
+                androidx.compose.material3.HorizontalDivider(color = DividerMuted, thickness = 0.5.dp)
+                ProfileMenuRow(
+                    icon = Icons.Outlined.CameraAlt,
+                    iconBg = StatusBlueContainer,
+                    iconTint = StatusBlue,
+                    title = "Scan settings",
+                    subtitle = "Vision or text scan default",
+                    onClick = { onNavigate("scanSettings") }
                 )
                 androidx.compose.material3.HorizontalDivider(color = DividerMuted, thickness = 0.5.dp)
                 ProfileMenuRow(
@@ -1684,6 +1694,63 @@ fun AlertPreferencesScreen(
             }
         }
         item { Text("Quiet hours per preference — Tap row to edit delay & quiet hours via time pickers. PUT 1..20 prefs.", style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp), color = TextSecondary, modifier = Modifier.padding(horizontal = 4.dp)) }
+    }
+}
+
+/**
+ * Label-scan preference: vision (photo sent to the AI model) vs text scan
+ * (on-device Google Lens, only the text leaves the phone). The non-selected
+ * path stays available as the automatic fallback.
+ */
+@Composable
+fun ScanSettingsScreen(
+    onBack: () -> Unit,
+    viewModel: MedacViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    val visionDefault by viewModel.scanVisionDefault.collectAsState()
+    LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        item { Text("Scan settings", style = MaterialTheme.typography.titleLarge, color = TextPrimary) }
+        item {
+            Surface(shape = RoundedCornerShape(14.dp), color = CardSurface, border = BorderStroke(0.5.dp, BorderSubtle), modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                        Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                            Text(
+                                "Read the photo with AI (vision)",
+                                style = MaterialTheme.typography.titleMedium.copy(fontSize = 14.sp),
+                                color = TextPrimary
+                            )
+                            Text(
+                                if (visionDefault) "Default: the label photo is read by the AI model."
+                                else "Default: text is read on-device with Google Lens.",
+                                style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, lineHeight = 14.sp),
+                                color = TextSecondary
+                            )
+                        }
+                        Switch(checked = visionDefault, onCheckedChange = { viewModel.setScanVisionDefault(it) })
+                    }
+                    androidx.compose.material3.HorizontalDivider(color = DividerMuted, thickness = 0.5.dp)
+                    Text(
+                        "Vision sends the label photo to your Medac server, where the AI model reads it. " +
+                            "Text scan keeps the photo on the device and sends only the recognised text (Google Lens). " +
+                            "Whichever you choose, the other path is kept as a fallback: if vision cannot name the medicine, " +
+                            "Medac falls back to the text scan automatically.",
+                        style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, lineHeight = 15.sp),
+                        color = TextSecondary
+                    )
+                }
+            }
+        }
+        item {
+            Surface(shape = RoundedCornerShape(14.dp), color = BlueInfo, modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    "Photos are only sent when you scan a label. This applies to the next scan.",
+                    modifier = Modifier.padding(12.dp),
+                    style = MaterialTheme.typography.labelMedium.copy(fontSize = 11.sp, lineHeight = 15.sp),
+                    color = BlueInfoText
+                )
+            }
+        }
     }
 }
 
