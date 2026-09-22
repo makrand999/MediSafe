@@ -259,6 +259,27 @@ export function listTools(): ToolDefinition[] {
   return Object.values(TOOL_REGISTRY);
 }
 
+export interface ToolFilterAuthorization {
+  can: (permission: string) => boolean;
+}
+
+/**
+ * Tools the caller may actually use, filtered by permission (role) and
+ * optionally by mode. The orchestrator sends only these to the model, which
+ * keeps the prompt small (all 24 definitions cost ~1k tokens per turn) and
+ * stops the model from attempting tools it would be denied at execution time.
+ */
+export function listToolsFor(
+  authorization: ToolFilterAuthorization,
+  options?: { mode?: ToolMode },
+): ToolDefinition[] {
+  return Object.values(TOOL_REGISTRY).filter(
+    (t) =>
+      authorization.can(t.requiredPermission) &&
+      (options?.mode === undefined || t.mode === options.mode),
+  );
+}
+
 export function validateToolCall(name: string, args: unknown): { valid: boolean; error?: string; issues?: z.ZodIssue[] } {
   const def = TOOL_REGISTRY[name];
   if (!def) return { valid: false, error: `Unknown tool: ${name}` };

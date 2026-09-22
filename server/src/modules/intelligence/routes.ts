@@ -359,7 +359,14 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
     // Determine authorization first — must be scoped to current user, not first patient member
     const membership = await fastify.db.query.patientMemberships.findFirst({ where: and(eq(schema.patientMemberships.patientId, access.patientId), eq(schema.patientMemberships.userId, req.user.id), eq(schema.patientMemberships.status, "active" as never)) });
     const systemTemplate = getPromptTemplate("assistant_turn", "v1");
-    const system = `${systemTemplate.system}\n\nPatient context: patientId=${access.patientId}, userId=${req.user.id}, role=${(membership?.role as string) ?? "viewer"}. Use this patientId for all tool calls (e.g., list_medications with patientId="${access.patientId}"). Do not ask the user for patientId. You have tools: list_medications, get_medication, get_today_occurrences, get_schedule, preview_schedule, etc. Use them to answer.\n\n${injectionGuardSystemAddendum()}`;
+    const role = (membership?.role as string) ?? "viewer";
+    // Only advertise the tools this role can actually execute (the orchestrator
+    // sends exactly the same filtered set).
+    const { listToolsFor } = await import("./tool-registry.js");
+    const availableTools = listToolsFor({ can: (perm) => canPermission(role as never, perm as never) })
+      .map((t) => t.name)
+      .join(", ");
+    const system = `${systemTemplate.system}\n\nPatient context: patientId=${access.patientId}, userId=${req.user.id}, role=${role}. Use this patientId for all tool calls (e.g., list_medications with patientId="${access.patientId}"). Do not ask the user for patientId. You have tools: ${availableTools}. Use them to answer.\n\n${injectionGuardSystemAddendum()}`;
     const authz = {
       patientId: access.patientId,
       role: (membership?.role as never) ?? "viewer",
@@ -385,7 +392,20 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
         role: "assistant",
         contentCiphertext: encryptPayload(result.message),
       });
-      await fastify.db.update(schema.aiRuns).set({ status: "completed", latencyMs: Date.now() - startedAt, finishedAt: new Date() }).where(eq(schema.aiRuns.id, runId));
+      await fastify.db
+        .update(schema.aiRuns)
+        .set({
+          status: "completed",
+          latencyMs: Date.now() - startedAt,
+          finishedAt: new Date(),
+          inputTokens: result.inputTokens,
+          outputTokens: result.outputTokens,
+        })
+        .where(eq(schema.aiRuns.id, runId));
+      fastify.log.info(
+        { aiRunId: runId, turns: result.turnCount, toolCalls: result.toolCallCount, inputTokens: result.inputTokens, outputTokens: result.outputTokens, latencyMs: Date.now() - startedAt },
+        "assistant turn completed",
+      );
       return reply.send({
         message: result.message,
         facts_used: result.factsUsed,

@@ -343,8 +343,11 @@ export class MuseSparkProvider implements IntelligenceProvider {
       const body = {
         model: this.config.model,
         messages: [{ role: "system", content: request.system }, ...mappedMessages],
-        tools: request.tools,
-        tool_choice: request.toolChoice ?? "auto",
+        // An empty tools array means "answer without tools": the gateway ignores
+        // tool_choice:"none", so the field has to be omitted entirely.
+        ...(request.tools.length > 0
+          ? { tools: request.tools, tool_choice: request.toolChoice ?? "auto" }
+          : {}),
         max_tokens: request.maxOutputTokens ?? this.config.maxOutputTokens,
       };
       const raw = (await this.postChatCompletions(body, controller.signal)) as {
