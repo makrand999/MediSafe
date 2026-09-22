@@ -376,14 +376,46 @@ export async function intelligenceRoutes(fastify: FastifyInstance, options: Inte
     const session = await fastify.db.query.authSessions.findFirst({ where: eq(schema.authSessions.id, req.user.sessionId) });
     const hasRecentAuth = session ? (Date.now() - new Date(session.createdAt).getTime() < 5 * 60 * 1000) : false;
     try {
-      const result = await orchestrator.run({
-        auth: { userId: req.user.id, sessionId: req.user.sessionId, hasRecentAuth },
-        authorization: authz as never,
-        aiRunId: runId,
-        purpose: "assistant_turn",
-        systemPrompt: system,
-        initialUserMessage: userContent,
-      });
+      const result =
+        config.assistantHarness === "pi"
+          ? await (async () => {
+              // Pi harness (flagged): same tools, authorization, audit and
+              // encryption — Pi only runs the loop. See docs/PI_HARNESS.md.
+              const { runPiAssistantTurn } = await import("./pi/harness.js");
+              const { buildGatewayModel } = await import("./pi/model.js");
+              const { loadConversationHistory } = await import("./pi/history.js");
+              const history = await loadConversationHistory(fastify.db, conv.id);
+              return runPiAssistantTurn({
+                model: buildGatewayModel({
+                  model: config.museSpark.model,
+                  baseUrl: config.museSpark.baseUrl,
+                  maxOutputTokens: config.museSpark.maxOutputTokens,
+                }),
+                apiKey: config.museSpark.apiKey,
+                system,
+                question: userContent,
+                history,
+                authorization: authz as never,
+                executor,
+                aiRunId: runId,
+                maxTurns: config.museSpark.maxAgentTurns,
+                maxOutputTokens: config.museSpark.maxOutputTokens,
+                timeoutMs: config.museSpark.timeoutMs,
+                onEvent: (event) => {
+                  if (event.type === "tool_execution_start") {
+                    fastify.log.debug({ aiRunId: runId, tool: event.toolName }, "pi tool call");
+                  }
+                },
+              });
+            })()
+          : await orchestrator.run({
+              auth: { userId: req.user.id, sessionId: req.user.sessionId, hasRecentAuth },
+              authorization: authz as never,
+              aiRunId: runId,
+              purpose: "assistant_turn",
+              systemPrompt: system,
+              initialUserMessage: userContent,
+            });
       // Store assistant message
       await fastify.db.insert(schema.aiMessages).values({
         id: randomUUID(),

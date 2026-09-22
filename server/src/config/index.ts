@@ -66,6 +66,8 @@ export interface AppConfig {
   aiConversationRetentionHours: number;
   aiProposalTtlMinutes: number;
   aiVisionMaxBytes: number;
+  /** Assistant conversation harness: our own loop (legacy) or Pi's Agent. */
+  assistantHarness: "legacy" | "pi";
   aiVisionMaxPixels: number;
   pushProviderConfigFile: string;
   exportDirectory: string;
@@ -169,6 +171,12 @@ export function loadConfig(envOverrides?: Record<string, string | undefined>): A
   if (museSparkDailyBudget <= 0 || museSparkDailyBudget > 1_000_000) {
     throw new Error("MUSE_SPARK_DAILY_BUDGET must be between 1 and 1000000");
   }
+
+  const rawAssistantHarness = get("ASSISTANT_HARNESS", "legacy") ?? "legacy";
+  if (rawAssistantHarness !== "legacy" && rawAssistantHarness !== "pi") {
+    throw new Error('ASSISTANT_HARNESS must be "legacy" or "pi"');
+  }
+  const assistantHarness = rawAssistantHarness;
 
   const aiVisionMaxBytes = getInt("AI_VISION_MAX_BYTES", 4 * 1024 * 1024);
   const aiVisionMaxPixels = getInt("AI_VISION_MAX_PIXELS", 8_294_400);
@@ -276,6 +284,7 @@ export function loadConfig(envOverrides?: Record<string, string | undefined>): A
     aiConversationRetentionHours: getInt("AI_CONVERSATION_RETENTION_HOURS", 72),
     aiProposalTtlMinutes,
     aiVisionMaxBytes,
+    assistantHarness,
     aiVisionMaxPixels,
     pushProviderConfigFile: get("PUSH_PROVIDER_CONFIG_FILE", "/opt/medac/secrets/push.json") ?? "/opt/medac/secrets/push.json",
     exportDirectory: get("EXPORT_DIRECTORY", "/var/lib/medac/exports") ?? "/var/lib/medac/exports",
